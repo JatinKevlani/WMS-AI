@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sales Transactions - AI-WMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e2dfff",
+                        "secondary-fixed": "#e2dfff",
+                        "on-secondary-container": "#454386",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-tint": "#4d44e3",
+                        "tertiary-container": "#a44100",
+                        "surface-dim": "#d2d9f4",
+                        "primary-container": "#4f46e5",
+                        "surface-bright": "#faf8ff",
+                        "inverse-surface": "#283044",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#140f54",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#413f82",
+                        "tertiary": "#7e3000",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-surface": "#131b2e",
+                        "on-background": "#131b2e",
+                        "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#b6b4ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dae2fd",
+                        "secondary": "#58579b",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "outline-variant": "#c7c4d8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c7c4d8; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</div>
+<div>
+<h2 class="font-sans text-xs font-medium uppercase tracking-widest text-slate-500">The Digital Foreman</h2>
+<p class="text-[10px] text-primary font-bold">Precision Logistics</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
+<span class="material-symbols-outlined">inventory_2</span> Products
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
+<span class="material-symbols-outlined">category</span> Categories
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../suppliers/code.html">
+<span class="material-symbols-outlined">local_shipping</span> Suppliers
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../purchase_orders/code.html">
+<span class="material-symbols-outlined">shopping_cart</span> Orders
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg font-sans text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
+<span class="material-symbols-outlined">payments</span> Sales
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<span class="material-symbols-outlined">notifications_active</span> Alerts
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../ai_recommendations/code.html">
+<span class="material-symbols-outlined">auto_awesome</span> AI Insights
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../analytics_dashboard/code.html">
+<span class="material-symbols-outlined">insights</span> Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<span class="material-symbols-outlined">import_export</span> Data Hub
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_settings/code.html">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="mt-auto p-4 bg-indigo-50 dark:bg-indigo-900/10 rounded-xl flex items-center gap-3 group">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="User" data-alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSsv7O3v2oNn1qkDJqEBrSgLaPaPDF43kAD8q_xueaQLwKO-iP7c5y6s_Bp698PI1XFtCa7gpMXNj4ioGoGTj77AX0qTMQA7-2HTWnkDots4ugS-kq0n_BuwWIa6ZsniLmawyyV7ZZOgl3VaJpdEcRoY7PuBSce1Js2pkhLwPNxRmYYQqiFpSv7FH1V4N7jtSFCCfAT3nfbuFNQz88VGCuhNlZ8wOvv61D9drq0B0dsVOAg5HxQy70tJoKaX2DjLs8gp9YBZxu0lsr"/>
+</div>
+<div class="truncate flex-1">
+<p class="text-[10px] font-bold text-on-surface" data-user-name>Alex Rivera</p>
+<p class="text-[8px] text-on-surface-variant uppercase tracking-tighter" data-user-role>Senior Controller</p>
+</div>
+<button onclick="WmsAPI.logout()" class="text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen bg-surface flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="w-full h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm dark:shadow-none flex items-center justify-between px-6">
+<div class="flex items-center gap-4">
+<h1 class="text-lg font-black tracking-tighter text-indigo-700 dark:text-indigo-300">AI-WMS</h1>
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-full text-xs w-64 focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Global Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150 relative">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-slate-500">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Dynamic Page Content -->
+<div class="p-8 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Header Section with Editorial Edge -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded text-[10px] font-bold tracking-widest uppercase">Live Activity</span>
+</div>
+<h2 class="text-4xl font-headline font-bold text-on-surface tracking-tight">Sales Transactions</h2>
+<p class="text-on-surface-variant text-sm mt-1">Real-time ledger of outbound inventory and revenue flow.</p>
+</div>
+<button class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-semibold tracking-wide">Record New Sale</span>
+</button>
+</div>
+<!-- Dashboard Stats Layering -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Total Revenue</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black tracking-tighter" id="kpi-revenue">—</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Total Sales Units</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black tracking-tighter" id="kpi-units">—</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Total Transactions</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black tracking-tighter text-tertiary" id="kpi-txns">—</span>
+</div>
+</div>
+</div>
+<!-- Main Split Layout: Table and Record Sale -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+<!-- Table Section (Asymmetric Balance) -->
+<div class="xl:col-span-8 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<h3 class="font-bold text-sm text-on-surface uppercase tracking-wider">Transaction Ledger</h3>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">ID</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Product</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Qty</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Total Price</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Sold By</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Date</th>
+</tr>
+</thead>
+<tbody id="salesTableBody" class="divide-y divide-transparent">
+    <tr><td colspan="6" class="px-6 py-8 text-center text-on-surface-variant">Loading sales...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Record Sale View (The Glassmorphism Panel) -->
+<div class="xl:col-span-4 bg-white/60 backdrop-blur-xl border border-white/40 shadow-2xl rounded-2xl p-8 sticky top-24 overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl">shopping_cart_checkout</span>
+</div>
+<div class="relative">
+<h3 class="text-xl font-bold tracking-tight mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                            Record Sale
+                        </h3>
+<div class="space-y-6">
+<!-- Product Selector -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Select Product</label>
+<div class="relative">
+<select id="saleProductId" class="w-full bg-surface-container-low border-none rounded-lg py-3 px-4 text-sm font-semibold appearance-none focus:ring-2 focus:ring-primary/20 transition-all">
+<option value="">Loading products...</option>
+</select>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Quantity Input -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Quantity</label>
+<input id="saleQuantity" class="w-full bg-surface-container-low border-none rounded-lg py-3 px-4 text-sm font-semibold focus:ring-2 focus:ring-primary/20 transition-all" type="number" min="1" value="1"/>
+</div>
+<!-- Price Info -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Sale Price (Per Unit)</label>
+<input id="salePrice" class="w-full bg-surface-container-low border-none rounded-lg py-3 px-4 text-sm font-semibold focus:ring-2 focus:ring-primary/20 transition-all" type="number" min="0" step="0.01" placeholder="Enter custom price or leave blank for default"/>
+</div>
+<!-- Confirm Button -->
+<button id="btnRecordSale" class="w-full mt-4 py-4 bg-primary text-on-primary font-black rounded-xl hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                RECORD SALE
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Insight Footer -->
+<div class="bg-tertiary-container/10 p-6 rounded-2xl flex flex-col md:flex-row items-center gap-6 border-l-4 border-tertiary">
+<div class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary flex-shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<p class="text-xs font-bold text-tertiary uppercase tracking-widest mb-1">AI Recommendation</p>
+<p class="text-on-surface text-sm">Sale velocity for <span class="font-bold">Thermal Cooling Units</span> has increased by 18% this week. Consider reordering from Supplier #402 before EOD to avoid stock-outs during tomorrow's shift.</p>
+</div>
+<button class="ml-auto px-4 py-2 bg-tertiary text-on-tertiary text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-tertiary/90 transition-colors">
+                    Automate Reorder
+                </button>
+</div>
+</div>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!WmsAPI.requireAuth()) return;
+
+    const tbody = document.getElementById('salesTableBody');
+    const productSelect = document.getElementById('saleProductId');
+    let productsList = [];
+
+    async function init() {
+        try {
+            const [salesData, productsData] = await Promise.all([
+                WmsAPI.getSales(),
+                WmsAPI.getProducts(0, 1000) // load many products for dropdown
+            ]);
+
+            // Populate Products Dropdown
+            productsList = productsData.content || [];
+            productSelect.innerHTML = '<option value="">-- Choose Product --</option>';
+            productsList.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.id;
+                opt.textContent = `${p.sku} - ${p.name} (${WmsAPI.formatCurrency(p.unitPrice)})`;
+                productSelect.appendChild(opt);
+            });
+
+            // Populate Sales Ledger & Compute KPIs
+            let totalRevenue = 0;
+            let totalUnits = 0;
+            
+            if (!salesData || salesData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-on-surface-variant">No sales recorded yet.</td></tr>`;
+                document.getElementById('kpi-revenue').textContent = WmsAPI.formatCurrency(0);
+                document.getElementById('kpi-units').textContent = '0';
+                document.getElementById('kpi-txns').textContent = '0';
+                return;
+            }
+
+            tbody.innerHTML = salesData.map(s => {
+                const amount = s.quantitySold * s.salePrice;
+                totalRevenue += amount;
+                totalUnits += s.quantitySold;
+
+                return `
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                    <td class="px-6 py-4 text-xs font-mono text-primary font-bold">#S-${s.id}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs font-semibold text-on-surface">${s.product ? s.product.name : 'Unknown Product'}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-xs">${s.quantitySold}</td>
+                    <td class="px-6 py-4 text-xs font-bold">${WmsAPI.formatCurrency(amount)}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 bg-surface-container text-[10px] font-medium rounded-full">System</span>
+                    </td>
+                    <td class="px-6 py-4 text-xs text-on-surface-variant">${WmsAPI.formatDate(s.saleDate)}</td>
+                </tr>
+                `;
+            }).join('');
+
+            document.getElementById('kpi-revenue').textContent = WmsAPI.formatCurrency(totalRevenue);
+            document.getElementById('kpi-units').textContent = totalUnits.toLocaleString();
+            document.getElementById('kpi-txns').textContent = salesData.length.toLocaleString();
+
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-error">Failed to load data: ${err.message}</td></tr>`;
+            WmsAPI.showToast(err.message, 'error');
+        }
+    }
+
+    init();
+
+    // Record Sale Form Submission
+    document.getElementById('btnRecordSale').addEventListener('click', async () => {
+        const prodId = productSelect.value;
+        const qty = parseInt(document.getElementById('saleQuantity').value, 10);
+        let price = parseFloat(document.getElementById('salePrice').value);
+
+        if (!prodId || isNaN(qty) || qty <= 0) {
+            WmsAPI.showToast('Please select a product and valid quantity', 'warning');
+            return;
+        }
+
+        // if price is NaN, try to look up default product price
+        if (isNaN(price)) {
+            const p = productsList.find(x => x.id == prodId);
+            if (p) {
+                price = p.unitPrice;
+            } else {
+                WmsAPI.showToast('Invalid product price', 'error');
+                return;
+            }
+        }
+
+        const btn = document.getElementById('btnRecordSale');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = 'Processing...';
+        btn.disabled = true;
+
+        try {
+            await WmsAPI.recordSale(prodId, qty, price);
+            WmsAPI.showToast('Sale recorded successfully!', 'success');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } catch (err) {
+            WmsAPI.showToast(err.message, 'error');
+            btn.innerHTML = oldHtml;
+            btn.disabled = false;
+        }
+    });
+
+});
+</script>
+</body></html>

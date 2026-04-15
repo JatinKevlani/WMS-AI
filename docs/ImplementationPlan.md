@@ -38,7 +38,7 @@
 
 | Time | Task IDs | Deliverable |
 |------|----------|-------------|
-| Hour 9 | T029–T033 | StockService, ProductController, SKUValidator, ProductCounter, StringUtils |
+| Hour 9 | T029–T033  | StockService, ProductController, SKUValidator, ProductCounter, StringUtils |
 | Hour 10 | T034–T038 | Searchable interface, Person/Employee hierarchy, SupplierService + Controller |
 | Hour 11 | T039–T042 | OrderQueue (PriorityQueue + Cloneable), OrderService, OrderController, NotificationQueue |
 | Hour 12 | T043–T045 | SalesService (with file logging), SalesController, SalesAverageCalculator |
