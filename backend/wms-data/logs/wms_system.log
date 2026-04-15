@@ -1,0 +1,11 @@
+2026-04-14T00:05:38.974+05:30  WARN 25124 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m28s253ms972µs200ns).
+2026-04-14T00:06:12.518+05:30  INFO 25124 --- [http-nio-8080-exec-2] com.wmsai.service.ProductService         : Product created: Smoke Valid Product (SKU: TSTA1234)
+2026-04-14T00:06:54.371+05:30  INFO 25124 --- [http-nio-8080-exec-9] com.wmsai.service.StockService           : Stock-in: 3 units added to TSTA1234 (new qty: 23)
+2026-04-14T00:06:54.415+05:30  INFO 25124 --- [http-nio-8080-exec-8] com.wmsai.service.StockService           : Stock-out: 2 units removed from TSTA1234 (new qty: 21)
+2026-04-14T00:06:54.506+05:30  INFO 25124 --- [http-nio-8080-exec-10] com.wmsai.service.StockService           : Stock-out: 1 units removed from TSTA1234 (new qty: 20)
+2026-04-14T00:06:54.509+05:30  INFO 25124 --- [http-nio-8080-exec-10] com.wmsai.service.SalesService           : Sale recorded: TSTA1234 x1 = ₹99.99
+2026-04-14T00:06:54.575+05:30  INFO 25124 --- [http-nio-8080-exec-1] com.wmsai.service.OrderService           : Purchase order created: #1 for supplier Codex Supplier 235808 (₹399.96)
+2026-04-14T00:06:54.666+05:30  INFO 25124 --- [http-nio-8080-exec-3] c.wmsai.service.AIRecommendationService  : 🤖 AI fallback used for restock (no API key)
+2026-04-14T00:06:54.711+05:30  INFO 25124 --- [http-nio-8080-exec-2] c.wmsai.service.AIRecommendationService  : 🤖 AI fallback used for bundle (no API key)
+2026-04-14T00:06:54.777+05:30  INFO 25124 --- [http-nio-8080-exec-4] c.wmsai.service.AIRecommendationService  : 🤖 AI fallback used for forecast (no API key)
+2026-04-14T00:06:54.820+05:30  INFO 25124 --- [http-nio-8080-exec-6] com.wmsai.service.ProductService         : Product soft-deleted: Smoke Valid Product (SKU: TSTA1234)
