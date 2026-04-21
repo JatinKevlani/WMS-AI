@@ -89,65 +89,83 @@
         }
     </style>
 </head>
-<body class="bg-surface text-on-surface">
-<!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
-<div class="mb-8 px-4 flex flex-col">
-<span class="text-indigo-600 dark:text-indigo-400 font-sans text-xs font-medium uppercase tracking-widest">The Digital Foreman</span>
-<span class="text-on-surface-variant text-[10px] uppercase tracking-tighter">Precision Logistics</span>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                Dashboard
+
+<body class="bg-surface text-on-surface flex min-h-screen">
+    <!-- SideNavBar Shell -->
+    <aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+        <div class="mb-8 px-4 py-2">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold tracking-tight text-on-surface">The Digital Foreman</h2>
+                    <p class="text-[10px] font-medium uppercase tracking-widest text-slate-500">Precision Logistics</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_dashboard/code.html">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Dashboard</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
-<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
-                Products
+            <a class="bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../product_list/code.html">
+                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Products</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../categories/code.html">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../suppliers/code.html">
-<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
-                Suppliers
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../categories/code.html">
+                <span class="material-symbols-outlined text-[20px]">category</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Categories</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../purchase_orders/code.html">
-<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-                Orders
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../suppliers/code.html">
+                <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Suppliers</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
-<span class="material-symbols-outlined" data-icon="payments">payments</span>
-                Sales
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../purchase_orders/code.html">
+                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Orders</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../alerts/code.html">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../ai_recommendations/code.html">
-<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
-                AI Insights
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../sales_transactions/code.html">
+                <span class="material-symbols-outlined text-[20px]">payments</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Sales</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../analytics_dashboard/code.html">
-<span class="material-symbols-outlined" data-icon="insights">insights</span>
-                Analytics
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../alerts/code.html">
+                <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Alerts</span>
             </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../data_hub/code.html">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest mt-auto" href="../admin_settings/code.html">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-                Settings
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../ai_recommendations/code.html">
+                <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">AI Insights</span>
             </a>
-</nav>
-<div class="mt-8 p-4 bg-indigo-50 dark:bg-indigo-900/10 rounded-xl flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="portrait of a warehouse foreman with a clean professional look against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLuVCvaCQtyZH0ZpmSVnmb0ynRgPYb3VAvcE5COdlM9a_G3nHiMDQKH0GeNaP34Wdquv5xdDIkS0i2atekxxfDds1S9iv00KawluP6MKYVioYR5M_rchBI-Q6wN-5-stFhGqpg_jP569k23lkY12vJ-YyR-Qegq7TnJwn38Gm1ZLOOfnX9b1_Pb2r4mgXbPR2SrqRLmr74E3igXSS6xNNmiWvL6A4mCqA3qsGVIjY1x7VENPTBa2L5hMLDI9y-02klXMmUF8YIqKkA"/>
-</div>
-<div class="flex flex-col">
-<span class="text-[10px] font-bold text-on-surface" data-user-name>Foreman Jack</span>
-<span class="text-[8px] text-on-surface-variant" data-user-role>Zone A Manager</span>
-</div>
-<button onclick="WmsAPI.logout()" class="ml-auto text-slate-400 hover:text-red-500 transition-colors" title="Logout">
-<span class="material-symbols-outlined text-[18px]">logout</span>
-</button>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="ml-64 min-h-screen bg-surface">
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../analytics_dashboard/code.html">
+                <span class="material-symbols-outlined text-[20px]">insights</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Analytics</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../data_hub/code.html">
+                <span class="material-symbols-outlined text-[20px]">import_export</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Data Hub</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_settings/code.html">
+                <span class="material-symbols-outlined text-[20px]">settings</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-3 px-2">
+                <img class="w-10 h-10 rounded-full object-cover" data-alt="professional portrait of a warehouse foreman wearing a high-visibility vest and a focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6AQ61sRqzUOYKXrU8AZ18QxcBCl6FCIkNl2i6ALoqIla6d-M-CYAyQUZWYuEgAX1jkvsTHbwADzht6TAU0ynO8v7PWVgCBnUB77ZyOHriMhKyFxPVXA5mz9p2IqsH32yenWyp_BWQ5nMdL9L_GKTpxSNFvjULX4X-GBhMVAjuFEkkAOZNdH2TpiyHrudy7QojcwVB9MMBRoeZmHEKHVPsp_R3mo0DyeosPOM4bFQFzFndOSD_La_C3wEGpTSotRCBGGIzIzKIFNA5" />
+                <div class="overflow-hidden">
+                    <p class="text-xs font-bold truncate" data-user-name>Warehouse Foreman</p>
+                    <p class="text-[10px] text-slate-500 truncate" data-user-role>Admin Access</p>
+                </div>
+                <button onclick="WmsAPI.logout()" class="ml-auto text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="flex-1 ml-64 bg-surface min-h-screen">
 <!-- TopNavBar -->
 <header class="w-full h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm flex items-center justify-between px-8">
 <div class="flex items-center gap-8">

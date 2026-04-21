@@ -1,275 +1,324 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "primary-fixed": "#e2dfff",
-                    "secondary-fixed": "#e2dfff",
-                    "on-secondary-container": "#454386",
-                    "tertiary-fixed-dim": "#ffb695",
-                    "on-primary-fixed": "#0f0069",
-                    "surface-tint": "#4d44e3",
-                    "tertiary-container": "#a44100",
-                    "surface-dim": "#d2d9f4",
-                    "primary-container": "#4f46e5",
-                    "surface-bright": "#faf8ff",
-                    "inverse-surface": "#283044",
-                    "on-primary-fixed-variant": "#3323cc",
-                    "on-error": "#ffffff",
-                    "outline": "#777587",
-                    "on-primary": "#ffffff",
-                    "on-tertiary-fixed-variant": "#7b2f00",
-                    "on-primary-container": "#dad7ff",
-                    "on-tertiary-container": "#ffd2be",
-                    "tertiary-fixed": "#ffdbcc",
-                    "surface-container-lowest": "#ffffff",
-                    "surface-container-high": "#e2e7ff",
-                    "surface-container": "#eaedff",
-                    "surface-variant": "#dae2fd",
-                    "on-surface-variant": "#464555",
-                    "error-container": "#ffdad6",
-                    "on-secondary-fixed": "#140f54",
-                    "error": "#ba1a1a",
-                    "on-error-container": "#93000a",
-                    "primary-fixed-dim": "#c3c0ff",
-                    "surface-container-low": "#f2f3ff",
-                    "on-secondary-fixed-variant": "#413f82",
-                    "tertiary": "#7e3000",
-                    "inverse-on-surface": "#eef0ff",
-                    "primary": "#3525cd",
-                    "secondary-fixed-dim": "#c3c0ff",
-                    "on-surface": "#131b2e",
-                    "on-background": "#131b2e",
-                    "inverse-primary": "#c3c0ff",
-                    "on-tertiary": "#ffffff",
-                    "secondary-container": "#b6b4ff",
-                    "surface": "#faf8ff",
-                    "surface-container-highest": "#dae2fd",
-                    "secondary": "#58579b",
-                    "on-secondary": "#ffffff",
-                    "background": "#faf8ff",
-                    "on-tertiary-fixed": "#351000",
-                    "outline-variant": "#c7c4d8"
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e2dfff",
+                        "secondary-fixed": "#e2dfff",
+                        "on-secondary-container": "#454386",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-tint": "#4d44e3",
+                        "tertiary-container": "#a44100",
+                        "surface-dim": "#d2d9f4",
+                        "primary-container": "#4f46e5",
+                        "surface-bright": "#faf8ff",
+                        "inverse-surface": "#283044",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#140f54",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#413f82",
+                        "tertiary": "#7e3000",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-surface": "#131b2e",
+                        "on-background": "#131b2e",
+                        "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#b6b4ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dae2fd",
+                        "secondary": "#58579b",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "outline-variant": "#c7c4d8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "fontFamily": {
-                    "headline": ["Inter"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-            }
-          },
-        },
-      }
+        }
     </script>
-<style>
-        body { font-family: 'Inter', sans-serif; }
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .login-gradient {
             background: linear-gradient(135deg, #3525cd 0%, #4f46e5 100%);
         }
     </style>
 </head>
+
 <body class="bg-surface text-on-surface overflow-hidden">
-<main class="flex min-h-screen">
-<!-- Left Side: Login Form Canvas -->
-<div class="flex-1 flex flex-col justify-center items-center px-8 lg:px-24 bg-surface relative z-10">
-<div class="w-full max-w-md">
-<!-- Branding Anchor -->
-<div class="mb-12 flex items-center gap-3">
-<div class="w-10 h-10 login-gradient rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
-</div>
-<span class="text-2xl font-black tracking-tighter text-primary">AI-WMS</span>
-</div>
-<!-- Messaging Section -->
-<div class="mb-10">
-<h1 class="text-3xl font-bold tracking-tight text-on-surface mb-2">Welcome back.</h1>
-<p class="text-on-surface-variant font-medium">Log in to manage your warehouse intelligence.</p>
-</div>
-<!-- Quick Entry Tags -->
-<div class="flex gap-3 mb-8">
-<span class="px-3 py-1 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold tracking-wider flex items-center gap-1.5 cursor-pointer hover:bg-surface-container transition-colors">
-<span class="material-symbols-outlined text-[14px]">badge</span>
+    <main class="flex min-h-screen">
+        <!-- Left Side: Login Form Canvas -->
+        <div class="flex-1 flex flex-col justify-center items-center px-8 lg:px-24 bg-surface relative z-10">
+            <div class="w-full max-w-md">
+                <!-- Branding Anchor -->
+                <div class="mb-12 flex items-center gap-3">
+                    <div class="w-10 h-10 login-gradient rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white"
+                            style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+                    </div>
+                    <span class="text-2xl font-black tracking-tighter text-primary">AI-WMS</span>
+                </div>
+                <!-- Messaging Section -->
+                <div class="mb-10">
+                    <h1 class="text-3xl font-bold tracking-tight text-on-surface mb-2">Welcome back.</h1>
+                    <p class="text-on-surface-variant font-medium">Log in to manage your warehouse intelligence.</p>
+                </div>
+                <!-- Quick Entry Tags -->
+                <div class="flex gap-3 mb-8">
+                    <span
+                        class="px-3 py-1 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold tracking-wider flex items-center gap-1.5 cursor-pointer hover:bg-surface-container transition-colors">
+                        <span class="material-symbols-outlined text-[14px]">badge</span>
                         Staff
                     </span>
-<span class="px-3 py-1 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold tracking-wider flex items-center gap-1.5 cursor-pointer hover:bg-surface-container transition-colors">
-<span class="material-symbols-outlined text-[14px]">admin_panel_settings</span>
+                    <span
+                        class="px-3 py-1 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-semibold tracking-wider flex items-center gap-1.5 cursor-pointer hover:bg-surface-container transition-colors">
+                        <span class="material-symbols-outlined text-[14px]">admin_panel_settings</span>
                         Admin
                     </span>
-</div>
-<!-- Login Form -->
-<form class="space-y-6">
-<div class="space-y-2">
-<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant" for="email">Email Address</label>
-<div class="relative">
-<input class="w-full px-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary text-on-surface placeholder:text-outline/50 transition-all" id="email" placeholder="foreman@logistics.ai" type="email"/>
-</div>
-</div>
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant" for="password">Password</label>
-<a class="text-xs font-semibold text-primary hover:text-on-primary-fixed-variant transition-colors" href="../forgot_password/code.html">Forgot password?</a>
-</div>
-<div class="relative">
-<input class="w-full px-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary text-on-surface placeholder:text-outline/50 transition-all" id="password" placeholder="••••••••" type="password"/>
-<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/70 hover:text-primary transition-colors" type="button">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</div>
-</div>
-<div class="flex items-center gap-2">
-<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary transition-all" id="remember" type="checkbox"/>
-<label class="text-sm font-medium text-on-surface-variant" for="remember">Keep me logged in for 30 days</label>
-</div>
-<button class="w-full py-4 login-gradient text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group" type="submit">
+                </div>
+                <!-- Login Form -->
+                <form class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant"
+                            for="email">Email Address</label>
+                        <div class="relative">
+                            <input
+                                class="w-full px-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary text-on-surface placeholder:text-outline/50 transition-all"
+                                id="email" placeholder="foreman@logistics.ai" type="email" />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant"
+                                for="password">Password</label>
+                            <a class="text-xs font-semibold text-primary hover:text-on-primary-fixed-variant transition-colors"
+                                href="../forgot_password/code.html">Forgot password?</a>
+                        </div>
+                        <div class="relative">
+                            <input
+                                class="w-full px-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary text-on-surface placeholder:text-outline/50 transition-all"
+                                id="password" placeholder="••••••••" type="password" />
+                            <button
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/70 hover:text-primary transition-colors"
+                                type="button">
+                                <span class="material-symbols-outlined text-xl">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input
+                            class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary transition-all"
+                            id="remember" type="checkbox" />
+                        <label class="text-sm font-medium text-on-surface-variant" for="remember">Keep me logged in for
+                            30 days</label>
+                    </div>
+                    <button
+                        class="w-full py-4 login-gradient text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
+                        type="submit">
                         Sign In to Dashboard
-                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</form>
-<!-- Footer Logic -->
-<div class="mt-12 pt-8 flex items-center gap-4">
-<div class="flex -space-x-2">
-<img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover" data-alt="professional portrait of warehouse operations manager with warm focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfrKWsy1WfoQgtf-duF_dDrg3LZEG3uIrp-nUW8I95NZGIo73TP2PmGRK3v-DlExv-7Qwqc3043UCVZXu5Qg2YXuwNe1anF9PBXGnr9DlMqUuMlBNX2NZ1-n3Gi0HE6LHPdhBK8Zcv_gt5LETZWg86r2j-JgpCCWJhriNkmZR2wgYHKVdbSVC1fH4BNYeYH7lWaDMIEeeT1inEq2UdQsqXzohAPo7O35ZhHrX-pEdvhoHu4QmdWjmEK1Aem97iwuH2DRUUE6AqnwrF"/>
-<img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover" data-alt="professional woman logistics coordinator portrait in clean office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqnmmWs4-xZbFuQaRwWCbBlPEfcyGRNlfwcnatkhZ-ZDno3tYy9JLPeNXhaU6Ql3NjrkAIrORcd5V8lx2k4V3yURcdiy_LzLSEqSnWPx8-O4-uiPW0MYbXoMzwOkjvlhvepJT92pfVzWUeO50SZYwXk3lVlk8iep9DcP9xCAET51mpO5OwnDx3dSAIwYGD0yTet6BOCCdJzDOrcCdiDxm4WqgVBgJAW2prg7eG4yqKTsIlga5shPV1XcNOf3jfAEaviuamKDpnWEg"/>
-<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+12</div>
-</div>
-<p class="text-xs text-on-surface-variant leading-tight">Join 2,400+ logistics experts using <span class="font-bold text-on-surface">The Digital Foreman</span>.</p>
-</div>
-</div>
-</div>
-<!-- Right Side: Brand Imagery & Data Narrative -->
-<div class="hidden lg:flex flex-1 relative bg-surface-container-low overflow-hidden">
-<!-- Decorative Architectural Lines -->
-<div class="absolute inset-0 z-10 opacity-5 pointer-events-none" style="background-image: radial-gradient(#3525cd 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
-<div class="absolute inset-0 overflow-hidden">
-<img class="w-full h-full object-cover grayscale-[0.5] contrast-[1.1]" data-alt="ultra modern futuristic warehouse interior with automated robots and rows of high shelving under cool blue cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzIpP6OaKkIT123_b8cJEHdHK0KVAdSq4e8VIvAMRqbeCmzufGsvg0mgCeD221ml1D1sH6ICSs03FHojt3Hq7U3b8xvcUmlw3pa11EQPEj96bRFpfh8kSG1XS_xh6gvgbPVzCUIzoYF5NWhgLh-JcIlrCBF-4Tb_75Z2BMnBrE3gBxjPPvPy52ugHsv7puLbXR3wrIJ44JJ-x3q-p7ejCN0_ba-Fp6t7LNaimdnkKu_iNamve6lX3xyu0xjLM1zJHOblZaTyfjjgdm"/>
-<div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-transparent"></div>
-<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
-</div>
-<!-- AI Insight Overlay (Bento/Card Style) -->
-<div class="absolute bottom-12 left-12 right-12 z-20">
-<div class="p-8 backdrop-blur-xl bg-surface-container-lowest/80 rounded-2xl shadow-2xl space-y-6 max-w-xl border border-white/20">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
-<span class="text-xs font-bold uppercase tracking-widest text-tertiary">Real-time Intelligence</span>
-</div>
-<span class="text-[10px] font-bold text-on-surface-variant">NODE: DX-409</span>
-</div>
-<div class="space-y-4">
-<h2 class="text-2xl font-bold text-on-surface leading-tight">Predictive Load Balancing is currently optimizing 14 active routes.</h2>
-<div class="flex items-end gap-6">
-<div>
-<p class="text-[10px] font-bold uppercase text-on-surface-variant mb-1">Efficiency Gain</p>
-<p class="text-3xl font-black text-primary">+24.8%</p>
-</div>
-<div class="flex-1 h-12 flex items-end gap-1 pb-1">
-<div class="w-full h-4 bg-primary/10 rounded-sm"></div>
-<div class="w-full h-6 bg-primary/20 rounded-sm"></div>
-<div class="w-full h-10 bg-primary/40 rounded-sm"></div>
-<div class="w-full h-8 bg-primary/60 rounded-sm"></div>
-<div class="w-full h-12 bg-primary rounded-sm"></div>
-</div>
-</div>
-</div>
-<div class="pt-6 border-t border-outline-variant/30 flex justify-between items-center">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-<p class="text-xs font-medium text-on-surface-variant">Automated picking active in Sector G.</p>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-lg">info</span>
-</div>
-</div>
-</div>
-<!-- Floating Tech Accents -->
-<div class="absolute top-12 right-12 z-20 flex flex-col gap-4">
-<div class="px-4 py-2 bg-inverse-surface/90 backdrop-blur text-inverse-on-surface rounded-lg text-[10px] font-bold uppercase tracking-tighter flex items-center gap-2">
-<span class="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.5)]"></span>
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </button>
+                </form>
+                <!-- Footer Logic -->
+                <div class="mt-12 pt-8 flex items-center gap-4">
+                    <div class="flex -space-x-2">
+                        <img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover"
+                            data-alt="professional portrait of warehouse operations manager with warm focused expression"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfrKWsy1WfoQgtf-duF_dDrg3LZEG3uIrp-nUW8I95NZGIo73TP2PmGRK3v-DlExv-7Qwqc3043UCVZXu5Qg2YXuwNe1anF9PBXGnr9DlMqUuMlBNX2NZ1-n3Gi0HE6LHPdhBK8Zcv_gt5LETZWg86r2j-JgpCCWJhriNkmZR2wgYHKVdbSVC1fH4BNYeYH7lWaDMIEeeT1inEq2UdQsqXzohAPo7O35ZhHrX-pEdvhoHu4QmdWjmEK1Aem97iwuH2DRUUE6AqnwrF" />
+                        <img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover"
+                            data-alt="professional woman logistics coordinator portrait in clean office environment"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqnmmWs4-xZbFuQaRwWCbBlPEfcyGRNlfwcnatkhZ-ZDno3tYy9JLPeNXhaU6Ql3NjrkAIrORcd5V8lx2k4V3yURcdiy_LzLSEqSnWPx8-O4-uiPW0MYbXoMzwOkjvlhvepJT92pfVzWUeO50SZYwXk3lVlk8iep9DcP9xCAET51mpO5OwnDx3dSAIwYGD0yTet6BOCCdJzDOrcCdiDxm4WqgVBgJAW2prg7eG4yqKTsIlga5shPV1XcNOf3jfAEaviuamKDpnWEg" />
+                        <div
+                            class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
+                            +12</div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-tight">Join 2,400+ logistics experts using <span
+                            class="font-bold text-on-surface">The Digital Foreman</span>.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Right Side: Brand Imagery & Data Narrative -->
+        <div class="hidden lg:flex flex-1 relative bg-surface-container-low overflow-hidden">
+            <!-- Decorative Architectural Lines -->
+            <div class="absolute inset-0 z-10 opacity-5 pointer-events-none"
+                style="background-image: radial-gradient(#3525cd 0.5px, transparent 0.5px); background-size: 24px 24px;">
+            </div>
+            <div class="absolute inset-0 overflow-hidden">
+                <img class="w-full h-full object-cover grayscale-[0.5] contrast-[1.1]"
+                    data-alt="ultra modern futuristic warehouse interior with automated robots and rows of high shelving under cool blue cinematic lighting"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzIpP6OaKkIT123_b8cJEHdHK0KVAdSq4e8VIvAMRqbeCmzufGsvg0mgCeD221ml1D1sH6ICSs03FHojt3Hq7U3b8xvcUmlw3pa11EQPEj96bRFpfh8kSG1XS_xh6gvgbPVzCUIzoYF5NWhgLh-JcIlrCBF-4Tb_75Z2BMnBrE3gBxjPPvPy52ugHsv7puLbXR3wrIJ44JJ-x3q-p7ejCN0_ba-Fp6t7LNaimdnkKu_iNamve6lX3xyu0xjLM1zJHOblZaTyfjjgdm" />
+                <div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+            </div>
+            <!-- AI Insight Overlay (Bento/Card Style) -->
+            <div class="absolute bottom-12 left-12 right-12 z-20">
+                <div
+                    class="p-8 backdrop-blur-xl bg-surface-container-lowest/80 rounded-2xl shadow-2xl space-y-6 max-w-xl border border-white/20">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-tertiary">Real-time
+                                Intelligence</span>
+                        </div>
+                        <span class="text-[10px] font-bold text-on-surface-variant">NODE: DX-409</span>
+                    </div>
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-bold text-on-surface leading-tight">Predictive Load Balancing is
+                            currently optimizing 14 active routes.</h2>
+                        <div class="flex items-end gap-6">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase text-on-surface-variant mb-1">Efficiency Gain
+                                </p>
+                                <p class="text-3xl font-black text-primary">+24.8%</p>
+                            </div>
+                            <div class="flex-1 h-12 flex items-end gap-1 pb-1">
+                                <div class="w-full h-4 bg-primary/10 rounded-sm"></div>
+                                <div class="w-full h-6 bg-primary/20 rounded-sm"></div>
+                                <div class="w-full h-10 bg-primary/40 rounded-sm"></div>
+                                <div class="w-full h-8 bg-primary/60 rounded-sm"></div>
+                                <div class="w-full h-12 bg-primary rounded-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-outline-variant/30 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-sm"
+                                style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            <p class="text-xs font-medium text-on-surface-variant">Automated picking active in Sector G.
+                            </p>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface-variant text-lg">info</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Floating Tech Accents -->
+            <div class="absolute top-12 right-12 z-20 flex flex-col gap-4">
+                <div
+                    class="px-4 py-2 bg-inverse-surface/90 backdrop-blur text-inverse-on-surface rounded-lg text-[10px] font-bold uppercase tracking-tighter flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.5)]"></span>
                     System Online
                 </div>
-</div>
-</div>
-</main>
-<script src="../shared/api.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // If already logged in, redirect to dashboard
-    if (WmsAPI.isLoggedIn()) {
-        window.location.href = '../admin_dashboard/code.html';
-        return;
-    }
-
-    const form = document.querySelector('form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    // Quick-fill buttons for Staff/Admin
-    const quickTags = document.querySelectorAll('.flex.gap-3.mb-8 span');
-    if (quickTags.length >= 2) {
-        quickTags[0].addEventListener('click', () => {
-            emailInput.value = 'staff@wms.com';
-            passwordInput.value = 'staff123';
-        });
-        quickTags[1].addEventListener('click', () => {
-            emailInput.value = 'admin@wms.com';
-            passwordInput.value = 'admin123';
-        });
-    }
-
-    // Toggle password visibility
-    const visToggle = form.querySelector('button[type="button"]');
-    if (visToggle) {
-        visToggle.addEventListener('click', () => {
-            const isPassword = passwordInput.type === 'password';
-            passwordInput.type = isPassword ? 'text' : 'password';
-            visToggle.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
-        });
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        if (!email || !password) {
-            WmsAPI.showToast('Please enter email and password', 'error');
-            return;
-        }
-
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Signing in...`;
-
-        try {
-            await WmsAPI.login(email, password);
-            WmsAPI.showToast('Login successful! Redirecting...');
-            setTimeout(() => {
+            </div>
+        </div>
+    </main>
+    <script src="../shared/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // If already logged in, redirect to dashboard
+            if (WmsAPI.isLoggedIn()) {
                 window.location.href = '../admin_dashboard/code.html';
-            }, 500);
-        } catch (err) {
-            WmsAPI.showToast(err.message || 'Login failed. Check your credentials.', 'error');
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = `Sign In to Dashboard <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>`;
-        }
-    });
-});
-</script>
-</body></html>
+                return;
+            }
+
+            const form = document.querySelector('form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            // Quick-fill buttons for Staff/Admin
+            const quickTags = document.querySelectorAll('.flex.gap-3.mb-8 span');
+            if (quickTags.length >= 2) {
+                quickTags[0].addEventListener('click', () => {
+                    // Auto-fill removed for Staff per request
+                });
+                quickTags[1].addEventListener('click', () => {
+                    emailInput.value = 'admin@wms.com';
+                    passwordInput.value = 'admin123';
+                });
+            }
+
+            // Toggle password visibility
+            const visToggle = form.querySelector('button[type="button"]');
+            if (visToggle) {
+                visToggle.addEventListener('click', () => {
+                    const isPassword = passwordInput.type === 'password';
+                    passwordInput.type = isPassword ? 'text' : 'password';
+                    visToggle.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
+                });
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                if (!email || !password) {
+                    WmsAPI.showToast('Please enter email and password', 'error');
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Signing in...`;
+
+                try {
+                    await WmsAPI.login(email, password);
+                    WmsAPI.showToast('Login successful! Redirecting...');
+                    setTimeout(() => {
+                        window.location.href = '../admin_dashboard/code.html';
+                    }, 500);
+                } catch (err) {
+                    WmsAPI.showToast(err.message || 'Login failed. Check your credentials.', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `Sign In to Dashboard <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
