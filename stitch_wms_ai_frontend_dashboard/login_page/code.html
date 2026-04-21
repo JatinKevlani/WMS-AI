@@ -182,9 +182,7 @@
                         <img class="w-8 h-8 rounded-full border-2 border-surface shadow-sm object-cover"
                             data-alt="professional woman logistics coordinator portrait in clean office environment"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqnmmWs4-xZbFuQaRwWCbBlPEfcyGRNlfwcnatkhZ-ZDno3tYy9JLPeNXhaU6Ql3NjrkAIrORcd5V8lx2k4V3yURcdiy_LzLSEqSnWPx8-O4-uiPW0MYbXoMzwOkjvlhvepJT92pfVzWUeO50SZYwXk3lVlk8iep9DcP9xCAET51mpO5OwnDx3dSAIwYGD0yTet6BOCCdJzDOrcCdiDxm4WqgVBgJAW2prg7eG4yqKTsIlga5shPV1XcNOf3jfAEaviuamKDpnWEg" />
-                        <div
-                            class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
-                            +12</div>
+
                     </div>
                     <p class="text-xs text-on-surface-variant leading-tight">Join 2,400+ logistics experts using <span
                             class="font-bold text-on-surface">The Digital Foreman</span>.</p>
@@ -273,7 +271,8 @@
             const quickTags = document.querySelectorAll('.flex.gap-3.mb-8 span');
             if (quickTags.length >= 2) {
                 quickTags[0].addEventListener('click', () => {
-                    // Auto-fill removed for Staff per request
+                    emailInput.value = 'staff@wms.com';
+                    passwordInput.value = 'staff123';
                 });
                 quickTags[1].addEventListener('click', () => {
                     emailInput.value = 'admin@wms.com';

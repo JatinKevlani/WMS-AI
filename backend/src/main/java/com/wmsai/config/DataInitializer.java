@@ -26,8 +26,6 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         seedAdminUser();
-        seedStaffUser();
-        seedCategories();
     }
 
     private void seedAdminUser() {
@@ -42,37 +40,17 @@ public class DataInitializer implements CommandLineRunner {
             userRepository.save(admin);
             log.info("✅ Default admin user created: admin@wms.com / admin123");
         }
-    }
 
-    private void seedStaffUser() {
         if (!userRepository.existsByEmail("staff@wms.com")) {
             User staff = User.builder()
                     .email("staff@wms.com")
                     .passwordHash(passwordEncoder.encode("staff123"))
-                    .fullName("Staff Operator")
+                    .fullName("Staff Expert")
                     .role(Role.STAFF)
                     .isActive(true)
                     .build();
             userRepository.save(staff);
-            log.info("Default staff user created: staff@wms.com / staff123");
+            log.info("✅ Default staff user created: staff@wms.com / staff123");
         }
-    }
-
-    private void seedCategories() {
-        List<String> categories = List.of(
-                "Electronics", "Health & Supplements", "Home Goods", "Furniture",
-                "Food & Beverages", "Sports & Outdoors", "Clothing", "Beauty & Personal Care",
-                "Automotive", "Office Supplies"
-        );
-
-        for (String name : categories) {
-            if (!categoryRepository.existsByName(name)) {
-                categoryRepository.save(Category.builder()
-                        .name(name)
-                        .description(name + " category")
-                        .build());
-            }
-        }
-        log.info("✅ Seeded {} categories", categories.size());
     }
 }

@@ -207,81 +207,6 @@
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Full Name</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Email</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Role</th>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Last Login</th>
-<th class="px-6 py-4"></th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant/5">
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-xs font-bold">JD</div>
-<span class="text-sm font-semibold">James Dalton</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-on-surface-variant">j.dalton@wms-ai.com</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded uppercase">Admin</span>
-</td>
-<td class="px-6 py-4">
-<span class="flex items-center gap-1.5 text-[11px] font-bold text-green-600">
-<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                                                Active
-                                            </span>
-</td>
-<td class="px-6 py-4 text-xs text-on-surface-variant">2 mins ago</td>
-<td class="px-6 py-4 text-right">
-<button class="p-2 hover:bg-surface-container-highest rounded-lg text-on-surface-variant">
-<span class="material-symbols-outlined text-[20px]">more_vert</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed text-xs font-bold">SH</div>
-<span class="text-sm font-semibold">Sarah Hughes</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-on-surface-variant">s.hughes@wms-ai.com</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded uppercase">Staff</span>
-</td>
-<td class="px-6 py-4">
-<span class="flex items-center gap-1.5 text-[11px] font-bold text-green-600">
-<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                                                Active
-                                            </span>
-</td>
-<td class="px-6 py-4 text-xs text-on-surface-variant">1 hour ago</td>
-<td class="px-6 py-4 text-right">
-<button class="p-2 hover:bg-surface-container-highest rounded-lg text-on-surface-variant">
-<span class="material-symbols-outlined text-[20px]">more_vert</span>
-</button>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed text-xs font-bold">MK</div>
-<span class="text-sm font-semibold">Mark Kovac</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm text-on-surface-variant">m.kovac@wms-ai.com</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded uppercase">Staff</span>
-</td>
-<td class="px-6 py-4">
-<span class="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
-<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
-                                                Inactive
-                                            </span>
-</td>
-<td class="px-6 py-4 text-xs text-on-surface-variant">3 days ago</td>
-<td class="px-6 py-4 text-right">
-<button class="p-2 hover:bg-surface-container-highest rounded-lg text-on-surface-variant">
-<span class="material-symbols-outlined text-[20px]">more_vert</span>
 </button>
 </td>
 </tr>
@@ -412,6 +337,43 @@
 document.addEventListener('DOMContentLoaded', async () => {
     if (!WmsAPI.requireAuth()) return;
 
+    function populateActiveUser() {
+        const u = WmsAPI.getUser();
+        const tbody = document.getElementById('usersTableBody');
+        if (!u) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-on-surface-variant">No personnel loaded.</td></tr>';
+            return;
+        }
+        
+        const init = u.fullName ? u.fullName.substring(0, 2).toUpperCase() : 'U';
+        tbody.innerHTML = `
+            <tr class="hover:bg-surface-container-low transition-colors group">
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-xs font-bold">${init}</div>
+                        <span class="text-sm font-semibold">${u.fullName || 'Admin User'}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-sm text-on-surface-variant">${u.email || 'None'}</td>
+                <td class="px-6 py-4">
+                    <span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded uppercase">${u.role || 'ADMIN'}</span>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="flex items-center gap-1.5 text-[11px] font-bold text-green-600">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                        Active
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-xs text-on-surface-variant">Just now</td>
+                <td class="px-6 py-4 text-right">
+                    <button class="p-2 hover:bg-surface-container-highest rounded-lg text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[20px]">more_vert</span>
+                    </button>
+                </td>
+            </tr>`;
+    }
+    populateActiveUser();
+
     const defaults = {
         warehouseTimezone: 'UTC-5 (New York, EST)',
         scanSensitivity: 'MID',
@@ -502,18 +464,32 @@ document.addEventListener('DOMContentLoaded', async () => {
         markDirty();
     });
 
+    const maintenanceModal = document.getElementById('maintenanceModal');
+    const closeMaintenanceModal = () => maintenanceModal.classList.add('hidden');
+    
+    document.getElementById('btnCancelMaintenance').addEventListener('click', closeMaintenanceModal);
+    document.getElementById('btnCancelMaintenance2').addEventListener('click', closeMaintenanceModal);
+
     maintenanceBtn.addEventListener('click', () => {
         const current = state.maintenanceWindow === 'Not Scheduled' ? '' : state.maintenanceWindow;
-        const schedule = window.prompt('Enter a maintenance window (example: Sunday 02:00 AM)', current);
-        if (schedule === null) return;
+        document.getElementById('maintenanceScheduleInput').value = current;
+        maintenanceModal.classList.remove('hidden');
+        document.getElementById('maintenanceScheduleInput').focus();
+    });
+
+    document.getElementById('maintenanceForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const schedule = document.getElementById('maintenanceScheduleInput').value;
         state.maintenanceWindow = schedule.trim() || 'Not Scheduled';
         applyState(state);
+        markDirty();
         WmsAPI.showToast(
             state.maintenanceWindow === 'Not Scheduled'
                 ? 'Maintenance schedule cleared'
                 : 'Maintenance window updated',
             'success'
         );
+        closeMaintenanceModal();
     });
 
     discardBtn.addEventListener('click', () => {
@@ -544,6 +520,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         WmsAPI.showToast('Log viewer is not exposed in this build yet.', 'warning');
     });
 
+    document.getElementById('btnCreateUser').addEventListener('click', () => {
+        const modal = document.getElementById('userCreationModal');
+        modal.classList.remove('hidden');
+    });
+
+    document.getElementById('btnCancelUserCreation').addEventListener('click', () => {
+        document.getElementById('userCreationModal').classList.add('hidden');
+    });
+
+    document.getElementById('userCreationForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('cuEmail').value;
+        const password = document.getElementById('cuPassword').value;
+        const fullName = document.getElementById('cuFullName').value;
+        const role = document.getElementById('cuRole').value;
+
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Creating...';
+
+        try {
+            await WmsAPI.register(email, password, fullName, role);
+            WmsAPI.showToast(`User ${fullName} created successfully`);
+            document.getElementById('userCreationModal').classList.add('hidden');
+            e.target.reset();
+        } catch (err) {
+            WmsAPI.showToast(err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Create User';
+        }
+    });
+
     try {
         const settings = await WmsAPI.getSettings();
         if (Array.isArray(settings)) {
@@ -564,4 +573,67 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 </script>
+<!-- Maintenance Modal -->
+<div id="maintenanceModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface">Maintenance Schedule</h3>
+            <button id="btnCancelMaintenance" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <form id="maintenanceForm" class="p-6 space-y-4">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Schedule Time</label>
+                <input type="text" id="maintenanceScheduleInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="e.g. Sunday 02:00 AM">
+                <p class="text-xs text-on-surface-variant mt-2">Leave blank to clear the schedule.</p>
+            </div>
+            <div class="pt-2 flex justify-end gap-3">
+                <button type="button" id="btnCancelMaintenance2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors flex items-center">
+                    <span class="material-symbols-outlined text-[18px] mr-2">save</span> Set Schedule
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- User Creation Modal -->
+<div id="userCreationModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface">Create New Personnel</h3>
+            <button id="btnCancelUserCreation" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <form id="userCreationForm" class="p-6 space-y-4">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Full Name</label>
+                <input type="text" id="cuFullName" required class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors" placeholder="e.g. Alex Rivera">
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Email Address</label>
+                <input type="email" id="cuEmail" required class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors" placeholder="alex@wms.com">
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Password</label>
+                <input type="password" id="cuPassword" required class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors" placeholder="••••••••">
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">System Role</label>
+                <select id="cuRole" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors">
+                    <option value="STAFF">Staff Member</option>
+                    <option value="ADMIN">Administrator</option>
+                </select>
+            </div>
+            <div class="pt-4 flex justify-end gap-3">
+                <button type="button" id="btnCancelUserCreation2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors">
+                    Create User
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </body></html>

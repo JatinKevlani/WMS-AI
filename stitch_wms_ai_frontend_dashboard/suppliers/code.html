@@ -191,35 +191,36 @@
                     </button>
 </div>
 </div>
+</div>
 <!-- Dashboard Stats Summary (Bento-style snippet) -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary border-opacity-30">
 <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Total Partners</p>
-<p class="text-2xl font-black text-on-surface" id="kpi-suppliers">—</p>
-<p class="text-green-600 text-[10px] font-bold mt-2 flex items-center">
-<span class="material-symbols-outlined text-xs mr-1">trending_up</span> +4 this month
+<p class="text-2xl font-black text-on-surface opacity-50" id="kpi-suppliers">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 flex items-center opacity-50">
+<span class="material-symbols-outlined text-xs mr-1">trending_flat</span> Waiting for data
                     </p>
 </div>
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary border-opacity-30">
 <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Active Shipments</p>
-<p class="text-2xl font-black text-on-surface">28</p>
-<p class="text-on-surface-variant text-[10px] font-bold mt-2 flex items-center">
-<span class="material-symbols-outlined text-xs mr-1">schedule</span> Avg. 3.2 days delay
+<p class="text-2xl font-black text-on-surface opacity-50">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 flex items-center opacity-50">
+<span class="material-symbols-outlined text-xs mr-1">schedule</span> No active shipments
                     </p>
 </div>
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-secondary">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-secondary border-opacity-30">
 <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Compliance Score</p>
-<p class="text-2xl font-black text-on-surface">94.8%</p>
-<p class="text-primary text-[10px] font-bold mt-2">Elite Tier Status</p>
+<p class="text-2xl font-black text-on-surface opacity-50">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 opacity-50">Not evaluated</p>
 </div>
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-error">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-error border-opacity-30">
 <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Critical Alerts</p>
-<p class="text-2xl font-black text-on-surface">3</p>
-<p class="text-error text-[10px] font-bold mt-2">Action Required</p>
+<p class="text-2xl font-black text-on-surface opacity-50">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 opacity-50">No alerts</p>
 </div>
 </div>
 <!-- Supplier Table Container -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm mt-8">
 <div class="p-6 border-b border-slate-50 flex items-center justify-between bg-surface-container-low">
 <h3 class="text-sm font-bold text-on-surface">Global Supplier Registry</h3>
 <div class="flex items-center space-x-2">
@@ -250,18 +251,14 @@
 </table>
 </div>
 <!-- Pagination Footer -->
-<div class="p-4 bg-surface-container-low border-t border-slate-100 flex items-center justify-between">
-<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Showing 1-10 of 142 Partners</p>
+<div class="p-4 bg-surface-container-low border-t border-slate-100 flex items-center justify-between opacity-50">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" id="supplier-pagination-info">Showing 0 Partners</p>
 <div class="flex items-center space-x-1">
-<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors text-on-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors text-on-surface-variant" disabled>
 <span class="material-symbols-outlined text-lg">chevron_left</span>
 </button>
-<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">1</button>
-<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant text-xs font-bold">2</button>
-<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant text-xs font-bold">3</button>
-<span class="px-2 text-on-surface-variant text-xs">...</span>
-<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant text-xs font-bold">15</button>
-<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors text-on-surface-variant">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-variant text-on-surface-variant text-xs font-bold" disabled>1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors text-on-surface-variant" disabled>
 <span class="material-symbols-outlined text-lg">chevron_right</span>
 </button>
 </div>
@@ -380,10 +377,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     loadSuppliers();
 
+    const filterSupplierModal = document.getElementById('filterSupplierModal');
+    const filterSupplierForm = document.getElementById('filterSupplierForm');
+
     document.getElementById('btnFilterSuppliers').addEventListener('click', () => {
-        const term = window.prompt('Filter suppliers by name or contact person', '');
-        if (term === null) return;
+        filterSupplierModal.classList.remove('hidden');
+        document.getElementById('filterSupplierInput').focus();
+    });
+
+    const closeFilterSupplierModal = () => {
+        filterSupplierModal.classList.add('hidden');
+    };
+
+    document.getElementById('btnCancelFilterSupplier').addEventListener('click', closeFilterSupplierModal);
+    document.getElementById('btnCancelFilterSupplier2').addEventListener('click', closeFilterSupplierModal);
+
+    filterSupplierForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const term = document.getElementById('filterSupplierInput').value;
         const query = term.trim().toLowerCase();
+        closeFilterSupplierModal();
         if (!query) {
             renderSuppliers(supplierCache);
             return;
@@ -394,18 +407,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         ));
     });
 
-    document.getElementById('btnAddSupplier').addEventListener('click', async () => {
-        const name = window.prompt('Supplier name');
-        if (!name) return;
+    const addSupplierModal = document.getElementById('addSupplierModal');
+    const addSupplierForm = document.getElementById('addSupplierForm');
 
-        const contactPerson = window.prompt('Contact person', '') || '';
-        const email = window.prompt('Email address', '') || '';
-        const phone = window.prompt('Phone number', '') || '';
-        const address = window.prompt('Address', '') || '';
+    document.getElementById('btnAddSupplier').addEventListener('click', () => {
+        addSupplierModal.classList.remove('hidden');
+        document.getElementById('supplierNameInput').focus();
+    });
+
+    const closeSupplierModal = () => {
+        addSupplierModal.classList.add('hidden');
+        addSupplierForm.reset();
+    };
+
+    document.getElementById('btnCancelAddSupplier').addEventListener('click', closeSupplierModal);
+    document.getElementById('btnCancelAddSupplier2').addEventListener('click', closeSupplierModal);
+
+    addSupplierForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('supplierNameInput').value;
+        const contactPerson = document.getElementById('supplierContactInput').value;
+        const email = document.getElementById('supplierEmailInput').value;
+        const phone = document.getElementById('supplierPhoneInput').value;
+        const address = document.getElementById('supplierAddressInput').value;
 
         try {
             await WmsAPI.createSupplier({ name, contactPerson, email, phone, address });
             WmsAPI.showToast('Supplier added successfully');
+            closeSupplierModal();
             await loadSuppliers();
         } catch (error) {
             WmsAPI.showToast(error.message || 'Failed to add supplier', 'error');
@@ -421,6 +450,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         WmsAPI.showToast('Interactive map is not available in this build yet.', 'warning');
     });
 
+    const viewSupplierModal = document.getElementById('viewSupplierModal');
+    const closeViewSupplierModal = () => viewSupplierModal.classList.add('hidden');
+
+    document.getElementById('btnCloseViewSupplier').addEventListener('click', closeViewSupplierModal);
+    document.getElementById('btnCloseViewSupplier2').addEventListener('click', closeViewSupplierModal);
+
     tbody.addEventListener('click', async (event) => {
         const button = event.target.closest('[data-view-supplier]');
         if (!button) return;
@@ -429,13 +464,123 @@ document.addEventListener('DOMContentLoaded', async () => {
             const result = await WmsAPI.getSupplier(button.dataset.viewSupplier);
             const supplier = result.supplier;
             const products = result.products || [];
-            window.alert(
-                `Supplier: ${supplier.name}\nContact: ${supplier.contactPerson || 'N/A'}\nEmail: ${supplier.email || 'N/A'}\nPhone: ${supplier.phone || 'N/A'}\nProducts supplied: ${products.length}\nAddress: ${supplier.address || 'N/A'}`
-            );
+
+            document.getElementById('viewSupplierTitle').textContent = supplier.name;
+            document.getElementById('viewSupplierContact').textContent = supplier.contactPerson || 'N/A';
+            document.getElementById('viewSupplierEmail').textContent = supplier.email || 'N/A';
+            document.getElementById('viewSupplierPhone').textContent = supplier.phone || 'N/A';
+            document.getElementById('viewSupplierProductCount').textContent = products.length.toString();
+            document.getElementById('viewSupplierAddress').textContent = supplier.address || 'N/A';
+
+            viewSupplierModal.classList.remove('hidden');
         } catch (error) {
             WmsAPI.showToast(error.message || 'Failed to load supplier details', 'error');
         }
     });
 });
 </script>
+<!-- Add Supplier Modal -->
+<div id="addSupplierModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface">Add New Supplier</h3>
+            <button id="btnCancelAddSupplier" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <form id="addSupplierForm" class="p-6 space-y-4">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Supplier Name *</label>
+                <input type="text" id="supplierNameInput" required class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="e.g. Nexus Components">
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Contact Person</label>
+                <input type="text" id="supplierContactInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="e.g. Jane Doe">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Email</label>
+                    <input type="email" id="supplierEmailInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="jane@example.com">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Phone</label>
+                    <input type="text" id="supplierPhoneInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="+1 (555) 000-0000">
+                </div>
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Address</label>
+                <textarea id="supplierAddressInput" rows="2" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="HQ Address"></textarea>
+            </div>
+            <div class="pt-4 mt-2 flex justify-end gap-3">
+                <button type="button" id="btnCancelAddSupplier2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors flex items-center">
+                    <span class="material-symbols-outlined text-[18px] mr-2">save</span> Save Data
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Filter Suppliers Modal -->
+<div id="filterSupplierModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface">Filter Suppliers</h3>
+            <button id="btnCancelFilterSupplier" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <form id="filterSupplierForm" class="p-6 space-y-4">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Search Term</label>
+                <input type="text" id="filterSupplierInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="Name or contact...">
+            </div>
+            <div class="pt-2 flex justify-end gap-3">
+                <button type="button" id="btnCancelFilterSupplier2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors flex items-center">
+                    <span class="material-symbols-outlined text-[18px] mr-2">filter_list</span> Apply Filter
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- View Supplier Details Modal -->
+<div id="viewSupplierModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface" id="viewSupplierTitle">Supplier Details</h3>
+            <button id="btnCloseViewSupplier" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Contact Person</p>
+                <p class="text-sm font-medium text-on-surface" id="viewSupplierContact">-</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                    <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Email</p>
+                    <p class="text-sm font-medium text-on-surface" id="viewSupplierEmail">-</p>
+                </div>
+                <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                    <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Phone</p>
+                    <p class="text-sm font-medium text-on-surface" id="viewSupplierPhone">-</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Products Supplied</p>
+                <p class="text-sm font-medium text-on-surface" id="viewSupplierProductCount">0</p>
+            </div>
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Address</p>
+                <p class="text-sm font-medium text-on-surface" id="viewSupplierAddress">-</p>
+            </div>
+        </div>
+        <div class="px-6 py-4 border-t border-outline-variant/20 flex justify-end">
+            <button type="button" id="btnCloseViewSupplier2" class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors">Done</button>
+        </div>
+    </div>
+</div>
 </body></html>
