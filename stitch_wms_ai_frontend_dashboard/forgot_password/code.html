@@ -116,7 +116,7 @@
 </button>
 </form>
 <div class="mt-12 pt-8 border-t border-surface-container-high">
-<a class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300" href="#">
+<a class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300" href="../login_page/code.html" id="returnToLoginLink">
 <span class="material-symbols-outlined text-[20px]">keyboard_backspace</span>
                             Return to Login
                         </a>
@@ -195,4 +195,37 @@
 <a class="text-slate-400 dark:text-slate-500 text-[10px] font-normal tracking-normal hover:text-slate-600 dark:hover:text-slate-300 transition-colors" href="#">Security</a>
 </div>
 </footer>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const emailInput = document.getElementById('email');
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    const params = new URLSearchParams(window.location.search);
+    const presetEmail = params.get('email') || localStorage.getItem('wms_reset_email') || '';
+
+    if (presetEmail) {
+        emailInput.value = presetEmail;
+    }
+
+    form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+        if (!email || !email.includes('@')) {
+            WmsAPI.showToast('Enter a valid email address', 'error');
+            return;
+        }
+
+        localStorage.setItem('wms_reset_email', email);
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Preparing Reset Link...';
+
+        WmsAPI.showToast('Reset flow prepared. Continue on the next screen.');
+        setTimeout(() => {
+            window.location.href = `../reset_password/code.html?email=${encodeURIComponent(email)}`;
+        }, 600);
+    });
+});
+</script>
 </body></html>

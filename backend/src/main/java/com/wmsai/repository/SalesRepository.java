@@ -26,4 +26,10 @@ public interface SalesRepository extends JpaRepository<SalesTransaction, Integer
            "FROM SalesTransaction s WHERE s.saleDate BETWEEN :from AND :to " +
            "GROUP BY s.product.category.name")
     List<Object[]> findRevenueByCategory(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
+
+    /** Slow-moving products: lowest total sales quantity [ANA-06]. */
+    @Query("SELECT s.product.id, s.product.name, s.product.sku, SUM(s.quantitySold) as totalQty " +
+           "FROM SalesTransaction s WHERE s.saleDate BETWEEN :from AND :to " +
+           "GROUP BY s.product.id, s.product.name, s.product.sku ORDER BY totalQty ASC")
+    List<Object[]> findSlowMovingProducts(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 }

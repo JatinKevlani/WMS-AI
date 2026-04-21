@@ -95,36 +95,36 @@
 <p class="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase mt-1">The Digital Foreman</p>
 </div>
 <nav class="space-y-1">
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
 <span class="material-symbols-outlined">dashboard</span>
 <span>Dashboard</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
 <span class="material-symbols-outlined">inventory_2</span>
 <span>Products</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../categories/code.html">
 <span class="material-symbols-outlined">category</span>
 <span>Categories</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../suppliers/code.html">
 <span class="material-symbols-outlined">local_shipping</span>
 <span>Suppliers</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../purchase_orders/code.html">
 <span class="material-symbols-outlined">shopping_cart</span>
 <span>Orders</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
 <span class="material-symbols-outlined">payments</span>
 <span>Sales</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../alerts/code.html">
 <span class="material-symbols-outlined">notifications_active</span>
 <span>Alerts</span>
 </a>
 <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800">
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="#">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../ai_recommendations/code.html">
 <span class="material-symbols-outlined">auto_awesome</span>
 <span>AI Insights</span>
 </a>
@@ -146,7 +146,7 @@
 <header class="h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm dark:shadow-none flex items-center justify-between px-8 w-full border-b-0">
 <div class="flex items-center space-x-4">
 <span class="text-slate-400 font-medium">Products /</span>
-<span class="text-indigo-700 dark:text-indigo-400 font-semibold">SKU-99284-NX</span>
+<span class="text-indigo-700 dark:text-indigo-400 font-semibold" id="detailSku">SKU-99284-NX</span>
 </div>
 <div class="flex items-center space-x-6">
 <div class="relative">
@@ -161,25 +161,25 @@
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
 <div>
 <div class="flex items-center gap-3 mb-2">
-<span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-bold uppercase tracking-widest rounded">Active Inventory</span>
-<span class="text-slate-400 text-sm font-medium tracking-tight">Category: Industrial Components</span>
+<span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-bold uppercase tracking-widest rounded" id="detailStatusBadge">Active Inventory</span>
+<span class="text-slate-400 text-sm font-medium tracking-tight" id="detailCategoryLabel">Category: Industrial Components</span>
 </div>
-<h2 class="text-4xl font-extrabold text-on-surface tracking-tight leading-none mb-2">Quantum Sensor Unit X1</h2>
-<p class="text-slate-500 text-sm">Supplier: Global Dynamics Corp. | Location: Aisle 4, Shelf 12, Bin B</p>
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tight leading-none mb-2" id="detailName">Quantum Sensor Unit X1</h2>
+<p class="text-slate-500 text-sm" id="detailMeta">Supplier: Global Dynamics Corp. | Location: Aisle 4, Shelf 12, Bin B</p>
 </div>
 <div class="flex items-center gap-3">
-<button class="px-5 py-2.5 bg-primary-gradient text-white text-sm font-semibold rounded-lg shadow-sm active:scale-95 duration-150 flex items-center gap-2">
+<button class="px-5 py-2.5 bg-primary-gradient text-white text-sm font-semibold rounded-lg shadow-sm active:scale-95 duration-150 flex items-center gap-2" id="btnStockIn">
 <span class="material-symbols-outlined text-sm">add_box</span>
                         Stock In
                     </button>
-<button class="px-5 py-2.5 bg-surface-container-highest text-on-surface text-sm font-semibold rounded-lg active:scale-95 duration-150 flex items-center gap-2">
+<button class="px-5 py-2.5 bg-surface-container-highest text-on-surface text-sm font-semibold rounded-lg active:scale-95 duration-150 flex items-center gap-2" id="btnStockOut">
 <span class="material-symbols-outlined text-sm">outbox</span>
                         Stock Out
                     </button>
-<button class="p-2.5 text-on-surface-variant hover:bg-slate-200/50 rounded-lg transition-colors">
+<button class="p-2.5 text-on-surface-variant hover:bg-slate-200/50 rounded-lg transition-colors" id="btnEditProduct">
 <span class="material-symbols-outlined">edit</span>
 </button>
-<button class="p-2.5 text-error hover:bg-error-container/30 rounded-lg transition-colors">
+<button class="p-2.5 text-error hover:bg-error-container/30 rounded-lg transition-colors" id="btnDeleteProduct">
 <span class="material-symbols-outlined">delete</span>
 </button>
 </div>
@@ -192,7 +192,7 @@
 <div class="flex items-center justify-between mb-8">
 <div>
 <h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">Inventory Trajectory</h3>
-<p class="text-3xl font-black text-indigo-700 mt-1">4,282 <span class="text-sm font-normal text-slate-400">Units on hand</span></p>
+<p class="text-3xl font-black text-indigo-700 mt-1"><span id="detailQuantity">4,282</span> <span class="text-sm font-normal text-slate-400">Units on hand</span></p>
 </div>
 <div class="flex gap-2">
 <span class="px-3 py-1 bg-surface-container-low text-indigo-600 text-xs font-bold rounded-full">Last 30 Days</span>
@@ -227,7 +227,7 @@
 </div>
 <p class="text-xl font-medium leading-tight relative z-10 mb-6 italic">"Demand surge predicted for Q4. Current safety stock is 12% below optimal levels."</p>
 <div class="mt-auto relative z-10">
-<button class="w-full py-3 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold uppercase rounded-lg tracking-widest hover:bg-white transition-colors">Adjust Reorder Points</button>
+<button class="w-full py-3 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold uppercase rounded-lg tracking-widest hover:bg-white transition-colors" id="btnAdjustReorderPoints">Adjust Reorder Points</button>
 </div>
 <!-- Background decoration -->
 <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
@@ -274,7 +274,7 @@
 <!-- Activity Timeline -->
 <div class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-sm">
 <h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-6">Live Activity Log</h3>
-<div class="space-y-6 overflow-y-auto max-h-[220px] pr-2">
+<div class="space-y-6 overflow-y-auto max-h-[220px] pr-2" id="detailActivityLog">
 <div class="flex gap-4 relative">
 <div class="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0 ring-4 ring-indigo-50"></div>
 <div class="absolute left-[3.5px] top-4 w-[1px] h-full bg-slate-100"></div>
@@ -306,7 +306,7 @@
 <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
 <div class="px-6 py-5 flex items-center justify-between">
 <h3 class="text-sm font-bold uppercase tracking-wider text-on-surface">Transaction Ledger</h3>
-<button class="text-indigo-600 text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+<button class="text-indigo-600 text-xs font-bold uppercase tracking-widest flex items-center gap-1" id="btnExportProductReport">
                         Export Report
                         <span class="material-symbols-outlined text-sm">download</span>
 </button>
@@ -322,7 +322,7 @@
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
 </tr>
 </thead>
-<tbody class="divide-y-0">
+<tbody class="divide-y-0" id="detailLedgerBody">
 <tr class="hover:bg-surface-container-low transition-colors group">
 <td class="px-6 py-4 text-xs font-medium text-on-surface">Oct 28, 2023 | 14:22</td>
 <td class="px-6 py-4 text-xs font-bold text-indigo-600">Stock Deployment</td>
@@ -390,4 +390,284 @@
 </div>
 </section>
 </main>
+<dialog id="genericModal" class="backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm p-0 rounded-2xl shadow-2xl border-none m-auto shadow-primary/20 bg-white dark:bg-slate-900 w-full max-w-sm overflow-hidden">
+    <div class="p-6">
+        <h3 id="modalTitle" class="text-xl font-bold text-on-surface mb-1"></h3>
+        <p id="modalDesc" class="text-xs text-on-surface-variant mb-4"></p>
+        <div id="modalBody" class="space-y-4 mb-8"></div>
+        <div class="flex justify-end gap-3">
+            <button id="modalBtnCancel" class="px-5 py-2.5 rounded-lg font-bold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+            <button id="modalBtnConfirm" class="px-5 py-2.5 rounded-lg font-bold bg-primary text-white shadow hover:bg-indigo-700 transition-colors">Confirm</button>
+        </div>
+    </div>
+</dialog>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!WmsAPI.requireAuth()) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    const quantityLabel = document.getElementById('detailQuantity');
+    const skuLabel = document.getElementById('detailSku');
+    const nameLabel = document.getElementById('detailName');
+    const categoryLabel = document.getElementById('detailCategoryLabel');
+    const metaLabel = document.getElementById('detailMeta');
+    const statusBadge = document.getElementById('detailStatusBadge');
+    const activityLog = document.getElementById('detailActivityLog');
+    const ledgerBody = document.getElementById('detailLedgerBody');
+
+    if (!productId) {
+        WmsAPI.showToast('No product selected. Returning to product list.', 'warning');
+        setTimeout(() => {
+            window.location.href = '../product_list/code.html';
+        }, 600);
+        return;
+    }
+
+    function statusText(product) {
+        if (product.quantity <= product.minThreshold) return 'Low Stock';
+        if (product.quantity >= product.maxThreshold) return 'Overstock';
+        return 'Active Inventory';
+    }
+
+    function statusClasses(product) {
+        if (product.quantity <= product.minThreshold) return 'px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-bold uppercase tracking-widest rounded';
+        if (product.quantity >= product.maxThreshold) return 'px-2 py-0.5 bg-tertiary/10 text-tertiary text-[10px] font-bold uppercase tracking-widest rounded';
+        return 'px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-bold uppercase tracking-widest rounded';
+    }
+
+    async function loadProductDetail() {
+        try {
+            const [product, sales] = await Promise.all([
+                WmsAPI.getProduct(productId),
+                WmsAPI.getSales()
+            ]);
+
+            document.title = `AI-WMS | ${product.name}`;
+            skuLabel.textContent = product.sku;
+            nameLabel.textContent = product.name;
+            categoryLabel.textContent = `Category: ${product.category?.name || 'Uncategorized'}`;
+            metaLabel.textContent = `Supplier: ${product.supplier?.name || 'Unknown Supplier'} | Price: ${WmsAPI.formatCurrency(product.unitPrice)} | Thresholds: ${product.minThreshold}-${product.maxThreshold}`;
+            quantityLabel.textContent = Number(product.quantity || 0).toLocaleString();
+            statusBadge.textContent = statusText(product);
+            statusBadge.className = statusClasses(product);
+
+            activityLog.innerHTML = `
+                <div class="flex gap-4 relative">
+                    <div class="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0 ring-4 ring-indigo-50"></div>
+                    <div class="absolute left-[3.5px] top-4 w-[1px] h-full bg-slate-100"></div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface">Inventory checked: ${product.quantity} units available</p>
+                        <p class="text-[10px] text-slate-400">Min threshold ${product.minThreshold} | Max threshold ${product.maxThreshold}</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 relative">
+                    <div class="w-2 h-2 rounded-full bg-slate-300 mt-1.5 shrink-0"></div>
+                    <div class="absolute left-[3.5px] top-4 w-[1px] h-full bg-slate-100"></div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface">Product updated</p>
+                        <p class="text-[10px] text-slate-400">${WmsAPI.formatDate(product.updatedAt)} | SKU ${product.sku}</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 relative">
+                    <div class="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0 ring-4 ring-indigo-50"></div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface">Created in inventory</p>
+                        <p class="text-[10px] text-slate-400">${WmsAPI.formatDate(product.createdAt)} | ${product.supplier?.name || 'No supplier assigned'}</p>
+                    </div>
+                </div>
+            `;
+
+            const productSales = (sales || []).filter((sale) => sale.product?.id === Number(productId)).map(s => ({
+                date: s.saleDate,
+                type: 'Sale Recorded',
+                qtyText: `-${s.quantitySold} Units`,
+                user: s.soldBy?.fullName || 'System',
+                status: 'Completed',
+                isSale: true
+            }));
+
+            const localAdj = JSON.parse(localStorage.getItem(`wms_stock_adj_${productId}`) || '[]');
+            const allLedgerEntries = [...productSales, ...localAdj].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (allLedgerEntries.length === 0) {
+                ledgerBody.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-on-surface-variant">No transactions or stock adjustments recorded for this product yet.</td></tr>`;
+            } else {
+                ledgerBody.innerHTML = allLedgerEntries.map((item) => `
+                    <tr class="hover:bg-surface-container-low transition-colors group">
+                        <td class="px-6 py-4 text-xs font-medium text-on-surface">${WmsAPI.formatDate(item.date)}</td>
+                        <td class="px-6 py-4 text-xs font-bold ${item.isSale ? 'text-indigo-600' : 'text-teal-600'}">${item.type}</td>
+                        <td class="px-6 py-4 text-xs font-semibold text-on-surface">${item.qtyText}</td>
+                        <td class="px-6 py-4 text-xs font-medium text-on-surface-variant">${item.user}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-surface-container text-[10px] font-medium rounded-full cursor-default border border-slate-200">
+                                ${item.status}
+                            </span>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Failed to load product details', 'error');
+        }
+    }
+
+    const dialog = document.getElementById('genericModal');
+    function showModal(title, desc, htmlBody, confirmText, onConfirm, isDanger = false) {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalDesc').textContent = desc;
+        document.getElementById('modalBody').innerHTML = htmlBody;
+        const btn = document.getElementById('modalBtnConfirm');
+        btn.textContent = confirmText;
+        btn.className = isDanger 
+            ? "px-5 py-2.5 rounded-lg font-bold bg-error text-white shadow hover:bg-red-700 transition-colors"
+            : "px-5 py-2.5 rounded-lg font-bold bg-primary text-white shadow hover:bg-indigo-700 transition-colors";
+        
+        document.getElementById('modalBtnCancel').onclick = () => dialog.close();
+        btn.onclick = async () => {
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            try {
+                await onConfirm();
+                dialog.close();
+            } finally {
+                btn.disabled = false;
+            }
+        };
+        dialog.showModal();
+    }
+
+    async function runStockChange(mode) {
+        showModal(
+            `Stock ${mode === 'in' ? 'In' : 'Out'}`,
+            `Adjusting inventory level.`,
+            `<label class="block text-xs font-bold text-on-surface-variant mb-1">Quantity</label>
+             <input id="stockQty" type="number" min="1" value="1" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"/>`,
+            mode === 'in' ? 'Add Stock' : 'Remove Stock',
+            async () => {
+                const qty = Number(document.getElementById('stockQty').value);
+                if (qty <= 0) throw new Error('Invalid quantity');
+                if (mode === 'in') await WmsAPI.stockIn(productId, qty);
+                else await WmsAPI.stockOut(productId, qty);
+                
+                WmsAPI.showToast(`Stock updated successfully`);
+                await loadProductDetail();
+                
+                // Add visual confirmation to activity log timeline implicitly!
+                activityLog.insertAdjacentHTML('afterbegin', `
+                <div class="flex gap-4 relative">
+                    <div class="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0"></div>
+                    <div class="absolute left-[3.5px] top-4 w-[1px] h-full bg-slate-100"></div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface">Manual Stock ${mode === 'in' ? 'In' : 'Out'} (+${qty})</p>
+                        <p class="text-[10px] text-slate-400">Just now | Local User</p>
+                    </div>
+                </div>`);
+
+                const localAdj = JSON.parse(localStorage.getItem(`wms_stock_adj_${productId}`) || '[]');
+                localAdj.push({
+                    date: new Date().toISOString(),
+                    type: mode === 'in' ? 'Stock In' : 'Stock Out',
+                    qtyText: mode === 'in' ? `+${qty} Units` : `-${qty} Units`,
+                    user: 'Local User',
+                    status: 'Completed',
+                    isSale: false
+                });
+                localStorage.setItem(`wms_stock_adj_${productId}`, JSON.stringify(localAdj));
+                await loadProductDetail();
+            }
+        );
+    }
+
+    document.getElementById('btnStockIn').addEventListener('click', () => runStockChange('in'));
+    document.getElementById('btnStockOut').addEventListener('click', () => runStockChange('out'));
+
+    document.getElementById('btnEditProduct').addEventListener('click', async () => {
+        const p = await WmsAPI.getProduct(productId);
+        showModal('Edit Product', 'Update master tracking details.', 
+            `<div><label class="text-xs font-bold block mb-1">Name</label><input id="epName" value="${p.name}" class="w-full rounded border-outline-variant p-2 mb-3 bg-surface-container-lowest"/></div>
+             <div><label class="text-xs font-bold block mb-1">Price</label><input id="epPrice" type="number" step="0.01" value="${p.unitPrice}" class="w-full rounded border-outline-variant p-2 mb-3 bg-surface-container-lowest"/></div>
+             <div class="grid grid-cols-2 gap-2">
+                 <div><label class="text-xs font-bold block mb-1">Min Threshold</label><input id="epMin" type="number" value="${p.minThreshold}" class="w-full rounded border-outline-variant p-2 bg-surface-container-lowest"/></div>
+                 <div><label class="text-xs font-bold block mb-1">Max Threshold</label><input id="epMax" type="number" value="${p.maxThreshold}" class="w-full rounded border-outline-variant p-2 bg-surface-container-lowest"/></div>
+             </div>`, 
+            'Save Changes', 
+            async () => {
+                await WmsAPI.updateProduct(productId, {
+                    name: document.getElementById('epName').value,
+                    unitPrice: Number(document.getElementById('epPrice').value),
+                    minThreshold: Number(document.getElementById('epMin').value),
+                    maxThreshold: Number(document.getElementById('epMax').value),
+                    categoryId: p.category?.id,
+                    supplierId: p.supplier?.id
+                });
+                WmsAPI.showToast('Product updated');
+                await loadProductDetail();
+            }
+        );
+    });
+
+    document.getElementById('btnDeleteProduct').addEventListener('click', () => {
+        showModal('Delete Product', 'This will remove the product permanently from active inventory listings. Are you sure?', '', 'Delete permanently', async () => {
+            await WmsAPI.deleteProduct(productId);
+            WmsAPI.showToast('Product deleted');
+            setTimeout(() => window.location.href = '../product_list/code.html', 500);
+        }, true);
+    });
+
+    document.getElementById('btnAdjustReorderPoints').addEventListener('click', async () => {
+        const p = await WmsAPI.getProduct(productId);
+        showModal('Adjust Reorder Points', 'Set autonomous AI threshold triggers.', 
+            `<div class="grid grid-cols-2 gap-4">
+                 <div><label class="text-xs font-bold block mb-1">Min Threshold</label><input id="roMin" type="number" value="${p.minThreshold}" class="w-full rounded border-outline-variant p-3 bg-surface-container-lowest"/></div>
+                 <div><label class="text-xs font-bold block mb-1">Max Threshold</label><input id="roMax" type="number" value="${p.maxThreshold}" class="w-full rounded border-outline-variant p-3 bg-surface-container-lowest"/></div>
+             </div>`, 
+            'Save Limits', 
+            async () => {
+                await WmsAPI.updateProduct(productId, {
+                    minThreshold: Number(document.getElementById('roMin').value),
+                    maxThreshold: Number(document.getElementById('roMax').value),
+                    categoryId: p.category?.id,
+                    supplierId: p.supplier?.id
+                });
+                WmsAPI.showToast('Thresholds applied successfully');
+                await loadProductDetail();
+            }
+        );
+    });
+
+    document.getElementById('btnExportProductReport').addEventListener('click', async () => {
+        try {
+            const product = await WmsAPI.getProduct(productId);
+            const printWindow = window.open('', '_blank', 'width=900,height=700');
+            if (!printWindow) {
+                WmsAPI.showToast('Allow popups to export the report', 'error');
+                return;
+            }
+
+            printWindow.document.write(`
+                <html>
+                <head><title>${product.name} Report</title></head>
+                <body style="font-family: Arial, sans-serif; padding: 24px;">
+                    <h2>${product.name}</h2>
+                    <p>SKU: ${product.sku}</p>
+                    <p>Supplier: ${product.supplier?.name || 'Unknown Supplier'}</p>
+                    <p>Quantity: ${product.quantity}</p>
+                    <p>Unit Price: ${WmsAPI.formatCurrency(product.unitPrice)}</p>
+                    <p>Thresholds: ${product.minThreshold} - ${product.maxThreshold}</p>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Export failed', 'error');
+        }
+    });
+
+    await loadProductDetail();
+});
+</script>
 </body></html>

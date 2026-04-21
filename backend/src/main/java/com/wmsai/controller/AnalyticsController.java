@@ -34,8 +34,16 @@ public class AnalyticsController {
         BigDecimal monthlyRevenue = salesRepository.findRevenueByPeriod(startOfMonth, now);
         long activeAlerts = alertRepository.countByIsReadFalse();
 
+        // Calculate total inventory value [ANA-01]
+        BigDecimal inventoryValue = productRepository.findAll().stream()
+                .filter(p -> !p.getIsDeleted())
+                .map(p -> (p.getUnitPrice() != null ? p.getUnitPrice() : BigDecimal.ZERO)
+                        .multiply(BigDecimal.valueOf(p.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
         Map<String, Object> stats = new LinkedHashMap<>();
         stats.put("totalProducts", totalProducts);
+        stats.put("inventoryValue", inventoryValue);
         stats.put("monthlyRevenue", monthlyRevenue);
         stats.put("activeAlerts", activeAlerts);
 

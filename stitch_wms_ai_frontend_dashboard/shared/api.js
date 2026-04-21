@@ -323,4 +323,25 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-user-email]').forEach(el => el.textContent = user.email);
         document.querySelectorAll('[data-user-role]').forEach(el => el.textContent = user.role);
     }
+    
+    // Global Header Actions
+    Array.from(document.querySelectorAll('.material-symbols-outlined')).forEach(el => {
+        const text = el.textContent.trim();
+        const btn = el.closest('button') || el.closest('a') || el;
+        if (text === 'print') {
+            btn.addEventListener('click', (e) => { e.preventDefault(); window.print(); });
+        } else if (text === 'ios_share' || text === 'file_upload' || text === 'cloud_upload' || text === 'download') {
+            btn.addEventListener('click', (e) => { 
+                // Ignore if it's explicitly a link to data_hub.html
+                if (btn.tagName === 'A' && btn.href && btn.href.includes('data_hub')) return;
+                e.preventDefault(); 
+                WmsAPI.showToast('Export initiated...', 'info'); 
+            });
+        } else if (text === 'account_circle') {
+            btn.addEventListener('click', (e) => { e.preventDefault(); WmsAPI.showToast(`User Profile: ${user?.fullName || 'Active User'}`, 'info'); });
+        } else if (text === 'notifications') {
+            btn.addEventListener('click', (e) => { e.preventDefault(); WmsAPI.showToast('No new notifications', 'info'); });
+        }
+    });
 });
+

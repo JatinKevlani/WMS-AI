@@ -27,6 +27,7 @@ public class SalesService {
     private final SalesRepository salesRepository;
     private final ProductRepository productRepository;
     private final StockService stockService;
+    private final AuditLogService auditLogService;
 
     /** Records a sale, triggers stock-out, and updates last sale date. */
     @Transactional
@@ -54,6 +55,13 @@ public class SalesService {
 
         SalesTransaction saved = salesRepository.save(txn);
         log.info("Sale recorded: {} x{} = ₹{}", product.getSku(), dto.getQuantitySold(), total);
+
+        // Log to activity file [SALES-03]
+        auditLogService.logActivity("SALE_RECORDED",
+                soldBy != null ? soldBy.getEmail() : "SYSTEM",
+                String.format("Product: %s (SKU: %s), Qty: %d, Price: ₹%s, Total: ₹%s",
+                        product.getName(), product.getSku(), dto.getQuantitySold(), dto.getSalePrice(), total));
+
         return saved;
     }
 

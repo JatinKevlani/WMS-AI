@@ -106,7 +106,7 @@
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
 <span class="material-symbols-outlined">inventory_2</span> Products
             </a>
-<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../categories/code.html">
 <span class="material-symbols-outlined">category</span> Categories
             </a>
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../suppliers/code.html">
@@ -118,7 +118,7 @@
 <a class="flex items-center gap-3 px-3 py-2 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg font-sans text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
 <span class="material-symbols-outlined">payments</span> Sales
             </a>
-<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../alerts/code.html">
 <span class="material-symbols-outlined">notifications_active</span> Alerts
             </a>
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../ai_recommendations/code.html">
@@ -127,7 +127,7 @@
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../analytics_dashboard/code.html">
 <span class="material-symbols-outlined">insights</span> Analytics
             </a>
-<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../data_hub/code.html">
 <span class="material-symbols-outlined">import_export</span> Data Hub
             </a>
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_settings/code.html">
@@ -287,7 +287,7 @@
 <p class="text-xs font-bold text-tertiary uppercase tracking-widest mb-1">AI Recommendation</p>
 <p class="text-on-surface text-sm">Sale velocity for <span class="font-bold">Thermal Cooling Units</span> has increased by 18% this week. Consider reordering from Supplier #402 before EOD to avoid stock-outs during tomorrow's shift.</p>
 </div>
-<button class="ml-auto px-4 py-2 bg-tertiary text-on-tertiary text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-tertiary/90 transition-colors">
+<button class="ml-auto px-4 py-2 bg-tertiary text-on-tertiary text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-tertiary/90 transition-colors" id="btnAutomateReorder">
                     Automate Reorder
                 </button>
 </div>
@@ -333,21 +333,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             tbody.innerHTML = salesData.map(s => {
                 const amount = s.quantitySold * s.salePrice;
                 totalRevenue += amount;
-                totalUnits += s.quantitySold;
-
-                return `
-                <tr class="hover:bg-surface-container-low transition-colors group">
-                    <td class="px-6 py-4 text-xs font-mono text-primary font-bold">#S-${s.id}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs font-semibold text-on-surface">${s.product ? s.product.name : 'Unknown Product'}</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-xs">${s.quantitySold}</td>
-                    <td class="px-6 py-4 text-xs font-bold">${WmsAPI.formatCurrency(amount)}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 bg-surface-container text-[10px] font-medium rounded-full">System</span>
-                    </td>
                     <td class="px-6 py-4 text-xs text-on-surface-variant">${WmsAPI.formatDate(s.saleDate)}</td>
                 </tr>
                 `;
@@ -364,6 +349,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     init();
+
+    document.getElementById('btnAutomateReorder').addEventListener('click', () => {
+        window.location.href = '../purchase_orders/code.html';
+    });
 
     // Record Sale Form Submission
     document.getElementById('btnRecordSale').addEventListener('click', async () => {

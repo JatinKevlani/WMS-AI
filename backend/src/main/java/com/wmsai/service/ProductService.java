@@ -27,6 +27,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final SupplierRepository supplierRepository;
+    private final AIRecommendationService aiRecommendationService;
 
     public Page<Product> getAllProducts(Pageable pageable) {
         return productRepository.findByIsDeletedFalse(pageable);
@@ -70,6 +71,14 @@ public class ProductService {
         Product saved = productRepository.save(product);
         ProductCounter.increment();
         log.info("Product created: {} (SKU: {})", saved.getName(), saved.getSku());
+
+        // Trigger AI bundle recommendation asynchronously [PROD-09]
+        try {
+            aiRecommendationService.getBundleRecommendation(saved.getId());
+            log.info("AI bundle recommendation triggered for product: {}", saved.getSku());
+        } catch (Exception e) {
+            log.warn("AI recommendation failed for {}: {}", saved.getSku(), e.getMessage());
+        }
 
         return saved;
     }

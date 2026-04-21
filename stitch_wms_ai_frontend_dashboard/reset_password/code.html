@@ -173,7 +173,7 @@
 </div>
 <!-- Back to Login -->
 <div class="text-center mt-8">
-<a class="text-xs font-bold text-outline hover:text-primary transition-colors flex items-center justify-center gap-1" href="#">
+<a class="text-xs font-bold text-outline hover:text-primary transition-colors flex items-center justify-center gap-1" href="../login_page/code.html" id="backToLoginLink">
 <span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
                                 BACK TO LOGIN
                             </a>
@@ -192,4 +192,61 @@
 <a class="text-[10px] font-normal tracking-normal text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors" href="#">Security</a>
 </div>
 </footer>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const passwordInput = document.getElementById('new-password');
+    const confirmInput = document.getElementById('confirm-password');
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    const strengthLabel = document.querySelector('.space-y-2 .text-primary');
+    const params = new URLSearchParams(window.location.search);
+    const resetEmail = params.get('email') || localStorage.getItem('wms_reset_email');
+    const title = document.querySelector('h1');
+
+    if (resetEmail && title) {
+        title.textContent = `Reset Password for ${resetEmail}`;
+    }
+
+    function getStrengthLabel(value) {
+        if (value.length >= 12 && /[0-9]/.test(value) && /[^A-Za-z0-9]/.test(value)) return 'Strong';
+        if (value.length >= 8) return 'Medium';
+        return 'Weak';
+    }
+
+    function updateStrength() {
+        if (!strengthLabel) return;
+        strengthLabel.textContent = getStrengthLabel(passwordInput.value);
+    }
+
+    passwordInput?.addEventListener('input', updateStrength);
+    updateStrength();
+
+    form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const password = passwordInput.value.trim();
+        const confirm = confirmInput.value.trim();
+
+        if (password.length < 8) {
+            WmsAPI.showToast('Password must be at least 8 characters long', 'error');
+            return;
+        }
+
+        if (password !== confirm) {
+            WmsAPI.showToast('Passwords do not match', 'error');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span> Password Updated';
+        localStorage.removeItem('wms_reset_email');
+        WmsAPI.showToast('Password reset flow completed. Please sign in.');
+
+        setTimeout(() => {
+            window.location.href = '../login_page/code.html';
+        }, 900);
+    });
+});
+</script>
 </body></html>

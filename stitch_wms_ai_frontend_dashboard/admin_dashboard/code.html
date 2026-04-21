@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI-WMS Dashboard | The Digital Foreman</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI-WMS Dashboard | The Digital Foreman</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -77,11 +84,15 @@
             },
         }
     </script>
-<style>
-        body { font-family: 'Inter', sans-serif; }
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .glass-panel {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -89,382 +100,489 @@
         }
     </style>
 </head>
+
 <body class="bg-surface text-on-surface min-h-screen">
-<!-- SideNavBar Shell -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
-<div class="mb-8 px-4 py-2">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
-</div>
-<div>
-<h2 class="text-sm font-bold tracking-tight text-on-surface">The Digital Foreman</h2>
-<p class="text-[10px] font-medium uppercase tracking-widest text-slate-500">Precision Logistics</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_dashboard/code.html">
-<span class="material-symbols-outlined text-[20px]">dashboard</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Dashboard</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../product_list/code.html">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Products</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../product_list/code.html">
-<span class="material-symbols-outlined text-[20px]">category</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Categories</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../suppliers/code.html">
-<span class="material-symbols-outlined text-[20px]">local_shipping</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Suppliers</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../purchase_orders/code.html">
-<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Orders</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../sales_transactions/code.html">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Sales</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_dashboard/code.html">
-<span class="material-symbols-outlined text-[20px]">notifications_active</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Alerts</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../ai_recommendations/code.html">
-<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">AI Insights</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../analytics_dashboard/code.html">
-<span class="material-symbols-outlined text-[20px]">insights</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Analytics</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_dashboard/code.html">
-<span class="material-symbols-outlined text-[20px]">import_export</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Data Hub</span>
-</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_settings/code.html">
-<span class="material-symbols-outlined text-[20px]">settings</span>
-<span class="font-sans text-xs font-medium uppercase tracking-widest">Settings</span>
-</a>
-</nav>
-<div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
-<div class="flex items-center gap-3 px-2">
-<img class="w-10 h-10 rounded-full object-cover" data-alt="professional portrait of a warehouse foreman wearing a high-visibility vest and a focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6AQ61sRqzUOYKXrU8AZ18QxcBCl6FCIkNl2i6ALoqIla6d-M-CYAyQUZWYuEgAX1jkvsTHbwADzht6TAU0ynO8v7PWVgCBnUB77ZyOHriMhKyFxPVXA5mz9p2IqsH32yenWyp_BWQ5nMdL9L_GKTpxSNFvjULX4X-GBhMVAjuFEkkAOZNdH2TpiyHrudy7QojcwVB9MMBRoeZmHEKHVPsp_R3mo0DyeosPOM4bFQFzFndOSD_La_C3wEGpTSotRCBGGIzIzKIFNA5"/>
-<div class="overflow-hidden">
-<p class="text-xs font-bold truncate" data-user-name>Warehouse Foreman</p>
-<p class="text-[10px] text-slate-500 truncate" data-user-role>Admin Access</p>
-</div>
-<button onclick="WmsAPI.logout()" class="ml-auto text-slate-400 hover:text-red-500 transition-colors" title="Logout">
-<span class="material-symbols-outlined text-[18px]">logout</span>
-</button>
-</div>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="ml-64 min-h-screen">
-<!-- TopNavBar Shell -->
-<header class="w-full h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm dark:shadow-none flex items-center justify-between px-6">
-<div class="flex items-center gap-6 flex-1">
-<span class="text-lg font-black tracking-tighter text-indigo-700 dark:text-indigo-300">AI-WMS</span>
-<div class="relative w-full max-w-md">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
-<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-indigo-500/20" placeholder="Quick search inventory..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150">
-<span class="material-symbols-outlined">account_circle</span>
-</button>
-</div>
-</header>
-<!-- Canvas -->
-<div class="p-8 max-w-7xl mx-auto space-y-8">
-<!-- Welcome Banner & Quick Actions -->
-<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-<div>
-<h1 class="text-3xl font-extrabold tracking-tight text-on-surface">Good morning, Admin.</h1>
-<p class="text-on-surface-variant body-md mt-1">Here's what's happening in the warehouse today.</p>
-</div>
-<div class="flex gap-3">
-<button id="btnDashboardProducts" class="px-5 py-2.5 bg-white shadow-sm hover:shadow-md text-on-surface text-sm font-semibold rounded-lg flex items-center gap-2 transition-all active:scale-95">
-<span class="material-symbols-outlined text-sm">add_box</span>
+    <!-- SideNavBar Shell -->
+    <aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+        <div class="mb-8 px-4 py-2">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold tracking-tight text-on-surface">The Digital Foreman</h2>
+                    <p class="text-[10px] font-medium uppercase tracking-widest text-slate-500">Precision Logistics</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../admin_dashboard/code.html">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Dashboard</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../product_list/code.html">
+                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Products</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../categories/code.html">
+                <span class="material-symbols-outlined text-[20px]">category</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Categories</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../suppliers/code.html">
+                <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Suppliers</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../purchase_orders/code.html">
+                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Orders</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../sales_transactions/code.html">
+                <span class="material-symbols-outlined text-[20px]">payments</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Sales</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../alerts/code.html">
+                <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Alerts</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../ai_recommendations/code.html">
+                <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">AI Insights</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../analytics_dashboard/code.html">
+                <span class="material-symbols-outlined text-[20px]">insights</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Analytics</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../data_hub/code.html">
+                <span class="material-symbols-outlined text-[20px]">import_export</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Data Hub</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200"
+                href="../admin_settings/code.html">
+                <span class="material-symbols-outlined text-[20px]">settings</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-3 px-2">
+                <img class="w-10 h-10 rounded-full object-cover"
+                    data-alt="professional portrait of a warehouse foreman wearing a high-visibility vest and a focused expression"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6AQ61sRqzUOYKXrU8AZ18QxcBCl6FCIkNl2i6ALoqIla6d-M-CYAyQUZWYuEgAX1jkvsTHbwADzht6TAU0ynO8v7PWVgCBnUB77ZyOHriMhKyFxPVXA5mz9p2IqsH32yenWyp_BWQ5nMdL9L_GKTpxSNFvjULX4X-GBhMVAjuFEkkAOZNdH2TpiyHrudy7QojcwVB9MMBRoeZmHEKHVPsp_R3mo0DyeosPOM4bFQFzFndOSD_La_C3wEGpTSotRCBGGIzIzKIFNA5" />
+                <div class="overflow-hidden">
+                    <p class="text-xs font-bold truncate" data-user-name>Warehouse Foreman</p>
+                    <p class="text-[10px] text-slate-500 truncate" data-user-role>Admin Access</p>
+                </div>
+                <button onclick="WmsAPI.logout()" class="ml-auto text-slate-400 hover:text-red-500 transition-colors"
+                    title="Logout">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="ml-64 min-h-screen">
+        <!-- TopNavBar Shell -->
+        <header
+            class="w-full h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm dark:shadow-none flex items-center justify-between px-6">
+            <div class="flex items-center gap-6 flex-1">
+                <span class="text-lg font-black tracking-tighter text-indigo-700 dark:text-indigo-300">AI-WMS</span>
+                <div class="relative w-full max-w-md">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                    <input
+                        class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-indigo-500/20"
+                        placeholder="Quick search inventory..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button
+                    class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+            </div>
+        </header>
+        <!-- Canvas -->
+        <div class="p-8 max-w-7xl mx-auto space-y-8">
+            <!-- Welcome Banner & Quick Actions -->
+            <section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-on-surface">Good morning, Admin.</h1>
+                    <p class="text-on-surface-variant body-md mt-1">Here's what's happening in the warehouse today.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button id="btnDashboardProducts"
+                        class="px-5 py-2.5 bg-white shadow-sm hover:shadow-md text-on-surface text-sm font-semibold rounded-lg flex items-center gap-2 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm">add_box</span>
                         Add Product
                     </button>
-<button id="btnDashboardOrders" class="px-5 py-2.5 bg-white shadow-sm hover:shadow-md text-on-surface text-sm font-semibold rounded-lg flex items-center gap-2 transition-all active:scale-95">
-<span class="material-symbols-outlined text-sm">receipt_long</span>
+                    <button id="btnDashboardOrders"
+                        class="px-5 py-2.5 bg-white shadow-sm hover:shadow-md text-on-surface text-sm font-semibold rounded-lg flex items-center gap-2 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm">receipt_long</span>
                         Create Order
                     </button>
-<button id="btnDashboardSales" class="px-5 py-2.5 bg-primary bg-gradient-to-br from-primary to-primary-container text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary/20 flex items-center gap-2 transition-all active:scale-95">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">payments</span>
+                    <button id="btnDashboardSales"
+                        class="px-5 py-2.5 bg-primary bg-gradient-to-br from-primary to-primary-container text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary/20 flex items-center gap-2 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm"
+                            style="font-variation-settings: 'FILL' 1;">payments</span>
                         Record Sale
                     </button>
-</div>
-</section>
-<!-- KPI Bento Grid -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-indigo-50 text-primary rounded-lg">
-<span class="material-symbols-outlined">inventory_2</span>
-</div>
-<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">+12%</span>
-</div>
-<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Total Products</p>
-<h3 class="text-3xl font-black text-on-surface" id="kpi-products">—</h3>
-</div>
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-indigo-50 text-primary rounded-lg">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-</div>
-<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">+4.2%</span>
-</div>
-<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Monthly Revenue</p>
-<h3 class="text-3xl font-black text-on-surface" id="kpi-revenue">—</h3>
-</div>
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-indigo-50 text-primary rounded-lg">
-<span class="material-symbols-outlined">trending_up</span>
-</div>
-<span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Target Hit</span>
-</div>
-<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Total Sales (MoM)</p>
-<h3 class="text-3xl font-black text-on-surface" id="kpi-sales">—</h3>
-</div>
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-error-container text-error rounded-lg">
-<span class="material-symbols-outlined">warning</span>
-</div>
-<span class="text-xs font-bold text-error bg-error-container px-2 py-1 rounded">Action Required</span>
-</div>
-<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Active Alerts</p>
-<h3 class="text-3xl font-black text-on-surface" id="kpi-alerts">—</h3>
-</div>
-</section>
-<!-- Main Analytics & Inventory Health -->
-<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<!-- Sales Overview Chart Placeholder -->
-<div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
-<div class="flex justify-between items-center mb-8">
-<div>
-<h4 class="text-lg font-bold">Sales Overview</h4>
-<p class="text-on-surface-variant text-xs">Performance trajectory over the current quarter</p>
-</div>
-<div class="flex bg-surface-container-low p-1 rounded-lg">
-<button class="px-3 py-1 text-xs font-bold bg-white shadow-sm rounded-md">MoM</button>
-<button class="px-3 py-1 text-xs font-bold text-on-surface-variant">QoQ</button>
-<button class="px-3 py-1 text-xs font-bold text-on-surface-variant">YoY</button>
-</div>
-</div>
-<div class="h-64 flex items-end gap-2 px-2">
-<!-- Simulated Chart -->
-<div class="flex-1 bg-primary/10 rounded-t-sm h-32 relative group">
-<div class="absolute bottom-0 w-full bg-primary/20 h-24 rounded-t-sm transition-all group-hover:bg-primary/40"></div>
-</div>
-<div class="flex-1 bg-primary/10 rounded-t-sm h-48 relative group">
-<div class="absolute bottom-0 w-full bg-primary/20 h-40 rounded-t-sm transition-all group-hover:bg-primary/40"></div>
-</div>
-<div class="flex-1 bg-primary/10 rounded-t-sm h-40 relative group">
-<div class="absolute bottom-0 w-full bg-primary/20 h-32 rounded-t-sm transition-all group-hover:bg-primary/40"></div>
-</div>
-<div class="flex-1 bg-primary/10 rounded-t-sm h-56 relative group">
-<div class="absolute bottom-0 w-full bg-primary/20 h-44 rounded-t-sm transition-all group-hover:bg-primary/40"></div>
-</div>
-<div class="flex-1 bg-primary/10 rounded-t-sm h-64 relative group">
-<div class="absolute bottom-0 w-full bg-primary/30 h-56 rounded-t-sm transition-all group-hover:bg-primary/50"></div>
-</div>
-<div class="flex-1 bg-primary/10 rounded-t-sm h-52 relative group">
-<div class="absolute bottom-0 w-full bg-primary/20 h-44 rounded-t-sm transition-all group-hover:bg-primary/40"></div>
-</div>
-<div class="flex-1 bg-primary/10 rounded-t-sm h-60 relative group">
-<div class="absolute bottom-0 w-full bg-primary/20 h-50 rounded-t-sm transition-all group-hover:bg-primary/40"></div>
-</div>
-</div>
-<div class="flex justify-between mt-4 px-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
-<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
-</div>
-</div>
-<!-- Inventory Health -->
-<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm">
-<h4 class="text-lg font-bold mb-6">Inventory Health</h4>
-<div class="flex justify-center mb-8">
-<!-- Custom Donut Chart -->
-<div class="relative w-48 h-48 rounded-full flex items-center justify-center" style="background: conic-gradient(#4f46e5 0% 87%, #ba1a1a 87% 95%, #7e3000 95% 100%);">
-<div class="w-36 h-36 bg-white rounded-full flex flex-col items-center justify-center">
-<span class="text-3xl font-black">87%</span>
-<span class="text-[10px] uppercase font-bold text-on-surface-variant">Healthy</span>
-</div>
-</div>
-</div>
-<ul class="space-y-4">
-<li class="flex items-center justify-between">
-<div class="flex items-center gap-2">
-<div class="w-3 h-3 rounded-full bg-primary"></div>
-<span class="text-xs font-medium">Normal Stock</span>
-</div>
-<span class="text-xs font-bold">87%</span>
-</li>
-<li class="flex items-center justify-between">
-<div class="flex items-center gap-2">
-<div class="w-3 h-3 rounded-full bg-error"></div>
-<span class="text-xs font-medium">Low Stock</span>
-</div>
-<span class="text-xs font-bold">8%</span>
-</li>
-<li class="flex items-center justify-between">
-<div class="flex items-center gap-2">
-<div class="w-3 h-3 rounded-full bg-tertiary"></div>
-<span class="text-xs font-medium">Overstock</span>
-</div>
-<span class="text-xs font-bold">5%</span>
-</li>
-</ul>
-</div>
-</section>
-<!-- Tables & Feeds -->
-<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<!-- Best Sellers Table -->
-<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
-<div class="p-8 pb-4">
-<h4 class="text-lg font-bold">Top 5 Best Sellers</h4>
-</div>
-<table class="w-full text-left">
-<thead class="bg-surface-container-low">
-<tr>
-<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Product SKU</th>
-<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Category</th>
-<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Sales Vol</th>
-<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Revenue</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-50">
-<tr class="hover:bg-surface-container-low transition-colors group">
-<td class="px-8 py-4 text-sm font-semibold">SKU-992-ALPHA</td>
-<td class="px-8 py-4 text-sm text-on-surface-variant">Electronics</td>
-<td class="px-8 py-4 text-sm">1,240</td>
-<td class="px-8 py-4 text-sm font-bold text-right">$12,400</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors">
-<td class="px-8 py-4 text-sm font-semibold">SKU-412-BETA</td>
-<td class="px-8 py-4 text-sm text-on-surface-variant">Hardware</td>
-<td class="px-8 py-4 text-sm">890</td>
-<td class="px-8 py-4 text-sm font-bold text-right">$8,900</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors">
-<td class="px-8 py-4 text-sm font-semibold">SKU-331-GAMMA</td>
-<td class="px-8 py-4 text-sm text-on-surface-variant">Packaging</td>
-<td class="px-8 py-4 text-sm">740</td>
-<td class="px-8 py-4 text-sm font-bold text-right">$3,700</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors">
-<td class="px-8 py-4 text-sm font-semibold">SKU-102-DELTA</td>
-<td class="px-8 py-4 text-sm text-on-surface-variant">Safety Gear</td>
-<td class="px-8 py-4 text-sm">620</td>
-<td class="px-8 py-4 text-sm font-bold text-right">$6,200</td>
-</tr>
-<tr class="hover:bg-surface-container-low transition-colors">
-<td class="px-8 py-4 text-sm font-semibold">SKU-882-EPSIL</td>
-<td class="px-8 py-4 text-sm text-on-surface-variant">Tools</td>
-<td class="px-8 py-4 text-sm">510</td>
-<td class="px-8 py-4 text-sm font-bold text-right">$5,100</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Alerts & AI Insights -->
-<div class="space-y-8">
-<!-- Recent Alerts -->
-<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border-l-4 border-error">
-<div class="flex justify-between items-center mb-6">
-<h4 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant">Critical Alerts</h4>
-<span class="text-[10px] font-bold px-2 py-0.5 bg-error-container text-error rounded-full">LIVE</span>
-</div>
-<div class="space-y-6">
-<div class="flex gap-4">
-<div class="w-2 h-2 mt-1.5 rounded-full bg-error shrink-0"></div>
-<div>
-<p class="text-sm font-bold">SKU-492 is running low</p>
-<p class="text-xs text-on-surface-variant">Restock required within 48 hours to avoid delay.</p>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="w-2 h-2 mt-1.5 rounded-full bg-tertiary shrink-0"></div>
-<div>
-<p class="text-sm font-bold">Incoming shipment delayed</p>
-<p class="text-xs text-on-surface-variant">Carrier ID: FEDEX-992. Estimated arrival: Friday.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- AI Recommendation Panel -->
-<div class="bg-gradient-to-br from-indigo-900 to-indigo-800 p-8 rounded-xl shadow-xl text-white relative overflow-hidden">
-<div class="absolute -right-8 -top-8 opacity-10">
-<span class="material-symbols-outlined text-[120px]">auto_awesome</span>
-</div>
-<div class="relative z-10">
-<div class="flex items-center gap-2 mb-4">
-<span class="material-symbols-outlined text-indigo-300" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-<h4 class="text-xs font-bold uppercase tracking-widest text-indigo-200">AI Recommendation</h4>
-</div>
-<p class="text-sm font-medium leading-relaxed mb-6">Based on current sales velocity and supply lead times, we suggest restocking <span class="font-bold text-indigo-200 underline decoration-indigo-400">Electronics</span> by Friday.</p>
-<button class="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors backdrop-blur-md">
+                </div>
+            </section>
+            <!-- KPI Bento Grid -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-indigo-50 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">inventory_2</span>
+                        </div>
+                        <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">+12%</span>
+                    </div>
+                    <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Total Products
+                    </p>
+                    <h3 class="text-3xl font-black text-on-surface" id="kpi-products">—</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-indigo-50 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">account_balance_wallet</span>
+                        </div>
+                        <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">+4.2%</span>
+                    </div>
+                    <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Monthly Revenue
+                    </p>
+                    <h3 class="text-3xl font-black text-on-surface" id="kpi-revenue">—</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-indigo-50 text-primary rounded-lg">
+                            <span class="material-symbols-outlined">trending_up</span>
+                        </div>
+                        <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Target Hit</span>
+                    </div>
+                    <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Total Sales
+                        (MoM)</p>
+                    <h3 class="text-3xl font-black text-on-surface" id="kpi-sales">—</h3>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-none">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-error-container text-error rounded-lg">
+                            <span class="material-symbols-outlined">warning</span>
+                        </div>
+                        <span class="text-xs font-bold text-error bg-error-container px-2 py-1 rounded">Action
+                            Required</span>
+                    </div>
+                    <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Active Alerts
+                    </p>
+                    <h3 class="text-3xl font-black text-on-surface" id="kpi-alerts">—</h3>
+                </div>
+            </section>
+            <!-- Main Analytics & Inventory Health -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Sales Overview Chart Placeholder -->
+                <div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h4 class="text-lg font-bold">Sales Overview</h4>
+                            <p class="text-on-surface-variant text-xs">Performance trajectory over the current quarter
+                            </p>
+                        </div>
+                        <div class="flex bg-surface-container-low p-1 rounded-lg">
+                            <button class="px-3 py-1 text-xs font-bold bg-white shadow-sm rounded-md">MoM</button>
+                            <button class="px-3 py-1 text-xs font-bold text-on-surface-variant">QoQ</button>
+                            <button class="px-3 py-1 text-xs font-bold text-on-surface-variant">YoY</button>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-end gap-2 px-2">
+                        <!-- Simulated Chart -->
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-32 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/20 h-24 rounded-t-sm transition-all group-hover:bg-primary/40">
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-48 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/20 h-40 rounded-t-sm transition-all group-hover:bg-primary/40">
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-40 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/20 h-32 rounded-t-sm transition-all group-hover:bg-primary/40">
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-56 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/20 h-44 rounded-t-sm transition-all group-hover:bg-primary/40">
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-64 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/30 h-56 rounded-t-sm transition-all group-hover:bg-primary/50">
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-52 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/20 h-44 rounded-t-sm transition-all group-hover:bg-primary/40">
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-primary/10 rounded-t-sm h-60 relative group">
+                            <div
+                                class="absolute bottom-0 w-full bg-primary/20 h-50 rounded-t-sm transition-all group-hover:bg-primary/40">
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex justify-between mt-4 px-2 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+                        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+                    </div>
+                </div>
+                <!-- Inventory Health -->
+                <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+                    <h4 class="text-lg font-bold mb-6">Inventory Health</h4>
+                    <div class="flex justify-center mb-8">
+                        <!-- Custom Donut Chart -->
+                        <div class="relative w-48 h-48 rounded-full flex items-center justify-center"
+                            style="background: conic-gradient(#4f46e5 0% 87%, #ba1a1a 87% 95%, #7e3000 95% 100%);">
+                            <div class="w-36 h-36 bg-white rounded-full flex flex-col items-center justify-center">
+                                <span class="text-3xl font-black">87%</span>
+                                <span class="text-[10px] uppercase font-bold text-on-surface-variant">Healthy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                <span class="text-xs font-medium">Normal Stock</span>
+                            </div>
+                            <span class="text-xs font-bold">87%</span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-error"></div>
+                                <span class="text-xs font-medium">Low Stock</span>
+                            </div>
+                            <span class="text-xs font-bold">8%</span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-tertiary"></div>
+                                <span class="text-xs font-medium">Overstock</span>
+                            </div>
+                            <span class="text-xs font-bold">5%</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Tables & Feeds -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Best Sellers Table -->
+                <div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-8 pb-4">
+                        <h4 class="text-lg font-bold">Top 5 Best Sellers</h4>
+                    </div>
+                    <table class="w-full text-left">
+                        <thead class="bg-surface-container-low">
+                            <tr>
+                                <th
+                                    class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+                                    Product SKU</th>
+                                <th
+                                    class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+                                    Category</th>
+                                <th
+                                    class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
+                                    Sales Vol</th>
+                                <th
+                                    class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">
+                                    Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50">
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="px-8 py-4 text-sm font-semibold">SKU-992-ALPHA</td>
+                                <td class="px-8 py-4 text-sm text-on-surface-variant">Electronics</td>
+                                <td class="px-8 py-4 text-sm">1,240</td>
+                                <td class="px-8 py-4 text-sm font-bold text-right">$12,400</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-8 py-4 text-sm font-semibold">SKU-412-BETA</td>
+                                <td class="px-8 py-4 text-sm text-on-surface-variant">Hardware</td>
+                                <td class="px-8 py-4 text-sm">890</td>
+                                <td class="px-8 py-4 text-sm font-bold text-right">$8,900</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-8 py-4 text-sm font-semibold">SKU-331-GAMMA</td>
+                                <td class="px-8 py-4 text-sm text-on-surface-variant">Packaging</td>
+                                <td class="px-8 py-4 text-sm">740</td>
+                                <td class="px-8 py-4 text-sm font-bold text-right">$3,700</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-8 py-4 text-sm font-semibold">SKU-102-DELTA</td>
+                                <td class="px-8 py-4 text-sm text-on-surface-variant">Safety Gear</td>
+                                <td class="px-8 py-4 text-sm">620</td>
+                                <td class="px-8 py-4 text-sm font-bold text-right">$6,200</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-8 py-4 text-sm font-semibold">SKU-882-EPSIL</td>
+                                <td class="px-8 py-4 text-sm text-on-surface-variant">Tools</td>
+                                <td class="px-8 py-4 text-sm">510</td>
+                                <td class="px-8 py-4 text-sm font-bold text-right">$5,100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Alerts & AI Insights -->
+                <div class="space-y-8">
+                    <!-- Recent Alerts -->
+                    <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border-l-4 border-error">
+                        <div class="flex justify-between items-center mb-6">
+                            <h4 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant">Critical
+                                Alerts</h4>
+                            <span
+                                class="text-[10px] font-bold px-2 py-0.5 bg-error-container text-error rounded-full">LIVE</span>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 mt-1.5 rounded-full bg-error shrink-0"></div>
+                                <div>
+                                    <p class="text-sm font-bold">SKU-492 is running low</p>
+                                    <p class="text-xs text-on-surface-variant">Restock required within 48 hours to avoid
+                                        delay.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 mt-1.5 rounded-full bg-tertiary shrink-0"></div>
+                                <div>
+                                    <p class="text-sm font-bold">Incoming shipment delayed</p>
+                                    <p class="text-xs text-on-surface-variant">Carrier ID: FEDEX-992. Estimated arrival:
+                                        Friday.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- AI Recommendation Panel -->
+                    <div
+                        class="bg-gradient-to-br from-indigo-900 to-indigo-800 p-8 rounded-xl shadow-xl text-white relative overflow-hidden">
+                        <div class="absolute -right-8 -top-8 opacity-10">
+                            <span class="material-symbols-outlined text-[120px]">auto_awesome</span>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="material-symbols-outlined text-indigo-300"
+                                    style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                <h4 class="text-xs font-bold uppercase tracking-widest text-indigo-200">AI
+                                    Recommendation</h4>
+                            </div>
+                            <p class="text-sm font-medium leading-relaxed mb-6">Based on current sales velocity and
+                                supply lead times, we suggest restocking <span
+                                    class="font-bold text-indigo-200 underline decoration-indigo-400">Electronics</span>
+                                by Friday.</p>
+                            <button
+                                class="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors backdrop-blur-md">
                                 Generate Purchase Order
                             </button>
-</div>
-</div>
-</div>
-</section>
-</div>
-</main>
-<!-- Contextual FAB - suppressed based on WMS logic for Dashboard views typically, but adding for 'Quick Capture' if needed -->
-<!-- Suppressed per rules for Profile/Details, but let's assume it belongs on Home -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary rounded-full shadow-2xl flex items-center justify-center text-white active:scale-95 transition-transform">
-<span class="material-symbols-outlined">add</span>
-</button>
-<script src="../shared/api.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-    if (!WmsAPI.requireAuth()) return;
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Contextual FAB - suppressed based on WMS logic for Dashboard views typically, but adding for 'Quick Capture' if needed -->
+    <!-- Suppressed per rules for Profile/Details, but let's assume it belongs on Home -->
+    <button
+        class="fixed bottom-8 right-8 w-14 h-14 bg-primary rounded-full shadow-2xl flex items-center justify-center text-white active:scale-95 transition-transform">
+        <span class="material-symbols-outlined">add</span>
+    </button>
+    <script src="../shared/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!WmsAPI.requireAuth()) return;
 
-    document.getElementById('btnDashboardProducts')?.addEventListener('click', () => {
-        window.location.href = '../product_list/code.html';
-    });
-    document.getElementById('btnDashboardOrders')?.addEventListener('click', () => {
-        window.location.href = '../purchase_orders/code.html';
-    });
-    document.getElementById('btnDashboardSales')?.addEventListener('click', () => {
-        window.location.href = '../sales_transactions/code.html';
-    });
+            document.getElementById('btnDashboardProducts')?.addEventListener('click', () => {
+                window.location.href = '../product_list/code.html';
+            });
+            document.getElementById('btnDashboardOrders')?.addEventListener('click', () => {
+                window.location.href = '../purchase_orders/code.html';
+            });
+            document.getElementById('btnDashboardSales')?.addEventListener('click', () => {
+                window.location.href = '../sales_transactions/code.html';
+            });
 
-    const user = WmsAPI.getUser();
-    const greeting = document.querySelector('h1');
-    if (greeting && user) {
-        const hour = new Date().getHours();
-        const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-        greeting.textContent = `${timeGreeting}, ${user.fullName.split(' ')[0]}.`;
-    }
+            const user = WmsAPI.getUser();
+            const greeting = document.querySelector('h1');
+            if (greeting && user) {
+                const hour = new Date().getHours();
+                const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+                greeting.textContent = `${timeGreeting}, ${user.fullName.split(' ')[0]}.`;
+            }
 
-    try {
-        const stats = await WmsAPI.getDashboardStats();
-        document.getElementById('kpi-products').textContent = stats.totalProducts.toLocaleString();
-        document.getElementById('kpi-revenue').textContent = WmsAPI.formatCurrency(stats.monthlyRevenue);
-        document.getElementById('kpi-alerts').textContent = stats.activeAlerts;
+            try {
+                const stats = await WmsAPI.getDashboardStats();
+                document.getElementById('kpi-products').textContent = stats.totalProducts.toLocaleString();
+                document.getElementById('kpi-revenue').textContent = WmsAPI.formatCurrency(stats.monthlyRevenue);
+                document.getElementById('kpi-alerts').textContent = stats.activeAlerts;
 
-        const salesData = await WmsAPI.getSalesAnalytics('MOM');
-        document.getElementById('kpi-sales').textContent = WmsAPI.formatCurrency(salesData.currentRevenue);
+                const salesData = await WmsAPI.getSalesAnalytics('MOM');
+                document.getElementById('kpi-sales').textContent = WmsAPI.formatCurrency(salesData.currentRevenue);
 
-        // Load recent alerts
-        const alerts = await WmsAPI.getAlerts();
-        const alertContainer = document.querySelector('.border-l-4.border-error .space-y-6');
-        if (alertContainer && alerts.length > 0) {
-            alertContainer.innerHTML = alerts.slice(0, 3).map(a => `
+                // Dynamic best sellers table
+                if (salesData.topProducts && salesData.topProducts.length > 0) {
+                    const bestSellersBody = document.querySelector('table tbody');
+                    if (bestSellersBody) {
+                        bestSellersBody.innerHTML = salesData.topProducts.slice(0, 5).map(p => `
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-8 py-4 text-sm font-semibold">${p[1] || 'N/A'}</td>
+                        <td class="px-8 py-4 text-sm text-on-surface-variant">${p[1] || '-'}</td>
+                        <td class="px-8 py-4 text-sm">${Number(p[2]).toLocaleString()}</td>
+                        <td class="px-8 py-4 text-sm font-bold text-right">${WmsAPI.formatCurrency(p[3])}</td>
+                    </tr>
+                `).join('');
+                    }
+                }
+
+                // Dynamic inventory health donut
+                const products = await WmsAPI.getProducts(0, 1000);
+                const allProds = products.content || [];
+                const total = allProds.length || 1;
+                const lowCount = allProds.filter(p => p.quantity <= p.minThreshold).length;
+                const overCount = allProds.filter(p => p.quantity >= p.maxThreshold).length;
+                const normalCount = total - lowCount - overCount;
+                const normalPct = Math.round((normalCount / total) * 100);
+                const lowPct = Math.round((lowCount / total) * 100);
+                const overPct = 100 - normalPct - lowPct;
+
+                const donut = document.querySelector('[style*="conic-gradient"]');
+                if (donut) {
+                    donut.style.background = `conic-gradient(#4f46e5 0% ${normalPct}%, #ba1a1a ${normalPct}% ${normalPct + lowPct}%, #7e3000 ${normalPct + lowPct}% 100%)`;
+                    const centerSpan = donut.querySelector('.text-3xl');
+                    if (centerSpan) centerSpan.textContent = normalPct + '%';
+                }
+                const healthLabels = document.querySelectorAll('ul.space-y-4 li .text-xs.font-bold');
+                if (healthLabels.length >= 3) {
+                    healthLabels[0].textContent = normalPct + '%';
+                    healthLabels[1].textContent = lowPct + '%';
+                    healthLabels[2].textContent = overPct + '%';
+                }
+
+                // Load recent alerts
+                const alerts = await WmsAPI.getAlerts();
+                const alertContainer = document.querySelector('.border-l-4.border-error .space-y-6');
+                if (alertContainer && alerts.length > 0) {
+                    alertContainer.innerHTML = alerts.slice(0, 3).map(a => `
                 <div class="flex gap-4">
                     <div class="w-2 h-2 mt-1.5 rounded-full ${a.type === 'LOW_STOCK' ? 'bg-error' : 'bg-tertiary'} shrink-0"></div>
                     <div>
@@ -473,12 +591,29 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
             `).join('');
-        } else if (alertContainer) {
-            alertContainer.innerHTML = '<p class="text-sm text-on-surface-variant">No active alerts. All systems healthy.</p>';
-        }
-    } catch (err) {
-        console.error('Dashboard load error:', err);
-    }
-});
-</script>
-</body></html>
+                } else if (alertContainer) {
+                    alertContainer.innerHTML = '<p class="text-sm text-on-surface-variant">No active alerts. All systems healthy.</p>';
+                }
+
+                // Wire "Generate Purchase Order" button
+                document.querySelector('.bg-gradient-to-br.from-indigo-900 button')?.addEventListener('click', () => {
+                    window.location.href = '../purchase_orders/code.html';
+                });
+
+                // Wire FAB button
+                document.querySelector('.fixed.bottom-8.right-8')?.addEventListener('click', () => {
+                    window.location.href = '../product_list/code.html';
+                });
+
+                // Wire notification bell
+                document.querySelector('[class*="notifications"]')?.closest('button')?.addEventListener('click', () => {
+                    window.location.href = '../alerts/code.html';
+                });
+            } catch (err) {
+                console.error('Dashboard load error:', err);
+            }
+        });
+    </script>
+</body>
+
+</html>

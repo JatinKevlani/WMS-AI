@@ -36,12 +36,19 @@ public class AlertScheduler {
             alertService.checkThresholds(p);
         }
 
-        // Overstock check
-        List<Product> overstock = productRepository.findOverstockProducts(LocalDate.now().minusDays(30));
-        for (Product p : overstock) {
-            alertService.checkThresholds(p);
+        // Overstock check — uses per-product overstockDays [ALERT-08]
+        List<Product> allProducts = productRepository.findAll();
+        long overstockCount = 0;
+        for (Product p : allProducts) {
+            if (!p.getIsDeleted() && p.getQuantity() > p.getMaxThreshold()) {
+                int days = p.getOverstockDays() != null ? p.getOverstockDays() : 30;
+                if (p.getLastSaleDate() == null || p.getLastSaleDate().isBefore(LocalDate.now().minusDays(days))) {
+                    alertService.checkThresholds(p);
+                    overstockCount++;
+                }
+            }
         }
 
-        log.info("✅ Daily threshold check complete: {} low-stock, {} overstock", lowStock.size(), overstock.size());
+        log.info("✅ Daily threshold check complete: {} low-stock, {} overstock", lowStock.size(), overstockCount);
     }
 }

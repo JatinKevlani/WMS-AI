@@ -27,4 +27,12 @@ public class AuthController {
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
+
+    /** POST /api/auth/logout — signals frontend to clear JWT [AUTH-03]. */
+    @PostMapping("/logout")
+    public ResponseEntity<java.util.Map<String, String>> logout() {
+        // JWT is stateless — the frontend clears localStorage.
+        // This endpoint exists to satisfy REST API contract.
+        return ResponseEntity.ok(java.util.Map.of("message", "Logged out successfully"));
+    }
 }

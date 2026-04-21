@@ -1,0 +1,1 @@
+[2026-04-21 22:46:39] User: admin@wms.com | Action: SALE_RECORDED | Details: Product: Wireless Earbuds A2 (SKU: ELC-102), Qty: 100, Price: ₹499.99, Total: ₹49999.00

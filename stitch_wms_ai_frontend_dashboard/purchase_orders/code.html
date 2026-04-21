@@ -110,7 +110,7 @@
 <span class="material-symbols-outlined text-lg">inventory_2</span>
 <span>Products</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest duration-200 ease-in-out" href="../product_list/code.html">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest duration-200 ease-in-out" href="../categories/code.html">
 <span class="material-symbols-outlined text-lg">category</span>
 <span>Categories</span>
 </a>
@@ -126,7 +126,7 @@
 <span class="material-symbols-outlined text-lg">payments</span>
 <span>Sales</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest duration-200 ease-in-out" href="../admin_dashboard/code.html">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest duration-200 ease-in-out" href="../alerts/code.html">
 <span class="material-symbols-outlined text-lg">notifications_active</span>
 <span>Alerts</span>
 </a>
@@ -138,7 +138,7 @@
 <span class="material-symbols-outlined text-lg">insights</span>
 <span>Analytics</span>
 </a>
-<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest duration-200 ease-in-out" href="../admin_dashboard/code.html">
+<a class="flex items-center space-x-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest duration-200 ease-in-out" href="../data_hub/code.html">
 <span class="material-symbols-outlined text-lg">import_export</span>
 <span>Data Hub</span>
 </a>
@@ -192,7 +192,7 @@
 <h1 class="text-3xl font-black text-on-surface tracking-tight">Purchase Orders</h1>
 <p class="text-on-surface-variant text-sm mt-1">Manage and track inventory replenishment requests.</p>
 </div>
-<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center space-x-2 active:scale-95 transition-all">
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 flex items-center space-x-2 active:scale-95 transition-all" id="btnCreatePo">
 <span class="material-symbols-outlined text-lg">add</span>
 <span>Create PO</span>
 </button>
@@ -225,7 +225,7 @@
 <input class="bg-transparent border-none p-0 text-sm font-semibold focus:ring-0 w-full" type="text" value="Last 30 Days"/>
 </div>
 </div>
-<div class="bg-primary/5 p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-primary/10 transition-colors">
+<div class="bg-primary/5 p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-primary/10 transition-colors" id="btnAiRecommendation">
 <div>
 <p class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">AI Recommendation</p>
 <p class="text-xs font-semibold text-on-surface">3 Items Low Stock</p>
@@ -284,25 +284,152 @@
 </div>
 <h3 class="text-xl font-black text-on-surface mb-2">No Purchase Orders Found</h3>
 <p class="text-on-surface-variant text-sm max-w-xs mb-8">You haven't created any purchase orders yet. Start by adding your first replenishment request.</p>
-<button class="bg-primary text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-primary/25">Create First Order</button>
+<button class="bg-primary text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-primary/25" id="btnCreateFirstOrder">Create First Order</button>
+</div>
+<dialog id="poModal" class="backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm p-0 rounded-2xl shadow-2xl border-none m-auto shadow-primary/20 bg-white dark:bg-slate-900 w-full max-w-xl">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-on-surface mb-6">Create Purchase Order</h3>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Supplier</label>
+                <select id="poSupplier" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"></select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Select Product to Add</label>
+                <div class="flex gap-2">
+                    <select id="poProduct" class="flex-1 rounded-lg border-outline-variant bg-surface-container-lowest p-3"></select>
+                    <input id="poQty" type="number" min="1" value="1" class="w-24 rounded-lg border-outline-variant bg-surface-container-lowest p-3" placeholder="Qty">
+                    <button type="button" id="btnAddPoItem" class="bg-surface-container text-on-surface font-bold px-4 rounded-lg flex items-center hover:bg-slate-200 transition-colors"><span class="material-symbols-outlined">add</span></button>
+                </div>
+            </div>
+            <div class="w-full border border-outline-variant/30 rounded-lg overflow-hidden hidden" id="poItemsContainer">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-surface-container-low text-xs border-b border-outline-variant/30">
+                        <tr><th class="p-2">Product</th><th class="p-2 w-20">Qty</th><th class="p-2 w-10"></th></tr>
+                    </thead>
+                    <tbody id="poItemsList" class="divide-y divide-outline-variant/10"></tbody>
+                </table>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Notes (Optional)</label>
+                <textarea id="poNotes" rows="2" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"></textarea>
+            </div>
+        </div>
+        <div class="mt-8 flex justify-end gap-3">
+            <button id="poBtnCancel" class="px-5 py-2.5 rounded-lg font-bold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+            <button id="poBtnSave" class="px-5 py-2.5 rounded-lg font-bold bg-primary text-white shadow hover:bg-indigo-700 transition-colors">Submit Order</button>
+        </div>
+    </div>
+</dialog>
+<dialog id="poStatusModal" class="backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm p-0 rounded-2xl shadow-2xl border-none m-auto shadow-primary/20 bg-white dark:bg-slate-900 w-full max-w-sm">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-on-surface mb-2" id="statusModalTitle">Update Status</h3>
+        <div class="mb-6"><select id="newStatusSelect" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"><option value="PENDING">PENDING</option><option value="SENT">SENT</option><option value="RECEIVED">RECEIVED</option><option value="CANCELLED">CANCELLED</option></select></div>
+        <div class="flex justify-end gap-3">
+            <button id="statusBtnCancel" class="px-5 py-2.5 rounded-lg font-bold text-on-surface-variant hover:bg-surface-container">Cancel</button>
+            <button id="statusBtnSave" class="px-5 py-2.5 rounded-lg font-bold bg-primary text-white shadow hover:bg-indigo-700">Save Status</button>
+        </div>
+    </div>
+</dialog>
 <script src="../shared/api.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
     if (!WmsAPI.requireAuth()) return;
 
     const tbody = document.getElementById('poTableBody');
+    const emptyState = document.getElementById('empty-state');
+    let ordersCache = [];
+    let suppliersList = [];
+    let productsList = [];
+
+    let currentPoItems = [];
+
+    async function openCreateOrder() {
+        if (!suppliersList.length || !productsList.length) {
+            WmsAPI.showToast('Supplier and product data are still loading', 'warning');
+            return;
+        }
+        document.getElementById('poSupplier').innerHTML = suppliersList.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+        document.getElementById('poProduct').innerHTML = productsList.map(p => `<option value="${p.id}" data-price="${p.unitPrice}">${p.sku} - ${p.name}</option>`).join('');
+        document.getElementById('poNotes').value = '';
+        currentPoItems = [];
+        window.renderPoItems();
+        document.getElementById('poModal').showModal();
+    }
+
+    document.getElementById('btnAddPoItem').addEventListener('click', () => {
+        const prodSelect = document.getElementById('poProduct');
+        const qty = Number(document.getElementById('poQty').value);
+        if (qty <= 0) return WmsAPI.showToast('Invalid quantity', 'error');
+        const prodId = Number(prodSelect.value);
+        const name = prodSelect.options[prodSelect.selectedIndex].text;
+        const price = Number(prodSelect.options[prodSelect.selectedIndex].dataset.price);
+        
+        const existing = currentPoItems.find(i => i.productId === prodId);
+        if (existing) existing.quantity += qty;
+        else currentPoItems.push({ productId: prodId, name, quantity: qty, unitPrice: price });
+        window.renderPoItems();
+    });
+
+    window.removePoItem = function(id) {
+        currentPoItems = currentPoItems.filter(i => i.productId !== id);
+        window.renderPoItems();
+    };
+
+    window.renderPoItems = function() {
+        const container = document.getElementById('poItemsContainer');
+        const list = document.getElementById('poItemsList');
+        if (currentPoItems.length === 0) {
+            container.classList.add('hidden');
+        } else {
+            container.classList.remove('hidden');
+            list.innerHTML = currentPoItems.map(i => `<tr><td class="p-2 font-medium">${i.name}</td><td class="p-2">${i.quantity}</td><td class="p-2"><button type="button" onclick="removePoItem(${i.productId})" class="text-error hover:text-red-700 font-bold flex"><span class="material-symbols-outlined text-[16px]">delete</span></button></td></tr>`).join('');
+        }
+    };
+
+    document.getElementById('poBtnCancel').addEventListener('click', () => document.getElementById('poModal').close());
+    document.getElementById('poBtnSave').addEventListener('click', async () => {
+        if (currentPoItems.length === 0) return WmsAPI.showToast('Add at least one item', 'error');
+        const btn = document.getElementById('poBtnSave');
+        btn.disabled = true;
+        try {
+            await WmsAPI.createOrder({
+                supplierId: Number(document.getElementById('poSupplier').value),
+                notes: document.getElementById('poNotes').value,
+                items: currentPoItems
+            });
+            WmsAPI.showToast('Order created successfully!');
+            document.getElementById('poModal').close();
+            await loadOrders();
+        } catch (e) {
+            WmsAPI.showToast(e.message, 'error');
+        } finally {
+            btn.disabled = false;
+        }
+    });
+
 
     async function loadOrders() {
         try {
-            const data = await WmsAPI.getOrders();
+            const [data, suppliers, productsData] = await Promise.all([
+                WmsAPI.getOrders(),
+                WmsAPI.getSuppliers(),
+                WmsAPI.getProducts(0, 1000)
+            ]);
+            ordersCache = data || [];
+            suppliersList = suppliers || [];
+            productsList = productsData.content || [];
             document.getElementById('orders-count-span').textContent = data.length;
             
             if (!data || data.length === 0) {
-                document.getElementById('empty-state').classList.remove('hidden');
-                document.getElementById('empty-state').classList.add('flex');
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
                 tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-on-surface-variant">No orders found.</td></tr>`;
                 return;
             }
+
+            emptyState.classList.add('hidden');
+            emptyState.classList.remove('flex');
 
             tbody.innerHTML = data.map(o => {
                 let statusHtml = '';
@@ -336,7 +463,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td class="px-6 py-4 text-xs text-slate-500">${WmsAPI.formatDate(orderDate)}</td>
                     <td class="px-6 py-4 text-right">
                         <div class="flex items-center justify-end space-x-1 opacity-100">
-                            <button class="p-1.5 rounded hover:bg-white text-slate-400 hover:text-primary transition-colors" title="View Details">
+                            <button class="p-1.5 rounded hover:bg-white text-slate-400 hover:text-primary transition-colors" title="View Details" data-view-order="${o.id}">
                                 <span class="material-symbols-outlined text-lg">visibility</span>
                             </button>
                         </div>
@@ -350,6 +477,43 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     loadOrders();
+
+    document.getElementById('btnCreatePo').addEventListener('click', openCreateOrder);
+    document.getElementById('btnCreateFirstOrder').addEventListener('click', openCreateOrder);
+    document.getElementById('btnAiRecommendation').addEventListener('click', () => {
+        window.location.href = '../ai_recommendations/code.html';
+    });
+
+    let activeOrderIdForStatus = null;
+    document.getElementById('statusBtnCancel').addEventListener('click', () => document.getElementById('poStatusModal').close());
+    document.getElementById('statusBtnSave').addEventListener('click', async () => {
+        const newStatus = document.getElementById('newStatusSelect').value;
+        try {
+            await WmsAPI.updateOrderStatus(activeOrderIdForStatus, newStatus);
+            WmsAPI.showToast(`Order updated to ${newStatus}`);
+            document.getElementById('poStatusModal').close();
+            await loadOrders();
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Failed to update order', 'error');
+        }
+    });
+
+    tbody.addEventListener('click', async (event) => {
+        const button = event.target.closest('[data-view-order]');
+        if (!button) return;
+
+        const orderId = Number(button.dataset.viewOrder);
+        const order = ordersCache.find((entry) => entry.id === orderId);
+        if (!order) {
+            WmsAPI.showToast('Order details are unavailable', 'error');
+            return;
+        }
+
+        document.getElementById('statusModalTitle').textContent = `ORD-${order.id} Status`;
+        document.getElementById('newStatusSelect').value = order.status;
+        activeOrderIdForStatus = order.id;
+        document.getElementById('poStatusModal').showModal();
+    });
 });
 </script>
 </body></html>

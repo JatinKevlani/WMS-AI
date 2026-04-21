@@ -24,6 +24,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final SupplierRepository supplierRepository;
     private final ProductRepository productRepository;
+    private final AlertService alertService;
 
     @Transactional
     public PurchaseOrder createOrder(OrderDTO dto, User createdBy) {
@@ -73,7 +74,8 @@ public class OrderService {
             for (OrderItem item : order.getItems()) {
                 Product product = item.getProduct();
                 product.setQuantity(product.getQuantity() + item.getQuantity());
-                productRepository.save(product);
+                Product saved = productRepository.save(product);
+                alertService.checkThresholds(saved);
                 log.info("Stock received: {} units of {} from PO#{}", item.getQuantity(), product.getSku(), orderId);
             }
         }

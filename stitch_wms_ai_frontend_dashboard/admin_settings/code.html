@@ -104,7 +104,7 @@
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
 <span class="material-symbols-outlined text-[20px]">inventory_2</span> Products
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../categories/code.html">
 <span class="material-symbols-outlined text-[20px]">category</span> Categories
 </a>
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../suppliers/code.html">
@@ -116,7 +116,7 @@
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
 <span class="material-symbols-outlined text-[20px]">payments</span> Sales
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../alerts/code.html">
 <span class="material-symbols-outlined text-[20px]">notifications_active</span> Alerts
 </a>
 <a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../ai_recommendations/code.html">
@@ -151,8 +151,8 @@
 <h1 class="text-lg font-black tracking-tighter text-indigo-700 dark:text-indigo-300">AI-WMS</h1>
 <div class="h-6 w-px bg-outline-variant opacity-20"></div>
 <nav class="flex items-center gap-6">
-<a class="text-indigo-700 dark:text-indigo-400 font-semibold font-sans text-sm tracking-tight" href="#">System Admin</a>
-<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors font-sans text-sm tracking-tight px-2 py-1 rounded" href="#">Logs</a>
+<a class="text-indigo-700 dark:text-indigo-400 font-semibold font-sans text-sm tracking-tight" href="./code.html">System Admin</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors font-sans text-sm tracking-tight px-2 py-1 rounded" href="#" id="logsLink">Logs</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
@@ -329,21 +329,21 @@
 <h3 class="font-bold">System Alerts</h3>
 </div>
 <div class="space-y-3">
-<label class="flex items-center justify-between cursor-pointer group">
+<label class="flex items-center justify-between cursor-pointer group" data-setting-toggle data-setting-key="criticalStockWarnings" data-enabled="true">
 <span class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors">Critical Stock Warnings</span>
-<div class="w-8 h-4 bg-primary rounded-full relative">
+<div class="w-8 h-4 bg-primary rounded-full relative" data-toggle-track>
 <div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
 </div>
 </label>
-<label class="flex items-center justify-between cursor-pointer group">
+<label class="flex items-center justify-between cursor-pointer group" data-setting-toggle data-setting-key="newUserOnboarding" data-enabled="false">
 <span class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors">New User Onboarding</span>
-<div class="w-8 h-4 bg-outline-variant rounded-full relative">
+<div class="w-8 h-4 bg-outline-variant rounded-full relative" data-toggle-track>
 <div class="absolute left-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
 </div>
 </label>
-<label class="flex items-center justify-between cursor-pointer group">
+<label class="flex items-center justify-between cursor-pointer group" data-setting-toggle data-setting-key="dailyShiftSummaries" data-enabled="true">
 <span class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors">Daily Shift Summaries</span>
-<div class="w-8 h-4 bg-primary rounded-full relative">
+<div class="w-8 h-4 bg-primary rounded-full relative" data-toggle-track>
 <div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
 </div>
 </label>
@@ -359,7 +359,7 @@
 <div class="space-y-8 flex-1">
 <div>
 <label class="text-[10px] font-bold uppercase text-primary mb-2 block">Warehouse Timezone</label>
-<select class="w-full bg-white border-none rounded-lg text-sm font-semibold px-4 py-3 shadow-sm focus:ring-2 focus:ring-primary/20">
+<select class="w-full bg-white border-none rounded-lg text-sm font-semibold px-4 py-3 shadow-sm focus:ring-2 focus:ring-primary/20" id="timezoneSelect">
 <option>UTC-5 (New York, EST)</option>
 <option>UTC+0 (London, GMT)</option>
 <option>UTC+8 (Singapore, SGT)</option>
@@ -368,15 +368,15 @@
 <div>
 <label class="text-[10px] font-bold uppercase text-primary mb-2 block">Global Scan Sensitivity</label>
 <div class="grid grid-cols-3 gap-2">
-<button class="py-2 text-[10px] font-bold rounded bg-white shadow-sm hover:bg-primary-fixed transition-colors">LOW</button>
-<button class="py-2 text-[10px] font-bold rounded bg-primary text-white shadow-sm">MID</button>
-<button class="py-2 text-[10px] font-bold rounded bg-white shadow-sm hover:bg-primary-fixed transition-colors">HIGH</button>
+<button class="py-2 text-[10px] font-bold rounded bg-white shadow-sm hover:bg-primary-fixed transition-colors" data-scan-level="LOW">LOW</button>
+<button class="py-2 text-[10px] font-bold rounded bg-primary text-white shadow-sm" data-scan-level="MID">MID</button>
+<button class="py-2 text-[10px] font-bold rounded bg-white shadow-sm hover:bg-primary-fixed transition-colors" data-scan-level="HIGH">HIGH</button>
 </div>
 </div>
 <div>
 <label class="text-[10px] font-bold uppercase text-primary mb-2 block">System Maintenance</label>
 <p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Schedule periodic cache clearing and AI model re-training during off-peak hours.</p>
-<button class="w-full py-3 bg-white border border-outline-variant/30 text-on-surface text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-surface-container-high transition-colors">
+<button class="w-full py-3 bg-white border border-outline-variant/30 text-on-surface text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-surface-container-high transition-colors" id="scheduleMaintenanceBtn">
                                     Schedule Maintenance
                                 </button>
 </div>
@@ -393,15 +393,15 @@
 </div>
 </div>
 <!-- Floating Action Footer (Fixed Bar) -->
-<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-fit z-50 flex items-center">
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-fit z-50 hidden items-center" id="settingsActionBar">
 <div class="bg-on-surface/90 backdrop-blur-xl px-4 py-3 rounded-full shadow-[0_20px_40px_-10px_rgba(15,23,42,0.3)] flex items-center gap-8 border border-white/10">
 <div class="flex items-center gap-3 pl-2">
 <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
 <span class="text-white text-[11px] font-bold uppercase tracking-widest">Unsaved Changes Detected</span>
 </div>
 <div class="flex gap-2">
-<button class="px-6 py-2 text-white/60 text-[10px] font-black uppercase tracking-widest hover:text-white transition-colors">Discard</button>
-<button class="px-8 py-2 bg-gradient-to-r from-primary to-primary-container text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all">
+<button class="px-6 py-2 text-white/60 text-[10px] font-black uppercase tracking-widest hover:text-white transition-colors" id="discardSettingsBtn">Discard</button>
+<button class="px-8 py-2 bg-gradient-to-r from-primary to-primary-container text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all" id="saveSettingsBtn">
                         Save System Changes
                     </button>
 </div>
@@ -409,8 +409,159 @@
 </div>
 <script src="../shared/api.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     if (!WmsAPI.requireAuth()) return;
+
+    const defaults = {
+        warehouseTimezone: 'UTC-5 (New York, EST)',
+        scanSensitivity: 'MID',
+        criticalStockWarnings: 'true',
+        newUserOnboarding: 'false',
+        dailyShiftSummaries: 'true',
+        maintenanceWindow: 'Not Scheduled'
+    };
+
+    const state = { ...defaults };
+    let savedState = { ...defaults };
+
+    const actionBar = document.getElementById('settingsActionBar');
+    const timezoneSelect = document.getElementById('timezoneSelect');
+    const logsLink = document.getElementById('logsLink');
+    const saveBtn = document.getElementById('saveSettingsBtn');
+    const discardBtn = document.getElementById('discardSettingsBtn');
+    const maintenanceBtn = document.getElementById('scheduleMaintenanceBtn');
+    const scanButtons = Array.from(document.querySelectorAll('[data-scan-level]'));
+    const toggleLabels = Array.from(document.querySelectorAll('[data-setting-toggle]'));
+
+    function markDirty() {
+        const dirty = JSON.stringify(state) !== JSON.stringify(savedState);
+        actionBar.classList.toggle('hidden', !dirty);
+        actionBar.classList.toggle('flex', dirty);
+    }
+
+    function setScanLevel(level) {
+        state.scanSensitivity = level;
+        scanButtons.forEach((button) => {
+            const active = button.dataset.scanLevel === level;
+            button.className = active
+                ? 'py-2 text-[10px] font-bold rounded bg-primary text-white shadow-sm'
+                : 'py-2 text-[10px] font-bold rounded bg-white shadow-sm hover:bg-primary-fixed transition-colors';
+        });
+        markDirty();
+    }
+
+    function setToggleState(label, enabled) {
+        const track = label.querySelector('[data-toggle-track]');
+        const knob = track?.querySelector('div');
+        label.dataset.enabled = enabled ? 'true' : 'false';
+        if (track) {
+            track.className = enabled
+                ? 'w-8 h-4 bg-primary rounded-full relative'
+                : 'w-8 h-4 bg-outline-variant rounded-full relative';
+        }
+        if (knob) {
+            knob.className = enabled
+                ? 'absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full'
+                : 'absolute left-0.5 top-0.5 w-3 h-3 bg-white rounded-full';
+        }
+    }
+
+    function applyState(nextState) {
+        Object.assign(state, nextState);
+        timezoneSelect.value = state.warehouseTimezone;
+        setScanLevel(state.scanSensitivity);
+
+        toggleLabels.forEach((label) => {
+            const key = label.dataset.settingKey;
+            setToggleState(label, state[key] === 'true');
+        });
+
+        maintenanceBtn.textContent = state.maintenanceWindow === 'Not Scheduled'
+            ? 'Schedule Maintenance'
+            : `Maintenance: ${state.maintenanceWindow}`;
+
+        markDirty();
+    }
+
+    scanButtons.forEach((button) => {
+        button.addEventListener('click', () => setScanLevel(button.dataset.scanLevel));
+    });
+
+    toggleLabels.forEach((label) => {
+        label.addEventListener('click', () => {
+            const key = label.dataset.settingKey;
+            const enabled = label.dataset.enabled !== 'true';
+            state[key] = String(enabled);
+            setToggleState(label, enabled);
+            markDirty();
+        });
+    });
+
+    timezoneSelect.addEventListener('change', () => {
+        state.warehouseTimezone = timezoneSelect.value;
+        markDirty();
+    });
+
+    maintenanceBtn.addEventListener('click', () => {
+        const current = state.maintenanceWindow === 'Not Scheduled' ? '' : state.maintenanceWindow;
+        const schedule = window.prompt('Enter a maintenance window (example: Sunday 02:00 AM)', current);
+        if (schedule === null) return;
+        state.maintenanceWindow = schedule.trim() || 'Not Scheduled';
+        applyState(state);
+        WmsAPI.showToast(
+            state.maintenanceWindow === 'Not Scheduled'
+                ? 'Maintenance schedule cleared'
+                : 'Maintenance window updated',
+            'success'
+        );
+    });
+
+    discardBtn.addEventListener('click', () => {
+        applyState({ ...savedState });
+        WmsAPI.showToast('Unsaved settings discarded', 'warning');
+    });
+
+    saveBtn.addEventListener('click', async () => {
+        saveBtn.disabled = true;
+        const oldHtml = saveBtn.innerHTML;
+        saveBtn.textContent = 'Saving...';
+
+        try {
+            await WmsAPI.updateSettings(state);
+            savedState = { ...state };
+            markDirty();
+            WmsAPI.showToast('Settings saved successfully');
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Failed to save settings', 'error');
+        } finally {
+            saveBtn.disabled = false;
+            saveBtn.innerHTML = oldHtml;
+        }
+    });
+
+    logsLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        WmsAPI.showToast('Log viewer is not exposed in this build yet.', 'warning');
+    });
+
+    try {
+        const settings = await WmsAPI.getSettings();
+        if (Array.isArray(settings)) {
+            settings.forEach((setting) => {
+                if (setting?.key) {
+                    state[setting.key] = setting.value ?? defaults[setting.key] ?? '';
+                }
+            });
+        }
+        savedState = { ...state };
+        applyState(state);
+        savedState = { ...state };
+        markDirty();
+    } catch (error) {
+        applyState(defaults);
+        savedState = { ...defaults };
+        WmsAPI.showToast('Using default settings view because loading failed.', 'warning');
+    }
 });
 </script>
 </body></html>

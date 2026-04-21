@@ -159,4 +159,82 @@ public class OOPJController {
                 "staffSearchByName", staff.searchByName("Bob") != null ? "Found" : "Not found"
         ));
     }
+
+    /** OOPJ-26: Binary to decimal conversion with NumberFormatException. */
+    @PostMapping("/barcode/convert")
+    public ResponseEntity<Map<String, Object>> barcodeConvert(@RequestBody Map<String, String> body) {
+        String binary = body.get("binary");
+        try {
+            int decimal = BarcodeUtils.bin2Dec(binary);
+            return ResponseEntity.ok(Map.of(
+                    "binary", binary,
+                    "decimal", decimal,
+                    "backToBinary", BarcodeUtils.dec2Bin(decimal)
+            ));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.ok(Map.of(
+                    "binary", binary != null ? binary : "",
+                    "error", e.getMessage()
+            ));
+        }
+    }
+
+    /** OOPJ-16ext: Vowel tracker with running totals. */
+    @PostMapping("/vowel/track")
+    public ResponseEntity<Map<String, Object>> vowelTrack(@RequestBody Map<String, Object> body) {
+        VowelTracker tracker = new VowelTracker();
+        Object sentences = body.get("sentences");
+        if (sentences instanceof java.util.List<?> list) {
+            for (Object s : list) {
+                if ("quit".equalsIgnoreCase(String.valueOf(s).trim())) break;
+                tracker.processSentence(String.valueOf(s));
+            }
+        } else {
+            tracker.processSentence(String.valueOf(body.getOrDefault("text", "")));
+        }
+        return ResponseEntity.ok(tracker.getRunningTotals());
+    }
+
+    /** OOPJ-27: Recursive find smallest. */
+    @PostMapping("/recursive/smallest")
+    public ResponseEntity<Map<String, Object>> recursiveSmallest(@RequestBody Map<String, java.util.List<Integer>> body) {
+        java.util.List<Integer> values = body.get("values");
+        int[] arr = values.stream().mapToInt(i -> i).toArray();
+        return ResponseEntity.ok(Map.of(
+                "values", values,
+                "smallest", RecursiveUtils.findSmallest(arr),
+                "largest", RecursiveUtils.findLargest(arr, arr.length - 1)
+        ));
+    }
+
+    /** OOPJ-27ext: Write random stock log and find smallest. */
+    @GetMapping("/inventory-log/demo")
+    public ResponseEntity<Map<String, Object>> inventoryLogDemo() {
+        try {
+            String path = "./wms-data/oopj_demo_stock.txt";
+            int[] values = InventoryLogWriter.writeRandomStockLog(path);
+            int smallest = RecursiveUtils.findSmallest(values);
+            return ResponseEntity.ok(Map.of(
+                    "count", values.length,
+                    "smallest", smallest,
+                    "filePath", path,
+                    "first10", java.util.Arrays.stream(values).limit(10).boxed().toList()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.ok(Map.of("error", e.getMessage()));
+        }
+    }
+
+    /** OOPJ-29: Tag deduplication sorted descending. */
+    @PostMapping("/tags/deduplicate")
+    public ResponseEntity<Map<String, Object>> deduplicate(@RequestBody Map<String, java.util.List<String>> body) {
+        java.util.List<String> words = body.get("words");
+        String[] arr = words.toArray(new String[0]);
+        java.util.List<String> result = TagDeduplicator.deduplicateAndSort(arr);
+        return ResponseEntity.ok(Map.of(
+                "input", words,
+                "deduplicated", result,
+                "uniqueCount", result.size()
+        ));
+    }
 }

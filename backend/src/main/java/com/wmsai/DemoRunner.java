@@ -80,6 +80,39 @@ public class DemoRunner implements CommandLineRunner {
         // 11. SKUValidator (Prac 17)
         log.info("[OOPJ-17] SKUValidator isPalindrome('RADAR'): {}", SKUValidator.isPalindrome("RADAR"));
 
+        // 12. VowelTracker (Prac 16 extension)
+        VowelTracker tracker = new VowelTracker();
+        tracker.processSentence("Warehouse Management System with AI");
+        log.info("[OOPJ-16ext] VowelTracker running totals: {}", tracker.getRunningTotals());
+
+        // 13. BarcodeUtils (Prac 26)
+        log.info("[OOPJ-26] BarcodeUtils bin2Dec('1101'): {}", BarcodeUtils.bin2Dec("1101"));
+        log.info("[OOPJ-26] BarcodeUtils dec2Bin(13): {}", BarcodeUtils.dec2Bin(13));
+        try {
+            BarcodeUtils.bin2Dec("12AB");
+        } catch (NumberFormatException e) {
+            log.info("[OOPJ-26] NumberFormatException caught: {}", e.getMessage());
+        }
+
+        // 14. RecursiveUtils (Prac 27)
+        int[] testArr = {45, 12, 78, 3, 56, 99, 7};
+        log.info("[OOPJ-27] RecursiveUtils findSmallest: {}", RecursiveUtils.findSmallest(testArr));
+        log.info("[OOPJ-27] RecursiveUtils findLargest: {}", RecursiveUtils.findLargest(testArr, testArr.length - 1));
+
+        // 15. InventoryLogWriter (Prac 27 extension)
+        try {
+            String logPath = "./wms-data/demo_stock_log.txt";
+            int smallest = InventoryLogWriter.writeAndFindSmallest(logPath);
+            log.info("[OOPJ-27ext] InventoryLogWriter wrote 150 random ints, smallest = {}", smallest);
+        } catch (Exception e) {
+            log.warn("[OOPJ-27ext] InventoryLogWriter demo skipped: {}", e.getMessage());
+        }
+
+        // 16. TagDeduplicator (Prac 29)
+        String[] sampleWords = {"apple", "banana", "cherry", "apple", "date", "banana", "elderberry"};
+        java.util.List<String> deduplicated = TagDeduplicator.deduplicateAndSort(sampleWords);
+        log.info("[OOPJ-29] TagDeduplicator deduplicated & sorted descending: {}", deduplicated);
+
         log.info("===========================================");
         log.info("✅ ALL OOPJ DEMOS COMPLETED SUCCESSFULLY ✅");
         log.info("===========================================");
