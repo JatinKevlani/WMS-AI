@@ -596,9 +596,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const addModal = document.getElementById('addProductModal');
     
-    document.getElementById('btnAddProduct').addEventListener('click', () => {
-        addModal.showModal();
-    });
+    const user = WmsAPI.getUser();
+    if (user && user.role === 'ADMIN') {
+        document.getElementById('btnAddProduct').addEventListener('click', () => {
+            addModal.showModal();
+        });
+    } else {
+        const addBtn = document.getElementById('btnAddProduct');
+        if (addBtn) addBtn.style.display = 'none';
+        
+        // Hide admin sidebar links
+        const alertsLink = document.querySelector('a[href*="alerts/code.html"]');
+        if (alertsLink) alertsLink.style.display = 'none';
+
+        const analyticsLink = document.querySelector('a[href*="analytics_dashboard/code.html"]');
+        if (analyticsLink) analyticsLink.style.display = 'none';
+        
+        const settingsLink = document.querySelector('a[href*="admin_settings/code.html"]');
+        if (settingsLink) settingsLink.style.display = 'none';
+    }
 
     document.getElementById('modalBtnCancel').addEventListener('click', () => {
         addModal.close();

@@ -522,21 +522,43 @@
                     healthLabels[2].textContent = overPct + '%';
                 }
 
-                // Load recent alerts
-                const alerts = await WmsAPI.getAlerts();
-                const alertContainer = document.querySelector('.border-l-4.border-error .space-y-6');
-                if (alertContainer && alerts.length > 0) {
-                    alertContainer.innerHTML = alerts.slice(0, 3).map(a => `
-                <div class="flex gap-4">
-                    <div class="w-2 h-2 mt-1.5 rounded-full ${a.type === 'LOW_STOCK' ? 'bg-error' : 'bg-tertiary'} shrink-0"></div>
-                    <div>
-                        <p class="text-sm font-bold">${a.type.replace('_', ' ')}</p>
-                        <p class="text-xs text-on-surface-variant">${a.message}</p>
-                    </div>
-                </div>
-            `).join('');
-                } else if (alertContainer) {
-                    alertContainer.innerHTML = '<p class="text-sm text-on-surface-variant">No active alerts. All systems healthy.</p>';
+                // Load recent alerts (Admin only)
+                if (user && user.role === 'ADMIN') {
+                    try {
+                        const alerts = await WmsAPI.getAlerts();
+                        const alertContainer = document.querySelector('.border-l-4.border-error .space-y-6');
+                        if (alertContainer && alerts.length > 0) {
+                            alertContainer.innerHTML = alerts.slice(0, 3).map(a => `
+                        <div class="flex gap-4">
+                            <div class="w-2 h-2 mt-1.5 rounded-full ${a.type === 'LOW_STOCK' ? 'bg-error' : 'bg-tertiary'} shrink-0"></div>
+                            <div>
+                                <p class="text-sm font-bold">${a.type.replace('_', ' ')}</p>
+                                <p class="text-xs text-on-surface-variant">${a.message}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                        } else if (alertContainer) {
+                            alertContainer.innerHTML = '<p class="text-sm text-on-surface-variant">No active alerts. All systems healthy.</p>';
+                        }
+                    } catch (e) {
+                        console.warn('Could not load alerts for dashboard:', e.message);
+                        const alertSection = document.querySelector('.border-l-4.border-error');
+                        if (alertSection) alertSection.style.display = 'none';
+                    }
+                } else {
+                    // Hide alert section for Staff
+                    const alertSection = document.querySelector('.border-l-4.border-error');
+                    if (alertSection) alertSection.style.display = 'none';
+                    
+                    // Also hide the Alerts link in the sidebar
+                    const alertsLink = document.querySelector('a[href*="alerts/code.html"]');
+                    if (alertsLink) alertsLink.style.display = 'none';
+
+                    const analyticsLink = document.querySelector('a[href*="analytics_dashboard/code.html"]');
+                    if (analyticsLink) analyticsLink.style.display = 'none';
+                    
+                    const settingsLink = document.querySelector('a[href*="admin_settings/code.html"]');
+                    if (settingsLink) settingsLink.style.display = 'none';
                 }
 
                 // Wire "Generate Purchase Order" button

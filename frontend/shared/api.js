@@ -2,7 +2,7 @@
  * WMS-AI API Client
  * Shared across all HTML pages for backend communication.
  */
-const API_BASE = '/api';
+const API_BASE = 'http://localhost:8080/api';
 
 class WmsAPI {
     static getToken() {
@@ -329,9 +329,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (text === 'print') {
             btn.addEventListener('click', (e) => { e.preventDefault(); window.print(); });
         } else if (text === 'ios_share' || text === 'file_upload' || text === 'cloud_upload' || text === 'download') {
+            // Skip buttons that have explicit export handlers
+            const btnId = btn.id || '';
+            if (btnId === 'btnExportProducts' || btnId === 'btnExportSales' || btnId === 'btnExportData') return;
+            if (btn.tagName === 'A' && btn.href && btn.href.includes('data_hub')) return;
             btn.addEventListener('click', (e) => { 
-                // Ignore if it's explicitly a link to data_hub.html
-                if (btn.tagName === 'A' && btn.href && btn.href.includes('data_hub')) return;
                 e.preventDefault(); 
                 WmsAPI.showToast('Export initiated...', 'info'); 
             });

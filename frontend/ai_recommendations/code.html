@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     async function loadRecommendations() {
+        const activeTab = document.querySelector('[data-ai-tab].text-primary').dataset.aiTab;
         try {
             grid.innerHTML = `
             <div class="bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center min-h-[380px] border-2 border-dashed border-outline-variant/30 col-span-full">
@@ -225,12 +226,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             <span class="material-symbols-outlined text-primary text-3xl animate-pulse">auto_awesome</span>
             </div>
             </div>
-            <h3 class="text-sm font-bold text-on-surface mb-2">Analyzing warehouse data...</h3>
-            <p class="text-xs text-on-surface-variant text-center max-w-[200px]">Generating real-time insights from global stock events.</p>
+            <h3 class="text-sm font-bold text-on-surface mb-2">Analyzing ${activeTab} data...</h3>
+            <p class="text-xs text-on-surface-variant text-center max-w-[200px]">Generating real-time ${activeTab} insights from inventory events.</p>
             </div>
             `;
 
-            const prods = await WmsAPI.getProducts(0, 3);
+            const prods = await WmsAPI.getProducts(0, 10);
             if (!prods || !prods.content || prods.content.length === 0) {
                 grid.innerHTML = `<div class="col-span-full text-center py-10 opacity-50 font-bold">No products found to analyze</div>`;
                 return;
@@ -238,29 +239,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             grid.innerHTML = '';
             
-            const p1 = prods.content[0];
-            const p2 = prods.content.length > 1 ? prods.content[1] : null;
-            const p3 = prods.content.length > 2 ? prods.content[2] : null;
+            // Show insights for first 4 products relevant to the tab
+            const itemsToAnalyze = prods.content.slice(0, 4);
 
-            if (p1) {
+            for (const product of itemsToAnalyze) {
                 try {
-                    const data = await WmsAPI.getRestockRecommendation(p1.id);
-                    grid.innerHTML += buildCard('Restock AI', data.product, data.sku || p1.sku, 'inventory', 'primary', data.recommendation);
-                } catch(e) { console.error(e); }
+                    let card = '';
+                    if (activeTab === 'restock') {
+                        const data = await WmsAPI.getRestockRecommendation(product.id);
+                        card = buildCard('Restock AI', data.product, data.sku || product.sku, 'inventory', 'primary', data.recommendation);
+                    } else if (activeTab === 'bundle') {
+                        const data = await WmsAPI.getBundleRecommendation(product.id);
+                        card = buildCard('Bundle Optimization', data.product, data.sku || product.sku, 'package_2', 'secondary', data.recommendation);
+                    } else if (activeTab === 'forecast') {
+                        const data = await WmsAPI.getDemandForecast(product.id);
+                        card = buildCard('Demand Forecast', data.product, data.sku || product.sku, 'insights', 'tertiary', data.forecast);
+                    }
+                    grid.innerHTML += card;
+                } catch(e) { 
+                    console.error(`Error loading ${activeTab} for ${product.name}:`, e);
+                }
             }
 
-            if (p2) {
-                try {
-                    const data = await WmsAPI.getBundleRecommendation(p2.id);
-                    grid.innerHTML += buildCard('Bundle Optimization', data.product, data.sku || p2.sku, 'package_2', 'secondary', data.recommendation);
-                } catch(e) { console.error(e); }
-            }
-
-            if (p3) {
-                try {
-                    const data = await WmsAPI.getDemandForecast(p3.id);
-                    grid.innerHTML += buildCard('Demand Forecast', data.product, data.sku || p3.sku, 'insights', 'tertiary', data.forecast);
-                } catch(e) { console.error(e); }
+            if (grid.innerHTML === '') {
+                grid.innerHTML = `<div class="col-span-full text-center py-10 opacity-50 font-bold">No specific ${activeTab} insights available for current stock.</div>`;
             }
 
         } catch (err) {

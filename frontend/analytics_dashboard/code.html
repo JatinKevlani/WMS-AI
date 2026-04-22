@@ -187,10 +187,14 @@
 <span class="text-xs font-semibold">Oct 01, 2023 - Oct 31, 2023</span>
 </div>
 <div class="h-4 w-px bg-outline-variant/20"></div>
-<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-surface-container-high rounded-lg transition-colors group">
-<span class="text-xs font-bold text-on-surface group-hover:text-primary">Monthly</span>
-<span class="material-symbols-outlined text-xs" data-icon="expand_more">expand_more</span>
-</button>
+<div class="relative">
+<select id="periodSelector" class="appearance-none bg-white dark:bg-slate-800 border border-outline-variant/10 rounded-lg px-3 py-1.5 pr-7 text-xs font-bold text-on-surface cursor-pointer focus:ring-2 focus:ring-primary/20 transition-all shadow-sm">
+<option value="MOM">Monthly</option>
+<option value="WOW">Weekly</option>
+<option value="YOY">Yearly</option>
+</select>
+<span class="material-symbols-outlined text-xs absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
 <div class="flex items-center gap-2 ml-4">
 <button class="bg-primary text-on-primary px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 shadow-sm hover:opacity-90 transition-opacity">
 <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
@@ -368,7 +372,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Load Analytics Data
     async function loadAnalytics() {
         try {
-            const data = await WmsAPI.getSalesAnalytics('MOM'); // month over month
+            const periodEl = document.getElementById('periodSelector');
+            const period = periodEl ? periodEl.value : 'MOM';
+            const data = await WmsAPI.getSalesAnalytics(period);
             
             // 1. KPIs
             const currRev = data.currentRevenue || 0;
@@ -448,6 +454,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     loadAnalytics();
+
+    // Period selector
+    const periodSelect = document.getElementById('periodSelector');
+    if (periodSelect) {
+        periodSelect.addEventListener('change', () => {
+            loadAnalytics();
+        });
+    }
 });
 </script>
 </body></html>

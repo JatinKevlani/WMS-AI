@@ -69,6 +69,15 @@ public class ProductService {
         }
 
         Product saved = productRepository.save(product);
+        
+        // Ensure relations are fully populated for the response
+        if (saved.getCategory() != null) {
+            saved.setCategory(categoryRepository.findById(saved.getCategory().getId()).orElse(null));
+        }
+        if (saved.getSupplier() != null) {
+            saved.setSupplier(supplierRepository.findById(saved.getSupplier().getId()).orElse(null));
+        }
+
         ProductCounter.increment();
         log.info("Product created: {} (SKU: {})", saved.getName(), saved.getSku());
 
