@@ -1,0 +1,38 @@
+# WMS-AI System Configuration Example
+# Rename this file to application.properties and place it in src/main/resources/
+
+server.port=8080
+
+# H2 Database Config
+spring.datasource.url=jdbc:h2:file:./wms-data/wmsdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.jpa.hibernate.ddl-auto=update
+
+# Security Settings
+app.jwt.secret=REPLACE_WITH_A_LONG_SECURE_BASE64_SECRET_KEY
+app.jwt.expiration=28800000
+app.cors.allowed-origins=http://localhost:3000,http://localhost:5173,https://your-frontend-deployment.com
+
+# SMTP Email Configuration
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-admin-email@gmail.com
+spring.mail.password=YOUR_16_DIGIT_GMAIL_APP_PASSWORD
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+# AI Recommendation Configuration
+anthropic.api.key=YOUR_ANTHROPIC_CLAUDE_API_KEY
+anthropic.api.model=claude-sonnet-4-20250514
+anthropic.api.base-url=https://api.anthropic.com/v1
+
+# Alert Definitions
+app.alert.admin.email=admin@your-wms-domain.com
+app.alert.default.overstock.days=30
+app.alert.default.min.threshold=50
+app.files.base.path=./wms-data

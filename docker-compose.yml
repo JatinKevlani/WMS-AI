@@ -1,0 +1,100 @@
+# ====================================================================
+# WMS-AI — Docker Compose (Production)
+# ====================================================================
+# Usage:
+#   docker compose up --build -d      # Build & start all services
+#   docker compose logs -f            # Follow logs
+#   docker compose down               # Stop all services
+#   docker compose down -v            # Stop & delete volumes (DESTROYS DATA)
+# ====================================================================
+
+services:
+  # ── PostgreSQL Database ──────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: wmsai-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-wmsai}
+      POSTGRES_USER: ${POSTGRES_USER:-wmsai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wmsai_secret}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - wms-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-wmsai} -d ${POSTGRES_DB:-wmsai}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Spring Boot Backend ──────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wmsai-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      POSTGRES_DB: ${POSTGRES_DB:-wmsai}
+      POSTGRES_USER: ${POSTGRES_USER:-wmsai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wmsai_secret}
+      JWT_SECRET: ${JWT_SECRET:-WmsAiSecretKeyForJWT256BitMinimumLengthRequiredHere2026!}
+      MAIL_USERNAME: ${MAIL_USERNAME:-wmsai.alerts@gmail.com}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    volumes:
+      - backend-data:/app/wms-data
+    ports:
+      - "8080:8080"
+    networks:
+      - wms-network
+    healthcheck:
+      test: ["CMD", "curl", "-s", "-o", "/dev/null", "http://localhost:8080/api/auth/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # ── Nginx Frontend ──────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: wmsai-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    networks:
+      - wms-network
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+# ── Volumes ────────────────────────────────────────────────────────
+volumes:
+  pgdata:
+    driver: local
+    name: wmsai-pgdata
+  backend-data:
+    driver: local
+    name: wmsai-backend-data
+
+# ── Networks ───────────────────────────────────────────────────────
+networks:
+  wms-network:
+    driver: bridge
+    name: wmsai-network

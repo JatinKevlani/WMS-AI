@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suppliers - AI-WMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#e2dfff",
+                    "secondary-fixed": "#e2dfff",
+                    "on-secondary-container": "#454386",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "on-primary-fixed": "#0f0069",
+                    "surface-tint": "#4d44e3",
+                    "tertiary-container": "#a44100",
+                    "surface-dim": "#d2d9f4",
+                    "primary-container": "#4f46e5",
+                    "surface-bright": "#faf8ff",
+                    "inverse-surface": "#283044",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-error": "#ffffff",
+                    "outline": "#777587",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "on-primary-container": "#dad7ff",
+                    "on-tertiary-container": "#ffd2be",
+                    "tertiary-fixed": "#ffdbcc",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e2e7ff",
+                    "surface-container": "#eaedff",
+                    "surface-variant": "#dae2fd",
+                    "on-surface-variant": "#464555",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#140f54",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface-container-low": "#f2f3ff",
+                    "on-secondary-fixed-variant": "#413f82",
+                    "tertiary": "#7e3000",
+                    "inverse-on-surface": "#eef0ff",
+                    "primary": "#3525cd",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "on-surface": "#131b2e",
+                    "on-background": "#131b2e",
+                    "inverse-primary": "#c3c0ff",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#b6b4ff",
+                    "surface": "#faf8ff",
+                    "surface-container-highest": "#dae2fd",
+                    "secondary": "#58579b",
+                    "on-secondary": "#ffffff",
+                    "background": "#faf8ff",
+                    "on-tertiary-fixed": "#351000",
+                    "outline-variant": "#c7c4d8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">package_2</span>
+</div>
+<div>
+<h1 class="text-on-surface font-black tracking-tighter text-lg leading-tight">AI-WMS</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">The Digital Foreman</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<span class="material-symbols-outlined mr-3">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
+<span class="material-symbols-outlined mr-3">inventory_2</span> Products
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../categories/code.html">
+<span class="material-symbols-outlined mr-3">category</span> Categories
+            </a>
+<!-- Active State: Suppliers -->
+<a class="flex items-center px-4 py-3 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg font-sans text-xs font-semibold uppercase tracking-widest" href="../suppliers/code.html">
+<span class="material-symbols-outlined mr-3">local_shipping</span> Suppliers
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../purchase_orders/code.html">
+<span class="material-symbols-outlined mr-3">shopping_cart</span> Orders
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
+<span class="material-symbols-outlined mr-3">payments</span> Sales
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../alerts/code.html">
+<span class="material-symbols-outlined mr-3">notifications_active</span> Alerts
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../ai_recommendations/code.html">
+<span class="material-symbols-outlined mr-3">auto_awesome</span> AI Insights
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../analytics_dashboard/code.html">
+<span class="material-symbols-outlined mr-3">insights</span> Analytics
+            </a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../data_hub/code.html">
+<span class="material-symbols-outlined mr-3">import_export</span> Data Hub
+            </a>
+</nav>
+<div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all font-sans text-xs font-medium uppercase tracking-widest" href="../admin_settings/code.html">
+<span class="material-symbols-outlined mr-3">settings</span> Settings
+            </a>
+<div class="mt-4 p-3 bg-indigo-50 dark:bg-indigo-900/10 rounded-xl flex items-center space-x-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="portrait of a professional warehouse foreman wearing a safety vest and a focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAinAZZaI14R158bmkhE6h2o98sAGc_0LqELefyWFTmW1rM22xJSoSum22HO2Fk-fBDNAnxpt3dhjUo4r1h7_kivHYXYHeeSVjZJgNs7zodPID2NDUX7ocYNybAdAkEx6x30SSEjbKXm9j7gc5tNH8RGXgiq9oTy-Dxz7r8SMrz4-sZhL_hkSwQXB29plyK4ohvRezwVQiTBZ8JvSI4azlqFHSNXyAw33x563rM82QO6vCn5zV-Aef05kLls5g-G_wXffJ3zxHsRMca"/>
+<div class="overflow-hidden">
+<p class="text-[11px] font-bold text-indigo-900 truncate" data-user-name>Warehouse Foreman</p>
+<p class="text-[9px] text-indigo-600 font-medium" data-user-role>Precision Logistics</p>
+</div>
+<button onclick="WmsAPI.logout()" class="ml-auto text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 bg-surface min-h-screen">
+<!-- TopAppBar Component -->
+<header class="w-full h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm dark:shadow-none flex items-center justify-between px-8">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400" placeholder="Search by name, ID or location..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 rounded-full hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150 relative">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-slate-500">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center space-x-2 text-tertiary font-medium mb-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] uppercase tracking-widest">AI Logistics Recommendation</span>
+</div>
+<h2 class="text-3xl font-extrabold text-on-surface tracking-tight">Suppliers</h2>
+<p class="text-on-surface-variant text-sm mt-1 max-w-lg">Manage your global network of manufacturing and distribution partners with precision AI scoring.</p>
+</div>
+<div class="flex items-center space-x-3">
+<button class="px-4 py-2 text-sm font-semibold text-on-surface bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors flex items-center" id="btnFilterSuppliers">
+<span class="material-symbols-outlined text-sm mr-2">filter_list</span> Filter
+                    </button>
+<button class="px-5 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white text-sm font-bold rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center" id="btnAddSupplier">
+<span class="material-symbols-outlined text-sm mr-2">add</span> Add Supplier
+                    </button>
+</div>
+</div>
+</div>
+<!-- Dashboard Stats Summary (Bento-style snippet) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary border-opacity-30">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Total Partners</p>
+<p class="text-2xl font-black text-on-surface opacity-50" id="kpi-suppliers">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 flex items-center opacity-50">
+<span class="material-symbols-outlined text-xs mr-1">trending_flat</span> Waiting for data
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary border-opacity-30">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Active Shipments</p>
+<p class="text-2xl font-black text-on-surface opacity-50">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 flex items-center opacity-50">
+<span class="material-symbols-outlined text-xs mr-1">schedule</span> No active shipments
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-secondary border-opacity-30">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Compliance Score</p>
+<p class="text-2xl font-black text-on-surface opacity-50">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 opacity-50">Not evaluated</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-error border-opacity-30">
+<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mb-1">Critical Alerts</p>
+<p class="text-2xl font-black text-on-surface opacity-50">--</p>
+<p class="text-on-surface-variant text-[10px] font-bold mt-2 opacity-50">No alerts</p>
+</div>
+</div>
+<!-- Supplier Table Container -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm mt-8">
+<div class="p-6 border-b border-slate-50 flex items-center justify-between bg-surface-container-low">
+<h3 class="text-sm font-bold text-on-surface">Global Supplier Registry</h3>
+<div class="flex items-center space-x-2">
+<span class="text-[11px] text-on-surface-variant font-medium">Sort by:</span>
+<select class="bg-transparent border-none text-[11px] font-bold text-primary focus:ring-0 p-0 pr-6 cursor-pointer">
+<option>Product Count</option>
+<option>Name (A-Z)</option>
+<option>Recent Activity</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Name / ID</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Contact Person</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Communication</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Regional HQ</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center">Active SKU</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody id="supplierTableBody" class="divide-y divide-slate-50">
+    <tr><td colspan="7" class="px-6 py-8 text-center text-on-surface-variant">Loading suppliers...</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 bg-surface-container-low border-t border-slate-100 flex items-center justify-between opacity-50">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" id="supplier-pagination-info">Showing 0 Partners</p>
+<div class="flex items-center space-x-1">
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors text-on-surface-variant" disabled>
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-variant text-on-surface-variant text-xs font-bold" disabled>1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container transition-colors text-on-surface-variant" disabled>
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Insight Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-gradient-to-br from-indigo-900 to-primary p-8 rounded-2xl relative overflow-hidden text-white shadow-xl">
+<div class="relative z-10">
+<div class="flex items-center space-x-2 mb-4">
+<span class="material-symbols-outlined text-indigo-300" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-200">AI Procurement Intelligence</span>
+</div>
+<h4 class="text-2xl font-bold mb-2">Predictive Capacity Alert</h4>
+<p class="text-indigo-100 text-sm max-w-md mb-6 leading-relaxed">
+                            Based on current manufacturing trends in the EMEA region, <span class="font-bold text-white">Nexus Components</span> is expected to reach 95% capacity by next quarter. Consider diversifying stock levels with secondary partners to mitigate lead-time risks.
+                        </p>
+<button class="px-6 py-2.5 bg-white text-primary text-xs font-black uppercase tracking-widest rounded-lg hover:bg-indigo-50 transition-colors shadow-lg" id="btnOptimizeSupplyChain">
+                            Optimize Supply Chain
+                        </button>
+</div>
+<!-- Decorative Element -->
+<div class="absolute right-0 top-0 w-64 h-full bg-white/5 -skew-x-12 translate-x-20"></div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-2xl flex flex-col justify-between border border-primary/5">
+<div>
+<h4 class="text-lg font-extrabold text-on-surface tracking-tight mb-2">Global Coverage</h4>
+<div class="w-full h-32 rounded-xl overflow-hidden relative mb-4">
+<img class="w-full h-full object-cover grayscale opacity-50 contrast-125" data-alt="a minimalist stylized world map with glowing dots representing warehouse and supplier locations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-L7B1XJE59C1Hds0qbceEnfz0N6krDWeOkVYrR3o1qhvOcqsclK-jDlXWItcJQKZJH3XRUMfTFpS44xBVmZGK6y9BbtfYH9vlPiEVFH-ma3og1fQtqouTclRTeMIp1XqjMCXCTUw47A3N2mTXqHH9f9vCLQSCLPJbFlIBFT4ryyMKektDc3mWFSXSL4GO1cN7uWCoVMmlWOGWu2O_9VefV-tIUEiFxH3y52k_Nlv1hUjFS1CVzCmTPxBxab3QhfyGWRRphqw-MdB5"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl animate-pulse">location_on</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant font-medium leading-relaxed">Your network covers 4 continents and 22 timezones. AI sync is active for all partners.</p>
+</div>
+<a class="text-primary text-[11px] font-bold uppercase tracking-widest flex items-center mt-4 group" href="#" id="viewInteractiveMapLink">
+                        View Interactive Map
+                        <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!WmsAPI.requireAuth()) return;
+
+    const tbody = document.getElementById('supplierTableBody');
+    let supplierCache = [];
+
+    function renderSuppliers(data) {
+        document.getElementById('kpi-suppliers').textContent = data.length.toLocaleString();
+
+        if (!data || data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-on-surface-variant">No suppliers found.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = data.map(s => {
+            const initials = s.name.substring(0, 2).toUpperCase();
+            return `
+            <tr class="hover:bg-slate-50 transition-colors group">
+                <td class="px-6 py-5">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center text-primary font-bold mr-3">${initials}</div>
+                        <div>
+                            <p class="text-sm font-bold text-on-surface">${s.name}</p>
+                            <p class="text-[10px] text-on-surface-variant font-mono">ID: ${s.id}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <p class="text-sm font-medium text-on-surface">${s.contactPerson || '-'}</p>
+                    <p class="text-[11px] text-on-surface-variant">Account Manager</p>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="space-y-1">
+                        <p class="text-[11px] text-on-surface flex items-center">
+                            <span class="material-symbols-outlined text-[14px] mr-1.5 text-primary">mail</span> ${s.email || '-'}
+                        </p>
+                        <p class="text-[11px] text-on-surface flex items-center">
+                            <span class="material-symbols-outlined text-[14px] mr-1.5 text-primary">call</span> ${s.phone || '-'}
+                        </p>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <p class="text-[11px] text-on-surface-variant leading-tight">${s.address || 'Location Unknown'}</p>
+                </td>
+                <td class="px-6 py-5 text-center">
+                    <span class="inline-flex items-center px-2 py-1 bg-primary-fixed text-primary text-[10px] font-bold rounded-md">Active</span>
+                </td>
+                <td class="px-6 py-5">
+                    <span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-[9px] font-black uppercase tracking-wider">Active</span>
+                </td>
+                <td class="px-6 py-5 text-right">
+                    <div class="flex items-center justify-end space-x-2">
+                        <button class="p-1.5 hover:bg-surface-container-highest rounded text-on-surface-variant transition-colors" title="View Details" data-view-supplier="${s.id}">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            `;
+        }).join('');
+    }
+
+    async function loadSuppliers() {
+        try {
+            supplierCache = await WmsAPI.getSuppliers();
+            renderSuppliers(supplierCache);
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-error">Failed to load suppliers: ${err.message}</td></tr>`;
+        }
+    }
+
+    loadSuppliers();
+
+    const filterSupplierModal = document.getElementById('filterSupplierModal');
+    const filterSupplierForm = document.getElementById('filterSupplierForm');
+
+    document.getElementById('btnFilterSuppliers').addEventListener('click', () => {
+        filterSupplierModal.classList.remove('hidden');
+        document.getElementById('filterSupplierInput').focus();
+    });
+
+    const closeFilterSupplierModal = () => {
+        filterSupplierModal.classList.add('hidden');
+    };
+
+    document.getElementById('btnCancelFilterSupplier').addEventListener('click', closeFilterSupplierModal);
+    document.getElementById('btnCancelFilterSupplier2').addEventListener('click', closeFilterSupplierModal);
+
+    filterSupplierForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const term = document.getElementById('filterSupplierInput').value;
+        const query = term.trim().toLowerCase();
+        closeFilterSupplierModal();
+        if (!query) {
+            renderSuppliers(supplierCache);
+            return;
+        }
+        renderSuppliers(supplierCache.filter((supplier) =>
+            supplier.name.toLowerCase().includes(query)
+            || (supplier.contactPerson || '').toLowerCase().includes(query)
+        ));
+    });
+
+    const addSupplierModal = document.getElementById('addSupplierModal');
+    const addSupplierForm = document.getElementById('addSupplierForm');
+
+    document.getElementById('btnAddSupplier').addEventListener('click', () => {
+        addSupplierModal.classList.remove('hidden');
+        document.getElementById('supplierNameInput').focus();
+    });
+
+    const closeSupplierModal = () => {
+        addSupplierModal.classList.add('hidden');
+        addSupplierForm.reset();
+    };
+
+    document.getElementById('btnCancelAddSupplier').addEventListener('click', closeSupplierModal);
+    document.getElementById('btnCancelAddSupplier2').addEventListener('click', closeSupplierModal);
+
+    addSupplierForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('supplierNameInput').value;
+        const contactPerson = document.getElementById('supplierContactInput').value;
+        const email = document.getElementById('supplierEmailInput').value;
+        const phone = document.getElementById('supplierPhoneInput').value;
+        const address = document.getElementById('supplierAddressInput').value;
+
+        try {
+            await WmsAPI.createSupplier({ name, contactPerson, email, phone, address });
+            WmsAPI.showToast('Supplier added successfully');
+            closeSupplierModal();
+            await loadSuppliers();
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Failed to add supplier', 'error');
+        }
+    });
+
+    document.getElementById('btnOptimizeSupplyChain').addEventListener('click', () => {
+        WmsAPI.showToast('AI optimization suggestions refreshed for supplier performance.');
+    });
+
+    document.getElementById('viewInteractiveMapLink').addEventListener('click', (event) => {
+        event.preventDefault();
+        WmsAPI.showToast('Interactive map is not available in this build yet.', 'warning');
+    });
+
+    const viewSupplierModal = document.getElementById('viewSupplierModal');
+    const closeViewSupplierModal = () => viewSupplierModal.classList.add('hidden');
+
+    document.getElementById('btnCloseViewSupplier').addEventListener('click', closeViewSupplierModal);
+    document.getElementById('btnCloseViewSupplier2').addEventListener('click', closeViewSupplierModal);
+
+    tbody.addEventListener('click', async (event) => {
+        const button = event.target.closest('[data-view-supplier]');
+        if (!button) return;
+
+        try {
+            const result = await WmsAPI.getSupplier(button.dataset.viewSupplier);
+            const supplier = result.supplier;
+            const products = result.products || [];
+
+            document.getElementById('viewSupplierTitle').textContent = supplier.name;
+            document.getElementById('viewSupplierContact').textContent = supplier.contactPerson || 'N/A';
+            document.getElementById('viewSupplierEmail').textContent = supplier.email || 'N/A';
+            document.getElementById('viewSupplierPhone').textContent = supplier.phone || 'N/A';
+            document.getElementById('viewSupplierProductCount').textContent = products.length.toString();
+            document.getElementById('viewSupplierAddress').textContent = supplier.address || 'N/A';
+
+            viewSupplierModal.classList.remove('hidden');
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Failed to load supplier details', 'error');
+        }
+    });
+});
+</script>
+<!-- Add Supplier Modal -->
+<div id="addSupplierModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface">Add New Supplier</h3>
+            <button id="btnCancelAddSupplier" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <form id="addSupplierForm" class="p-6 space-y-4">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Supplier Name *</label>
+                <input type="text" id="supplierNameInput" required class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="e.g. Nexus Components">
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Contact Person</label>
+                <input type="text" id="supplierContactInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="e.g. Jane Doe">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Email</label>
+                    <input type="email" id="supplierEmailInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="jane@example.com">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Phone</label>
+                    <input type="text" id="supplierPhoneInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="+1 (555) 000-0000">
+                </div>
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Address</label>
+                <textarea id="supplierAddressInput" rows="2" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="HQ Address"></textarea>
+            </div>
+            <div class="pt-4 mt-2 flex justify-end gap-3">
+                <button type="button" id="btnCancelAddSupplier2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors flex items-center">
+                    <span class="material-symbols-outlined text-[18px] mr-2">save</span> Save Data
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Filter Suppliers Modal -->
+<div id="filterSupplierModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface">Filter Suppliers</h3>
+            <button id="btnCancelFilterSupplier" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <form id="filterSupplierForm" class="p-6 space-y-4">
+            <div>
+                <label class="block text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5">Search Term</label>
+                <input type="text" id="filterSupplierInput" class="w-full bg-surface-container font-medium text-sm text-on-surface px-4 py-2.5 rounded-xl border-2 border-transparent focus:border-primary focus:bg-surface-container-lowest outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="Name or contact...">
+            </div>
+            <div class="pt-2 flex justify-end gap-3">
+                <button type="button" id="btnCancelFilterSupplier2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors flex items-center">
+                    <span class="material-symbols-outlined text-[18px] mr-2">filter_list</span> Apply Filter
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- View Supplier Details Modal -->
+<div id="viewSupplierModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+            <h3 class="text-lg font-bold text-on-surface" id="viewSupplierTitle">Supplier Details</h3>
+            <button id="btnCloseViewSupplier" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Contact Person</p>
+                <p class="text-sm font-medium text-on-surface" id="viewSupplierContact">-</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                    <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Email</p>
+                    <p class="text-sm font-medium text-on-surface" id="viewSupplierEmail">-</p>
+                </div>
+                <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                    <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Phone</p>
+                    <p class="text-sm font-medium text-on-surface" id="viewSupplierPhone">-</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Products Supplied</p>
+                <p class="text-sm font-medium text-on-surface" id="viewSupplierProductCount">0</p>
+            </div>
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Address</p>
+                <p class="text-sm font-medium text-on-surface" id="viewSupplierAddress">-</p>
+            </div>
+        </div>
+        <div class="px-6 py-4 border-t border-outline-variant/20 flex justify-end">
+            <button type="button" id="btnCloseViewSupplier2" class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-md transition-colors">Done</button>
+        </div>
+    </div>
+</div>
+</body></html>

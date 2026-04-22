@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Recommendations Hub | AI-WMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e2dfff", "secondary-fixed": "#e2dfff",
+                        "on-secondary-container": "#454386", "tertiary-fixed-dim": "#ffb695",
+                        "on-primary-fixed": "#0f0069", "surface-tint": "#4d44e3",
+                        "tertiary-container": "#a44100", "surface-dim": "#d2d9f4",
+                        "primary-container": "#4f46e5", "surface-bright": "#faf8ff",
+                        "inverse-surface": "#283044", "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff", "outline": "#777587",
+                        "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff", "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc", "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e7ff", "surface-container": "#eaedff",
+                        "surface-variant": "#dae2fd", "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6", "on-secondary-fixed": "#140f54",
+                        "error": "#ba1a1a", "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#c3c0ff", "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#413f82", "tertiary": "#7e3000",
+                        "inverse-on-surface": "#eef0ff", "primary": "#3525cd",
+                        "secondary-fixed-dim": "#c3c0ff", "on-surface": "#131b2e",
+                        "on-background": "#131b2e", "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff", "secondary-container": "#b6b4ff",
+                        "surface": "#faf8ff", "surface-container-highest": "#dae2fd",
+                        "secondary": "#58579b", "on-secondary": "#ffffff",
+                        "background": "#faf8ff", "on-tertiary-fixed": "#351000",
+                        "outline-variant": "#c7c4d8"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"], "body": ["Inter"], "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h2 class="text-sm font-bold tracking-tight text-on-surface">The Digital Foreman</h2>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">Precision Logistics</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../admin_dashboard/code.html">
+<span class="material-symbols-outlined text-lg">dashboard</span><span>Dashboard</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../product_list/code.html">
+<span class="material-symbols-outlined text-lg">inventory_2</span><span>Products</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../categories/code.html">
+<span class="material-symbols-outlined text-lg">category</span><span>Categories</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../suppliers/code.html">
+<span class="material-symbols-outlined text-lg">local_shipping</span><span>Suppliers</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../purchase_orders/code.html">
+<span class="material-symbols-outlined text-lg">shopping_cart</span><span>Orders</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../sales_transactions/code.html">
+<span class="material-symbols-outlined text-lg">payments</span><span>Sales</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../alerts/code.html">
+<span class="material-symbols-outlined text-lg">notifications_active</span><span>Alerts</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-white text-indigo-600 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest" href="../ai_recommendations/code.html">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">auto_awesome</span><span>AI Insights</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../analytics_dashboard/code.html">
+<span class="material-symbols-outlined text-lg">insights</span><span>Analytics</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../data_hub/code.html">
+<span class="material-symbols-outlined text-lg">import_export</span><span>Data Hub</span></a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:text-indigo-500 transition-all text-xs font-medium uppercase tracking-widest" href="../admin_settings/code.html">
+<span class="material-symbols-outlined text-lg">settings</span><span>Settings</span></a>
+</nav>
+<div class="mt-auto p-2 bg-indigo-50 rounded-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnASg379Ox8O2Cjph1uNyfx7fJ66KYaA-G4pUu7X8ezv2l2OCrAwogiNLDZXnqpAjd1wy90A97pfVzOsr9jAL2p4zTBMXcJOUD0wLkBMDSHzay5NaFxf1zALyUDDJ6CLjBcIdsbQajCNSq9yu0ci3hoPdYFsS178yOwbKuXfG1XdAs5YMxgplRgW4X1r1xpiK0-uIblFWVUlhec-AOx3dSnTuPCZVPQII-DfSsAiwwWK_7qSASNZwtyI8YHBysZs-58gnWV4JY7m2Q"/>
+</div>
+<div class="overflow-hidden flex-1">
+<p class="text-[11px] font-bold text-on-surface truncate" data-user-name>Alex Rivera</p>
+<p class="text-[9px] text-on-surface-variant truncate" data-user-role>Active Shift: Delta</p>
+</div>
+<button onclick="WmsAPI.logout()" class="text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-slate-50 dark:bg-slate-900 shadow-sm w-full h-16 sticky top-0 z-40 flex items-center justify-between px-6">
+<div class="flex items-center gap-6">
+<h1 class="text-lg font-black tracking-tighter text-indigo-700">AI-WMS</h1>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-slate-100 border-none rounded-full py-1.5 pl-9 pr-4 text-xs w-64 focus:ring-2 focus:ring-indigo-500 transition-all" placeholder="Search insights..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-slate-500">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Insights Dashboard -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface mb-2">AI Recommendations Hub</h2>
+<p class="text-on-surface-variant max-w-lg">Advanced predictive modeling for warehouse optimization. Review and approve machine-learning driven operations.</p>
+</div>
+<div class="flex items-center gap-2 p-1 bg-surface-container-low rounded-xl">
+<button class="px-4 py-2 text-xs font-semibold rounded-lg bg-white shadow-sm text-primary" data-insight-mode="live">Live Insights</button>
+<button class="px-4 py-2 text-xs font-semibold rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" data-insight-mode="history">Historical Performance</button>
+</div>
+</div>
+<!-- Custom Tabs Navigation -->
+<div class="flex border-b border-outline-variant/30 mb-8 gap-8">
+<button class="pb-4 text-sm font-bold text-primary border-b-2 border-primary relative" data-ai-tab="bundle">
+                    Bundle Suggestions
+</button>
+<button class="pb-4 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors" data-ai-tab="overstock">Overstock Mitigation</button>
+<button class="pb-4 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors" data-ai-tab="reorder">Reorder Intelligence</button>
+</div>
+<!-- Bento Grid Recommendations -->
+<div id="recommendationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center min-h-[380px] border-2 border-dashed border-outline-variant/30 col-span-full">
+<div class="relative w-20 h-20 mb-6">
+<div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+<div class="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl animate-pulse">auto_awesome</span>
+</div>
+</div>
+<h3 class="text-sm font-bold text-on-surface mb-2">Analyzing warehouse data...</h3>
+<p class="text-xs text-on-surface-variant text-center max-w-[200px]">Our neural networks are crunching movement patterns for recommendations.</p>
+</div>
+</div>
+</div>
+<!-- FAB for refresh -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50" id="btnRefreshAi" title="Refresh Recommendations">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!WmsAPI.requireAuth()) return;
+
+    const grid = document.getElementById('recommendationsGrid');
+    const tabButtons = Array.from(document.querySelectorAll('[data-ai-tab]'));
+    const insightModeButtons = Array.from(document.querySelectorAll('[data-insight-mode]'));
+    let activeTab = 'bundle';
+    
+    // Wire up refresh button
+    document.getElementById('btnRefreshAi').addEventListener('click', () => {
+        loadRecommendations();
+    });
+
+    function updateActiveTab(nextTab) {
+        activeTab = nextTab;
+        tabButtons.forEach((button) => {
+            const active = button.dataset.aiTab === nextTab;
+            button.className = active
+                ? 'pb-4 text-sm font-bold text-primary border-b-2 border-primary relative'
+                : 'pb-4 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors';
+        });
+    }
+
+    function updateInsightMode(mode) {
+        insightModeButtons.forEach((button) => {
+            const active = button.dataset.insightMode === mode;
+            button.className = active
+                ? 'px-4 py-2 text-xs font-semibold rounded-lg bg-white shadow-sm text-primary'
+                : 'px-4 py-2 text-xs font-semibold rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors';
+        });
+    }
+
+    tabButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            updateActiveTab(button.dataset.aiTab);
+            loadRecommendations();
+        });
+    });
+
+    insightModeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            updateInsightMode(button.dataset.insightMode);
+            WmsAPI.showToast(
+                button.dataset.insightMode === 'history'
+                    ? 'Historical recommendation review mode enabled.'
+                    : 'Showing live recommendation stream.'
+            );
+        });
+    });
+
+    async function loadRecommendations() {
+        try {
+            grid.innerHTML = `
+            <div class="bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center min-h-[380px] border-2 border-dashed border-outline-variant/30 col-span-full">
+            <div class="relative w-20 h-20 mb-6">
+            <div class="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary text-3xl animate-pulse">auto_awesome</span>
+            </div>
+            </div>
+            <h3 class="text-sm font-bold text-on-surface mb-2">Analyzing warehouse data...</h3>
+            <p class="text-xs text-on-surface-variant text-center max-w-[200px]">Generating real-time insights from global stock events.</p>
+            </div>
+            `;
+
+            const prods = await WmsAPI.getProducts(0, 3);
+            if (!prods || !prods.content || prods.content.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-10 opacity-50 font-bold">No products found to analyze</div>`;
+                return;
+            }
+
+            grid.innerHTML = '';
+            
+            const p1 = prods.content[0];
+            const p2 = prods.content.length > 1 ? prods.content[1] : null;
+            const p3 = prods.content.length > 2 ? prods.content[2] : null;
+
+            if (p1) {
+                try {
+                    const data = await WmsAPI.getRestockRecommendation(p1.id);
+                    grid.innerHTML += buildCard('Restock AI', data.product, data.sku || p1.sku, 'inventory', 'primary', data.recommendation);
+                } catch(e) { console.error(e); }
+            }
+
+            if (p2) {
+                try {
+                    const data = await WmsAPI.getBundleRecommendation(p2.id);
+                    grid.innerHTML += buildCard('Bundle Optimization', data.product, data.sku || p2.sku, 'package_2', 'secondary', data.recommendation);
+                } catch(e) { console.error(e); }
+            }
+
+            if (p3) {
+                try {
+                    const data = await WmsAPI.getDemandForecast(p3.id);
+                    grid.innerHTML += buildCard('Demand Forecast', data.product, data.sku || p3.sku, 'insights', 'tertiary', data.forecast);
+                } catch(e) { console.error(e); }
+            }
+
+        } catch (err) {
+            grid.innerHTML = `
+            <div class="col-span-full text-center py-10 text-error bg-error/5 rounded-xl border border-error/20">
+                <p class="font-bold">Recommendation engine error.</p>
+                <p class="text-sm">${err.message}</p>
+            </div>`;
+        }
+    }
+
+    function buildCard(badge, productName, sku, icon, colorTheme, textHtml) {
+        const tColor = colorTheme === 'primary' ? 'primary' : colorTheme === 'secondary' ? 'secondary' : 'tertiary';
+        return `
+        <div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm group hover:shadow-md transition-shadow flex flex-col h-full border border-outline-variant/10 min-h-[380px]">
+            <div class="flex justify-between items-start mb-4">
+                <div class="p-2 bg-${tColor}-fixed rounded-lg text-${tColor}">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">${icon}</span>
+                </div>
+                <span class="px-2 py-1 bg-${tColor}/10 text-${tColor} text-[10px] font-bold tracking-wider uppercase rounded">${badge}</span>
+            </div>
+            <h3 class="text-base font-bold text-on-surface mb-1">${productName}</h3>
+            <p class="text-xs text-on-surface-variant mb-6">SKU: ${sku}</p>
+            <div class="bg-surface-container-low rounded-lg p-4 mb-6 flex-1 overflow-auto max-h-[160px]">
+                <div class="flex items-center gap-2 mb-2 text-${tColor}">
+                    <span class="material-symbols-outlined text-sm">auto_awesome</span>
+                    <span class="text-[11px] font-bold uppercase tracking-tight">AI Output</span>
+                </div>
+                <p class="text-xs text-on-surface leading-relaxed whitespace-pre-wrap">${textHtml}</p>
+            </div>
+            <div class="flex gap-2 mt-auto pt-2 border-t border-outline-variant/10">
+                <button class="flex-1 bg-gradient-to-br from-${tColor} to-${tColor}-container text-white text-xs font-bold py-2.5 rounded-lg hover:shadow-lg transition-all active:scale-95" data-implement-plan="${badge}">Implement Plan</button>
+                <button class="px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors text-xs font-bold" data-dismiss-card="true">Dismiss</button>
+            </div>
+        </div>
+        `;
+    }
+
+    grid.addEventListener('click', (event) => {
+        const dismissButton = event.target.closest('[data-dismiss-card]');
+        if (dismissButton) {
+            dismissButton.closest('.bg-surface-container-lowest')?.remove();
+            if (!grid.children.length) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-on-surface-variant">All recommendations dismissed. Refresh to analyze again.</div>';
+            }
+            return;
+        }
+
+        const implementButton = event.target.closest('[data-implement-plan]');
+        if (implementButton) {
+            const badge = implementButton.dataset.implementPlan || '';
+            window.location.href = badge.includes('Restock') || activeTab === 'reorder'
+                ? '../purchase_orders/code.html'
+                : '../product_list/code.html';
+        }
+    });
+
+    // init load
+    updateActiveTab(activeTab);
+    updateInsightMode('live');
+    loadRecommendations();
+});
+</script>
+</body></html>

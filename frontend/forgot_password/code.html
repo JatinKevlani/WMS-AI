@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e2e7ff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "surface-bright": "#faf8ff",
+                        "outline-variant": "#c7c4d8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-container": "#ffd2be",
+                        "secondary-container": "#b6b4ff",
+                        "on-background": "#131b2e",
+                        "surface-variant": "#dae2fd",
+                        "outline": "#777587",
+                        "primary": "#3525cd",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "surface-tint": "#4d44e3",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary-fixed": "#140f54",
+                        "primary-container": "#4f46e5",
+                        "on-surface": "#131b2e",
+                        "on-secondary-fixed-variant": "#413f82",
+                        "surface-container-highest": "#dae2fd",
+                        "surface": "#faf8ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-surface-variant": "#464555",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#283044",
+                        "secondary-fixed": "#e2dfff",
+                        "tertiary-container": "#a44100",
+                        "on-secondary-container": "#454386",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eaedff",
+                        "primary-fixed": "#e2dfff",
+                        "secondary": "#58579b",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-dim": "#d2d9f4",
+                        "on-tertiary-fixed": "#351000",
+                        "tertiary": "#7e3000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed-dim min-h-screen flex flex-col">
+<main class="flex-grow flex flex-col md:flex-row w-full overflow-hidden">
+<!-- Left Section: Recovery Form -->
+<section class="w-full md:w-[45%] lg:w-[40%] bg-surface-container-lowest flex flex-col justify-between p-8 md:p-16 lg:p-24 relative z-10">
+<div>
+<!-- Brand Anchor -->
+<div class="mb-16">
+<span class="text-2xl font-black tracking-tighter text-primary">AI-WMS</span>
+</div>
+<div class="max-w-md mx-auto md:mx-0">
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface mb-4">Reset Access</h1>
+<p class="text-on-surface-variant text-md leading-relaxed mb-10">
+                        Enter your registered email address below. The Digital Foreman will send a secure authentication link to your inbox.
+                    </p>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant" for="email">Corporate Email</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/20 transition-all" id="email" placeholder="name@logistics-hub.ai" type="email"/>
+</div>
+</div>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-4 rounded-xl shadow-lg shadow-primary/20 active:scale-[0.98] transition-all flex justify-center items-center gap-2" type="submit">
+                            Send Reset Link
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</form>
+<div class="mt-12 pt-8 border-t border-surface-container-high">
+<a class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300" href="../login_page/code.html" id="returnToLoginLink">
+<span class="material-symbols-outlined text-[20px]">keyboard_backspace</span>
+                            Return to Login
+                        </a>
+</div>
+</div>
+</div>
+<!-- Contextual Information -->
+<div class="mt-20">
+<div class="flex items-center gap-4 p-4 rounded-xl bg-tertiary-container/10 border border-tertiary-container/5">
+<span class="material-symbols-outlined text-tertiary" data-weight="fill">security</span>
+<p class="text-xs font-medium text-tertiary">
+                        Identity verification is managed by AI-WMS Quantum Auth Protocols.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Right Section: Visual Experience -->
+<section class="hidden md:flex flex-1 relative bg-surface-container-high overflow-hidden items-center justify-center p-12">
+<!-- Background Visualization -->
+<div class="absolute inset-0 z-0">
+<img alt="high-tech futuristic automated warehouse with neon logistics paths and glowing robotic arms in a clean architectural style" class="w-full h-full object-cover opacity-60 mix-blend-multiply grayscale-[40%]" data-alt="high-tech futuristic automated warehouse with neon logistics paths and glowing robotic arms in a clean architectural style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARiOE3JMfLPX8r8-6TKrgjtTGTnabpMwxpRpbd5ehCSFON_6bhYZIPlLsMVNtHUhh0bWj7hkYXHefTmzFmy__ekNAA2Y_pdmcZ41eNArVg-ooR-tdItexfcE_TNe4eBsLzp7MZBwTj2DRL6Nq5SUY8ewcKMvseTMVaT1K2u1snAWom7qPxh69PDOZ-sH6fq-jrBJDPw3DDcA1yXT3gSeE0QvCfdPYhU-SItUMMm_V2x9UYwpNT_q1ROAE7STUMs6y2aIqR1ONIqux8"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent"></div>
+</div>
+<!-- Bento Info Cards -->
+<div class="relative z-10 w-full max-w-4xl grid grid-cols-12 gap-6 h-[600px]">
+<!-- Main Insight Card -->
+<div class="col-span-8 row-span-4 glass-panel rounded-3xl p-8 flex flex-col justify-end shadow-2xl">
+<div class="mb-auto">
+<span class="inline-block px-3 py-1 rounded-full bg-primary-container text-on-primary-container text-[10px] font-bold tracking-widest uppercase mb-4">Live System Health</span>
+<h2 class="text-3xl font-black text-on-surface leading-none tracking-tighter">Global Logistics Hub<br/>Automation Core</h2>
+</div>
+<div class="mt-12 grid grid-cols-3 gap-6">
+<div class="space-y-1">
+<span class="text-primary text-2xl font-black">99.8%</span>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Uptime</p>
+</div>
+<div class="space-y-1">
+<span class="text-primary text-2xl font-black">12ms</span>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Latency</p>
+</div>
+<div class="space-y-1">
+<span class="text-primary text-2xl font-black">42k</span>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Active Units</p>
+</div>
+</div>
+</div>
+<!-- Secondary Metric Card -->
+<div class="col-span-4 row-span-2 bg-primary text-on-primary rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl opacity-50">analytics</span>
+<div>
+<p class="text-xs font-medium uppercase tracking-widest opacity-80 mb-1">Weekly Efficiency</p>
+<p class="text-2xl font-bold">+14.2%</p>
+</div>
+</div>
+<!-- Tertiary Status Card -->
+<div class="col-span-4 row-span-2 bg-surface-container-lowest rounded-3xl p-6 shadow-lg flex flex-col justify-between border border-white">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden">
+<img alt="avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOkmF6Yl6cLuR-M0xe4UhAbW3Ps5Vt65bkjCwgBifxYelxVPE9sO5sroO_2njN28tTtps3YY2qPSEHNsSv70Mt0vFtfVuhGjxqabuad9524ih4plc6X2ok-cFMniKw7U_hw_CbXs7PzAkg7A-24FvthlyXrSwZfoO1SjG0BQCcoWQjBp68X70SN16JiUY91p0iW2FLJZ1MrIA7fVbSOZU6EFSvdC7nw4WLftFzqUf81HGnKIgXOFKWWBo-IiRnGz6wqMVgDuuGIWNA"/>
+</div>
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden">
+<img alt="avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZdLe_zyPjciqGQ1RzKV0Hd4MnuRicQK1epGY8439USI_J-1EHtnisypSKdSUuMLFSbLzQTkU5UquOfVtiHdNVXELQtrGvSAiZqvy-XHP6DaDOodreAVXO60LPxQUpsIUTLOHWLxHOi-DmKrmBWc3zSgboa04DrrW99_hJlD16M5PuH_mh8oPNIGHXkft5nrzMPJYKveMVaev8G3dqny6jLDrdkJKzQMSxdLTrQsxiAP8ixj_P9CHvoohPnxXFfTufyO5oyz3PSRaq"/>
+</div>
+</div>
+<p class="text-xs font-semibold text-on-surface">Digital Foreman AI is active for your sector.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer - Shared Component -->
+<footer class="flex justify-center items-center gap-6 w-full mt-auto py-4 bg-transparent">
+<p class="text-slate-400 dark:text-slate-600 text-[10px] font-normal tracking-normal">© 2024 Architectural Intelligence WMS. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 dark:text-slate-500 text-[10px] font-normal tracking-normal hover:text-slate-600 dark:hover:text-slate-300 transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-400 dark:text-slate-500 text-[10px] font-normal tracking-normal hover:text-slate-600 dark:hover:text-slate-300 transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-400 dark:text-slate-500 text-[10px] font-normal tracking-normal hover:text-slate-600 dark:hover:text-slate-300 transition-colors" href="#">Security</a>
+</div>
+</footer>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const emailInput = document.getElementById('email');
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    const params = new URLSearchParams(window.location.search);
+    const presetEmail = params.get('email') || localStorage.getItem('wms_reset_email') || '';
+
+    if (presetEmail) {
+        emailInput.value = presetEmail;
+    }
+
+    form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+        if (!email || !email.includes('@')) {
+            WmsAPI.showToast('Enter a valid email address', 'error');
+            return;
+        }
+
+        localStorage.setItem('wms_reset_email', email);
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Preparing Reset Link...';
+
+        WmsAPI.showToast('Reset flow prepared. Continue on the next screen.');
+        setTimeout(() => {
+            window.location.href = `../reset_password/code.html?email=${encodeURIComponent(email)}`;
+        }, 600);
+    });
+});
+</script>
+</body></html>

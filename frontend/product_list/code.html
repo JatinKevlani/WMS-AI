@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Inventory - AI-WMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e2dfff",
+                        "secondary-fixed": "#e2dfff",
+                        "on-secondary-container": "#454386",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-tint": "#4d44e3",
+                        "tertiary-container": "#a44100",
+                        "surface-dim": "#d2d9f4",
+                        "primary-container": "#4f46e5",
+                        "surface-bright": "#faf8ff",
+                        "inverse-surface": "#283044",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#140f54",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#413f82",
+                        "tertiary": "#7e3000",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-surface": "#131b2e",
+                        "on-background": "#131b2e",
+                        "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#b6b4ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dae2fd",
+                        "secondary": "#58579b",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "outline-variant": "#c7c4d8"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .no-border-table tr { border-bottom: none !important; }
+        .tonal-gradient {
+            background: linear-gradient(135deg, #3525cd 0%, #4f46e5 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface flex min-h-screen">
+    <!-- SideNavBar Shell -->
+    <aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+        <div class="mb-8 px-4 py-2">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold tracking-tight text-on-surface">The Digital Foreman</h2>
+                    <p class="text-[10px] font-medium uppercase tracking-widest text-slate-500">Precision Logistics</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_dashboard/code.html">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Dashboard</span>
+            </a>
+            <a class="bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../product_list/code.html">
+                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Products</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../categories/code.html">
+                <span class="material-symbols-outlined text-[20px]">category</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Categories</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../suppliers/code.html">
+                <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Suppliers</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../purchase_orders/code.html">
+                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Orders</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../sales_transactions/code.html">
+                <span class="material-symbols-outlined text-[20px]">payments</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Sales</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../alerts/code.html">
+                <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Alerts</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../ai_recommendations/code.html">
+                <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">AI Insights</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../analytics_dashboard/code.html">
+                <span class="material-symbols-outlined text-[20px]">insights</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Analytics</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../data_hub/code.html">
+                <span class="material-symbols-outlined text-[20px]">import_export</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Data Hub</span>
+            </a>
+            <a class="text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 flex items-center gap-3 px-4 py-3 transition-all duration-200" href="../admin_settings/code.html">
+                <span class="material-symbols-outlined text-[20px]">settings</span>
+                <span class="font-sans text-xs font-medium uppercase tracking-widest">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-3 px-2">
+                <img class="w-10 h-10 rounded-full object-cover" data-alt="professional portrait of a warehouse foreman wearing a high-visibility vest and a focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6AQ61sRqzUOYKXrU8AZ18QxcBCl6FCIkNl2i6ALoqIla6d-M-CYAyQUZWYuEgAX1jkvsTHbwADzht6TAU0ynO8v7PWVgCBnUB77ZyOHriMhKyFxPVXA5mz9p2IqsH32yenWyp_BWQ5nMdL9L_GKTpxSNFvjULX4X-GBhMVAjuFEkkAOZNdH2TpiyHrudy7QojcwVB9MMBRoeZmHEKHVPsp_R3mo0DyeosPOM4bFQFzFndOSD_La_C3wEGpTSotRCBGGIzIzKIFNA5" />
+                <div class="overflow-hidden">
+                    <p class="text-xs font-bold truncate" data-user-name>Warehouse Foreman</p>
+                    <p class="text-[10px] text-slate-500 truncate" data-user-role>Admin Access</p>
+                </div>
+                <button onclick="WmsAPI.logout()" class="ml-auto text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="flex-1 ml-64 bg-surface min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 shadow-sm flex items-center justify-between px-8">
+<div class="flex items-center gap-8">
+<h1 class="text-lg font-black tracking-tighter text-indigo-700 dark:text-indigo-300">AI-WMS</h1>
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+</span>
+<input class="bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Quick search inventory..." type="text" id="quickSearchInput"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-[1600px] mx-auto">
+<!-- Page Header Area -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div class="space-y-1">
+<span class="text-tertiary label-md font-semibold tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+                        AI STOCK PREDICTION ACTIVE
+                    </span>
+<h2 class="text-4xl font-extrabold tracking-tight text-on-surface">Product Inventory</h2>
+<p class="text-on-surface-variant body-md">Manage and track your global warehouse stock precision.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex bg-surface-container-low p-1 rounded-lg">
+<button class="px-3 py-2 text-on-surface-variant hover:bg-surface-container-lowest rounded-md transition-all">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+</button>
+<button class="px-3 py-2 text-on-surface-variant hover:bg-surface-container-lowest rounded-md transition-all">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+</button>
+</div>
+<button class="tonal-gradient text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform active:scale-95" id="btnAddProduct">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                        Add Product
+                    </button>
+</div>
+</div>
+<!-- Dashboard Logic: Filter Strip -->
+<div class="bg-surface-container-low p-6 rounded-2xl mb-8 flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 ml-1">Search SKU or Name</label>
+<div class="relative">
+<input class="w-full bg-white border-none rounded-xl py-3 pl-4 pr-4 shadow-sm focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Enter keyword..." type="text" id="filterSearch"/>
+</div>
+</div>
+<div class="w-48">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 ml-1">Category</label>
+<select class="w-full bg-white border-none rounded-xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-primary/20 text-sm appearance-none" id="filterCategory">
+<option>All Categories</option>
+<option>Electronics</option>
+<option>Heavy Machinery</option>
+<option>Textiles</option>
+</select>
+</div>
+<div class="w-48">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 ml-1">Supplier</label>
+<select class="w-full bg-white border-none rounded-xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-primary/20 text-sm appearance-none" id="filterSupplier">
+<option>All Suppliers</option>
+<option>Global Logistics Corp</option>
+<option>TechSupply Ltd</option>
+</select>
+</div>
+<div class="w-48">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 ml-1">Stock Status</label>
+<select class="w-full bg-white border-none rounded-xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-primary/20 text-sm appearance-none" id="filterStock">
+<option>Any Status</option>
+<option>Normal</option>
+<option>Low Stock</option>
+<option>Overstock</option>
+</select>
+</div>
+<div class="pt-6">
+<button class="bg-on-surface text-white px-5 py-3 rounded-xl font-bold text-sm hover:bg-indigo-900 transition-colors" id="btnApplyFilters">
+                        Apply Filters
+                    </button>
+</div>
+</div>
+<!-- Table Actions Container -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm">
+<div class="px-8 py-6 flex items-center justify-between bg-surface-container-low/50">
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold text-on-surface-variant">BULK ACTIONS:</span>
+<button class="text-xs font-bold text-primary flex items-center gap-1.5 hover:underline" id="btnBulkDelete">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+                            Delete
+                        </button>
+<button class="text-xs font-bold text-primary flex items-center gap-1.5 hover:underline" id="btnPrintLabels">
+<span class="material-symbols-outlined text-sm" data-icon="label">label</span>
+                            Print Labels
+                        </button>
+<button onclick="WmsAPI.exportProducts()" class="text-xs font-bold text-primary flex items-center gap-1.5 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span>
+                            Export Data
+                        </button>
+</div>
+<div class="text-xs text-on-surface-variant" id="productCountLabel">
+                        Showing 1-12 of 2,450 items
+                    </div>
+</div>
+<!-- High Density Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left no-border-table">
+<thead class="bg-surface-container-lowest">
+<tr>
+<th class="px-8 py-4"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox" id="selectAllProducts"/></th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">SKU</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Product Name</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Category</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Supplier</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Price</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-center">Qty</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-center">Thres</th>
+<th class="px-4 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Status</th>
+<th class="px-8 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody id="productTableBody" class="divide-y divide-transparent">
+    <tr><td colspan="10" class="px-8 py-8 text-center text-on-surface-variant">Loading products...</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-8 py-6 bg-surface-container-low/30 flex items-center justify-between border-t border-outline-variant/10">
+<div class="flex items-center gap-2">
+<span class="text-xs text-on-surface-variant">Show rows:</span>
+<select class="bg-transparent border-none text-xs font-bold text-on-surface focus:ring-0 cursor-pointer" id="rowsPerPageSelect">
+<option>10</option>
+<option selected="">25</option>
+<option>50</option>
+</select>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-on-surface-variant hover:bg-white rounded-lg transition-colors disabled:opacity-30" disabled="" id="btnPrevPage">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-lg text-xs font-bold" data-page-btn="0">1</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-lg text-xs font-bold transition-colors" data-page-btn="1">2</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-lg text-xs font-bold transition-colors" data-page-btn="2">3</button>
+<span class="px-2 text-on-surface-variant" id="pageEllipsis">...</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-lg text-xs font-bold transition-colors" id="lastPageBtn"></button>
+<button class="p-2 text-on-surface-variant hover:bg-white rounded-lg transition-colors" id="btnNextPage">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Insight Widget - Bento Grid Element -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-indigo-900 rounded-3xl p-8 text-white relative overflow-hidden group">
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div>
+<span class="text-xs font-bold tracking-[0.2em] text-indigo-300 uppercase mb-4 block">Warehouse Performance</span>
+<h3 class="text-2xl font-bold mb-4 leading-tight max-w-md">Inventory velocity has increased by 14.5% in Sector D over the last 48 hours.</h3>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-3xl font-black">94.2%</span>
+<span class="text-[10px] uppercase font-bold text-indigo-300">Space Utilization</span>
+</div>
+<div class="w-px h-10 bg-white/20"></div>
+<div class="flex flex-col">
+<span class="text-3xl font-black">0.04%</span>
+<span class="text-[10px] uppercase font-bold text-indigo-300">Pick Error Rate</span>
+</div>
+</div>
+</div>
+<!-- Decorative Graphic -->
+<div class="absolute right-0 bottom-0 top-0 w-1/3 opacity-20 pointer-events-none">
+<svg class="h-full w-full" preserveaspectratio="none" viewbox="0 0 200 400">
+<path d="M0 400 C 50 350, 150 380, 200 300 L 200 400 L 0 400" fill="white"></path>
+<path d="M0 300 C 100 250, 180 200, 200 100 L 200 400 L 0 400" fill="white" fill-opacity="0.2"></path>
+</svg>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-3xl p-8 flex flex-col justify-between border border-white/40">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-indigo-600" data-icon="emergency">emergency</span>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded text-[10px] font-bold">CRITICAL</span>
+</div>
+<div>
+<h4 class="text-lg font-bold text-on-surface mb-2">Restock Suggestion</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">AI predicts 'Neural Link Hub' will be out of stock within 18 hours. Immediate re-order recommended.</p>
+</div>
+<button class="mt-4 w-full py-3 bg-white border border-outline-variant/30 rounded-xl text-xs font-bold text-on-surface hover:bg-surface-container-lowest transition-all" id="btnCreateRecommendedPo">
+                        Create Purchase Order
+                    </button>
+</div>
+</div>
+</div>
+<!-- Modal Dialog for Add Product -->
+<dialog id="addProductModal" class="backdrop:bg-slate-900/50 backdrop:backdrop-blur-sm p-0 rounded-2xl shadow-2xl border-none m-auto shadow-primary/20 bg-white dark:bg-slate-900 w-full max-w-lg">
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-on-surface mb-4">Add New Product</h3>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Product Name</label>
+                <input id="modalProductName" type="text" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"/>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">SKU (4-12 characters alphanum)</label>
+                <input id="modalProductSku" type="text" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3 uppercase"/>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Unit Price</label>
+                    <input id="modalProductPrice" type="number" min="0" step="0.01" value="0.00" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"/>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Opening Qty</label>
+                    <input id="modalProductQty" type="number" min="0" value="0" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3"/>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Category</label>
+                    <select id="modalProductCategory" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3">
+                        <option value="">No Category</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Supplier</label>
+                    <select id="modalProductSupplier" class="w-full rounded-lg border-outline-variant bg-surface-container-lowest p-3">
+                        <option value="">No Supplier</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 flex justify-end gap-3">
+            <button id="modalBtnCancel" class="px-5 py-2.5 rounded-lg font-bold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+            <button id="modalBtnSave" class="px-5 py-2.5 rounded-lg font-bold bg-primary text-white shadow hover:bg-primary-container transition-colors">Save Product</button>
+        </div>
+    </div>
+</dialog>
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!WmsAPI.requireAuth()) return;
+
+    const tbody = document.getElementById('productTableBody');
+    const quickSearchInput = document.getElementById('quickSearchInput');
+    const filterSearch = document.getElementById('filterSearch');
+    const filterCategory = document.getElementById('filterCategory');
+    const filterSupplier = document.getElementById('filterSupplier');
+    const filterStock = document.getElementById('filterStock');
+    const productCountLabel = document.getElementById('productCountLabel');
+    const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+    const selectAllProducts = document.getElementById('selectAllProducts');
+    const prevPageBtn = document.getElementById('btnPrevPage');
+    const nextPageBtn = document.getElementById('btnNextPage');
+    const pageButtons = Array.from(document.querySelectorAll('[data-page-btn]'));
+    const lastPageBtn = document.getElementById('lastPageBtn');
+    const pageEllipsis = document.getElementById('pageEllipsis');
+    let currentPage = 0;
+    let allProducts = [];
+    let filteredProducts = [];
+    let categoriesList = [];
+    let suppliersList = [];
+
+    function selectedProductIds() {
+        return Array.from(document.querySelectorAll('[data-product-select]:checked')).map((input) => Number(input.value));
+    }
+
+    function getStatus(product) {
+        if (product.quantity <= product.minThreshold) return 'LOW STOCK';
+        if (product.quantity >= product.maxThreshold) return 'OVERSTOCK';
+        return 'NORMAL';
+    }
+
+    function updatePagination() {
+        const pageSize = Number(rowsPerPageSelect.value || 25);
+        const totalPages = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
+        if (currentPage >= totalPages) currentPage = totalPages - 1;
+
+        prevPageBtn.disabled = currentPage === 0;
+        nextPageBtn.disabled = currentPage >= totalPages - 1;
+
+        const start = Math.max(0, Math.min(currentPage - 1, totalPages - 3));
+        pageButtons.forEach((button, index) => {
+            const pageIndex = start + index;
+            if (pageIndex < totalPages) {
+                button.hidden = false;
+                button.textContent = String(pageIndex + 1);
+                button.dataset.pageTarget = String(pageIndex);
+                button.className = pageIndex === currentPage
+                    ? 'w-8 h-8 flex items-center justify-center bg-primary text-white rounded-lg text-xs font-bold'
+                    : 'w-8 h-8 flex items-center justify-center hover:bg-white rounded-lg text-xs font-bold transition-colors';
+            } else {
+                button.hidden = true;
+            }
+        });
+
+        if (totalPages > 3) {
+            pageEllipsis.hidden = false;
+            lastPageBtn.hidden = false;
+            lastPageBtn.textContent = String(totalPages);
+            lastPageBtn.dataset.pageTarget = String(totalPages - 1);
+            lastPageBtn.className = currentPage === totalPages - 1
+                ? 'w-8 h-8 flex items-center justify-center bg-primary text-white rounded-lg text-xs font-bold'
+                : 'w-8 h-8 flex items-center justify-center hover:bg-white rounded-lg text-xs font-bold transition-colors';
+        } else {
+            pageEllipsis.hidden = true;
+            lastPageBtn.hidden = true;
+        }
+    }
+
+    function renderProducts() {
+        const pageSize = Number(rowsPerPageSelect.value || 25);
+        const startIndex = currentPage * pageSize;
+        const pageItems = filteredProducts.slice(startIndex, startIndex + pageSize);
+        const total = filteredProducts.length;
+        const endIndex = Math.min(startIndex + pageItems.length, total);
+
+        productCountLabel.textContent = total
+            ? `Showing ${startIndex + 1}-${endIndex} of ${total} items`
+            : 'Showing 0 items';
+
+        if (pageItems.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="10" class="px-8 py-4 text-center">No products found.</td></tr>`;
+            updatePagination();
+            return;
+        }
+
+        tbody.innerHTML = pageItems.map((p) => {
+            const status = getStatus(p);
+            const statusHtml = status === 'LOW STOCK'
+                ? `<span class="bg-error-container text-on-error-container px-2 py-1 rounded-full text-[10px] font-bold">LOW STOCK</span>`
+                : status === 'OVERSTOCK'
+                    ? `<span class="bg-tertiary/10 text-tertiary px-2 py-1 rounded-full text-[10px] font-bold">OVERSTOCK</span>`
+                    : `<span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-[10px] font-bold">NORMAL</span>`;
+
+            return `
+            <tr class="hover:bg-surface-container-low transition-colors group">
+                <td class="px-8 py-4"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox" data-product-select value="${p.id}"/></td>
+                <td class="px-4 py-4 text-xs font-mono font-bold text-indigo-600">${p.sku}</td>
+                <td class="px-4 py-4">
+                    <div class="flex items-center gap-3">
+                        <div>
+                            <div class="text-sm font-bold truncate max-w-[200px]">${p.name}</div>
+                            <div class="text-[10px] text-on-surface-variant">ID: ${p.id}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-4 py-4 text-sm text-on-surface-variant">${p.category ? p.category.name : '-'}</td>
+                <td class="px-4 py-4 text-sm text-on-surface-variant">${p.supplier ? p.supplier.name : '-'}</td>
+                <td class="px-4 py-4 text-sm font-bold text-right">${WmsAPI.formatCurrency(p.unitPrice)}</td>
+                <td class="px-4 py-4 text-sm text-center font-medium ${p.quantity <= p.minThreshold ? 'text-error' : ''}">${p.quantity}</td>
+                <td class="px-4 py-4 text-sm text-center text-on-surface-variant">${p.minThreshold}</td>
+                <td class="px-4 py-4">${statusHtml}</td>
+                <td class="px-8 py-4 text-right">
+                    <button class="text-on-surface-variant hover:text-primary transition-colors" data-view-product="${p.id}" title="View Details">
+                        <span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+                    </button>
+                </td>
+            </tr>
+            `;
+        }).join('');
+
+        updatePagination();
+    }
+
+    async function loadProducts() {
+        try {
+            const [productsData, categories, suppliers] = await Promise.all([
+                WmsAPI.getProducts(0, 1000),
+                WmsAPI.getCategories(),
+                WmsAPI.getSuppliers()
+            ]);
+
+            allProducts = productsData.content || [];
+            categoriesList = categories || [];
+            suppliersList = suppliers || [];
+
+            // Populate Modal Dropdowns
+            const catSelect = document.getElementById('modalProductCategory');
+            if (catSelect) catSelect.innerHTML = '<option value="">No Category</option>' + categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+            
+            const supSelect = document.getElementById('modalProductSupplier');
+            if (supSelect) supSelect.innerHTML = '<option value="">No Supplier</option>' + suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+
+            filterCategory.innerHTML = '<option value="">All Categories</option>' + categories.map((category) => `<option value="${category.name}">${category.name}</option>`).join('');
+            filterSupplier.innerHTML = '<option value="">All Suppliers</option>' + suppliers.map((supplier) => `<option value="${supplier.name}">${supplier.name}</option>`).join('');
+            filteredProducts = [...allProducts];
+            renderProducts();
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="10" class="px-8 py-4 text-center text-error">Failed to load products: ${err.message}</td></tr>`;
+        }
+    }
+
+    function applyFilters() {
+        const searchTerm = (filterSearch.value || quickSearchInput.value || '').trim().toLowerCase();
+        const category = filterCategory.value;
+        const supplier = filterSupplier.value;
+        const stock = filterStock.value;
+
+        filteredProducts = allProducts.filter((product) => {
+            const matchesSearch = !searchTerm
+                || product.name.toLowerCase().includes(searchTerm)
+                || product.sku.toLowerCase().includes(searchTerm);
+            const matchesCategory = !category || product.category?.name === category;
+            const matchesSupplier = !supplier || product.supplier?.name === supplier;
+            const status = getStatus(product);
+            const matchesStock = !stock || stock === 'Any Status' || status === stock.toUpperCase();
+            return matchesSearch && matchesCategory && matchesSupplier && matchesStock;
+        });
+
+        currentPage = 0;
+        renderProducts();
+    }
+
+    document.getElementById('btnApplyFilters').addEventListener('click', applyFilters);
+    quickSearchInput.addEventListener('input', applyFilters);
+    filterSearch.addEventListener('input', applyFilters);
+    filterCategory.addEventListener('change', applyFilters);
+    filterSupplier.addEventListener('change', applyFilters);
+    filterStock.addEventListener('change', applyFilters);
+
+    const addModal = document.getElementById('addProductModal');
+    
+    document.getElementById('btnAddProduct').addEventListener('click', () => {
+        addModal.showModal();
+    });
+
+    document.getElementById('modalBtnCancel').addEventListener('click', () => {
+        addModal.close();
+    });
+
+    document.getElementById('modalBtnSave').addEventListener('click', async () => {
+        const name = document.getElementById('modalProductName').value.trim();
+        const sku = document.getElementById('modalProductSku').value.trim().toUpperCase();
+        const unitPrice = Number(document.getElementById('modalProductPrice').value);
+        const quantity = Number(document.getElementById('modalProductQty').value);
+        const categoryId = document.getElementById('modalProductCategory').value ? Number(document.getElementById('modalProductCategory').value) : null;
+        const supplierId = document.getElementById('modalProductSupplier').value ? Number(document.getElementById('modalProductSupplier').value) : null;
+
+        if (!name || !sku) {
+            WmsAPI.showToast('Name and SKU are required', 'error');
+            return;
+        }
+
+        try {
+            document.getElementById('modalBtnSave').disabled = true;
+            document.getElementById('modalBtnSave').textContent = 'Saving...';
+            await WmsAPI.createProduct({
+                name,
+                sku,
+                unitPrice,
+                quantity,
+                categoryId,
+                supplierId
+            });
+            WmsAPI.showToast('Product created successfully');
+            addModal.close();
+            
+            // Clear form
+            document.getElementById('modalProductName').value = '';
+            document.getElementById('modalProductSku').value = '';
+            
+            await loadProducts();
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Failed to create product', 'error');
+        } finally {
+            document.getElementById('modalBtnSave').disabled = false;
+            document.getElementById('modalBtnSave').textContent = 'Save Product';
+        }
+    });
+
+    document.getElementById('btnCreateRecommendedPo').addEventListener('click', () => {
+        window.location.href = '../purchase_orders/code.html';
+    });
+
+    rowsPerPageSelect.addEventListener('change', () => {
+        currentPage = 0;
+        renderProducts();
+    });
+
+    prevPageBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage -= 1;
+            renderProducts();
+        }
+    });
+
+    nextPageBtn.addEventListener('click', () => {
+        const pageSize = Number(rowsPerPageSelect.value || 25);
+        if ((currentPage + 1) * pageSize < filteredProducts.length) {
+            currentPage += 1;
+            renderProducts();
+        }
+    });
+
+    [...pageButtons, lastPageBtn].forEach((button) => {
+        button.addEventListener('click', () => {
+            if (button.dataset.pageTarget) {
+                currentPage = Number(button.dataset.pageTarget);
+                renderProducts();
+            }
+        });
+    });
+
+    selectAllProducts.addEventListener('change', () => {
+        document.querySelectorAll('[data-product-select]').forEach((input) => {
+            input.checked = selectAllProducts.checked;
+        });
+    });
+
+    tbody.addEventListener('click', (event) => {
+        const viewButton = event.target.closest('[data-view-product]');
+        if (viewButton) {
+            window.location.href = `../product_details/code.html?id=${viewButton.dataset.viewProduct}`;
+        }
+    });
+
+    const bulkDeleteModal = document.getElementById('bulkDeleteModal');
+    const closeBulkDeleteModal = () => bulkDeleteModal.classList.add('hidden');
+    let pendingDeleteIds = [];
+
+    document.getElementById('btnCancelBulkDelete').addEventListener('click', closeBulkDeleteModal);
+    document.getElementById('btnCancelBulkDelete2').addEventListener('click', closeBulkDeleteModal);
+
+    document.getElementById('btnBulkDelete').addEventListener('click', () => {
+        pendingDeleteIds = selectedProductIds();
+        if (pendingDeleteIds.length === 0) {
+            WmsAPI.showToast('Select at least one product to delete', 'warning');
+            return;
+        }
+        document.getElementById('bulkDeleteCount').textContent = pendingDeleteIds.length;
+        bulkDeleteModal.classList.remove('hidden');
+    });
+
+    document.getElementById('btnConfirmBulkDelete').addEventListener('click', async () => {
+        try {
+            await Promise.all(pendingDeleteIds.map((id) => WmsAPI.deleteProduct(id)));
+            WmsAPI.showToast('Selected products deleted');
+            selectAllProducts.checked = false;
+            closeBulkDeleteModal();
+            await loadProducts();
+        } catch (error) {
+            WmsAPI.showToast(error.message || 'Bulk delete failed', 'error');
+        }
+    });
+
+    document.getElementById('btnPrintLabels').addEventListener('click', () => {
+        const ids = selectedProductIds();
+        const products = filteredProducts.filter((product) => ids.includes(product.id));
+        if (products.length === 0) {
+            WmsAPI.showToast('Select products to print labels', 'warning');
+            return;
+        }
+
+        const printWindow = window.open('', '_blank', 'width=900,height=700');
+        if (!printWindow) {
+            WmsAPI.showToast('Allow popups to print labels', 'error');
+            return;
+        }
+
+        printWindow.document.write(`
+            <html>
+            <head><title>Product Labels</title></head>
+            <body style="font-family: Arial, sans-serif; padding: 24px;">
+                <h2>Product Labels</h2>
+                ${products.map((product) => `
+                    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                        <div><strong>${product.name}</strong></div>
+                        <div>SKU: ${product.sku}</div>
+                        <div>Price: ${WmsAPI.formatCurrency(product.unitPrice)}</div>
+                        <div>Qty: ${product.quantity}</div>
+                    </div>
+                `).join('')}
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+    });
+
+    loadProducts();
+});
+</script>
+<!-- Bulk Delete Confirmation Modal -->
+<div id="bulkDeleteModal" class="fixed inset-0 bg-slate-900/50 z-[100] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-surface-container-lowest rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden transform transition-all border border-outline-variant/20">
+        <div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-error/10">
+            <h3 class="text-lg font-bold text-error flex items-center">
+                <span class="material-symbols-outlined mr-2">warning</span> Confirm Bulk Deletion
+            </h3>
+            <button id="btnCancelBulkDelete" type="button" class="text-on-surface-variant hover:text-on-surface w-8 h-8 flex items-center justify-center rounded-3xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <div class="p-6">
+            <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Are you sure you want to permanently delete <span id="bulkDeleteCount" class="font-bold text-on-surface"></span> selected product(s)? This action cannot be undone.</p>
+            <div class="flex justify-end gap-3">
+                <button type="button" id="btnCancelBulkDelete2" class="px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">Cancel</button>
+                <button type="button" id="btnConfirmBulkDelete" class="px-5 py-2.5 text-sm font-bold text-white bg-error hover:bg-error/90 rounded-xl shadow-md transition-colors flex items-center">
+                    <span class="material-symbols-outlined text-[18px] mr-2">delete_forever</span> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body></html>

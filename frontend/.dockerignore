@@ -1,0 +1,7 @@
+Dockerfile
+.dockerignore
+*.md
+*.png
+*.psd
+.git/
+.vscode/

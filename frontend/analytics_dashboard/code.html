@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI-WMS | Advanced Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e2dfff",
+                        "secondary-fixed": "#e2dfff",
+                        "on-secondary-container": "#454386",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-tint": "#4d44e3",
+                        "tertiary-container": "#a44100",
+                        "surface-dim": "#d2d9f4",
+                        "primary-container": "#4f46e5",
+                        "surface-bright": "#faf8ff",
+                        "inverse-surface": "#283044",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#140f54",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#413f82",
+                        "tertiary": "#7e3000",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-surface": "#131b2e",
+                        "on-background": "#131b2e",
+                        "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#b6b4ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dae2fd",
+                        "secondary": "#58579b",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "outline-variant": "#c7c4d8"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h2 class="text-sm font-bold tracking-tight text-on-surface">The Digital Foreman</h2>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant">Precision Logistics</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../admin_dashboard/code.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-xs font-medium uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../product_list/code.html">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest">Products</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../categories/code.html">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="text-xs font-medium uppercase tracking-widest">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../suppliers/code.html">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="text-xs font-medium uppercase tracking-widest">Suppliers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../purchase_orders/code.html">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-xs font-medium uppercase tracking-widest">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../sales_transactions/code.html">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-xs font-medium uppercase tracking-widest">Sales</span>
+</a>
+<!-- Analytics (Active) -->
+<a class="flex items-center gap-3 px-3 py-2 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 shadow-sm rounded-lg transition-all duration-200" href="../analytics_dashboard/code.html">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="text-xs font-semibold uppercase tracking-widest">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../ai_recommendations/code.html">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-xs font-medium uppercase tracking-widest">AI Insights</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../alerts/code.html">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="text-xs font-medium uppercase tracking-widest">Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-indigo-500 transition-all duration-200" href="../admin_settings/code.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-xs font-medium uppercase tracking-widest">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-indigo-50 dark:border-indigo-900/10">
+<div class="flex items-center gap-3 px-2 group">
+<img alt="User" class="w-8 h-8 rounded-full border-2 border-primary-container object-cover" data-alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgHGz1l_CRMxSBGwdg-gTnyQL12-xJz5xQHQbir57JhcJN9nG0qqAxuMOYd5cYkjH7b2vWWqm5eF2zvWYX2X2Kq1CJFmZ9177sZCJpEQvrxWgrC9WvHZXqx0mKd60ltY-z9_XGsdBlA69httMkLog4clZGYApR2_I_kduJ1DBS1S3_xCgmoTUOprYLHXwEvMpjvXup0iAlKtQoN-O19avL2mhSgdoVrY0N5bnPhGUDmmSuPG3q2okrdPphfOzIX8a_IHpqQbPE6l2m"/>
+<div class="overflow-hidden flex-1">
+<p class="text-xs font-bold truncate" data-user-name>Admin User</p>
+<p class="text-[10px] text-on-surface-variant truncate" data-user-role>Analytics</p>
+</div>
+<button onclick="WmsAPI.logout()" class="text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen bg-surface">
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-40 bg-slate-50 dark:bg-slate-900 flex items-center justify-between px-6 w-full shadow-sm">
+<div class="flex items-center gap-4">
+<h1 class="text-lg font-black tracking-tighter text-indigo-700 dark:text-indigo-300">AI-WMS</h1>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="search">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-full text-xs w-64 focus:ring-2 focus:ring-primary-container/30 transition-all" placeholder="Global insight search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-8 max-w-[1600px] mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Advanced Analytics</h2>
+<p class="text-on-surface-variant mt-1 font-medium">Real-time performance intelligence across global hubs.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low p-1.5 rounded-xl">
+<div class="flex items-center bg-white dark:bg-slate-800 shadow-sm rounded-lg px-3 py-1.5 gap-2 border border-outline-variant/10">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="calendar_today">calendar_today</span>
+<span class="text-xs font-semibold">Oct 01, 2023 - Oct 31, 2023</span>
+</div>
+<div class="h-4 w-px bg-outline-variant/20"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-surface-container-high rounded-lg transition-colors group">
+<span class="text-xs font-bold text-on-surface group-hover:text-primary">Monthly</span>
+<span class="material-symbols-outlined text-xs" data-icon="expand_more">expand_more</span>
+</button>
+<div class="flex items-center gap-2 ml-4">
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+</div>
+<!-- KPI Row (Asymmetric Bento) -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/5 flex flex-col justify-between min-h-[160px]">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Current Revenue</span>
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">payments</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black tracking-tighter" id="kpi-current-rev">—</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/5 flex flex-col justify-between min-h-[160px]">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Previous Revenue</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm">history</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black tracking-tighter" id="kpi-prev-rev">—</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/5 flex flex-col justify-between min-h-[160px] md:col-span-2">
+<div class="flex flex-col md:flex-row justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Period Growth</span>
+<span class="bg-emerald-100 text-emerald-700 text-[10px] px-2 py-0.5 rounded-full font-bold" id="kpi-growth-badge">--</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-black tracking-tighter text-primary" id="kpi-growth">—</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Charting Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-auto lg:h-[800px]">
+<!-- Main Revenue Trend Chart -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/5 overflow-hidden flex flex-col">
+<div class="p-8 flex items-center justify-between border-b border-outline-variant/5">
+<div>
+<h3 class="text-xl font-bold tracking-tight">Revenue Trends &amp; Forecasts</h3>
+<p class="text-xs text-on-surface-variant font-medium">Aggregated across all logistic centers</p>
+</div>
+<div class="flex gap-4 items-center">
+    <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-indigo-200 rounded-sm"></div><span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Projected Revenue</span></div>
+    <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-indigo-600 rounded-sm"></div><span class="text-[10px] font-bold text-on-surface uppercase tracking-wider">Actual Revenue</span></div>
+</div>
+</div>
+<div class="flex-1 p-8 relative flex items-end justify-between gap-2">
+<!-- Simulated Area Chart -->
+<div class="absolute inset-x-8 top-16 bottom-16 flex items-end">
+<svg class="w-full h-full opacity-10" preserveaspectratio="none" viewbox="0 0 100 100">
+<path class="text-primary" d="M0 80 Q25 60 50 70 T100 20 L100 100 L0 100 Z" fill="currentColor"></path>
+</svg>
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path class="text-primary" d="M0 80 Q25 60 50 70 T100 20" fill="none" stroke="currentColor" stroke-width="2"></path>
+<circle class="fill-primary" cx="100" cy="20" r="1.5"></circle>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="absolute bottom-4 inset-x-8 flex justify-between text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">
+<span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov (AI)</span>
+</div>
+<!-- AI Insight Overlay -->
+<div class="absolute top-20 right-12 w-48 bg-tertiary-fixed-dim/90 backdrop-blur-md p-4 rounded-xl shadow-xl text-on-tertiary-fixed border border-white/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[9px] font-black uppercase tracking-widest">AI Forecast</span>
+</div>
+<p class="text-[11px] leading-snug font-medium">+18% growth projected for Nov due to seasonal stocking patterns.</p>
+</div>
+</div>
+</div>
+<!-- Secondary Charts Column -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Sales by Category (Doughnut Simulation) -->
+<div class="bg-surface-container-low rounded-2xl p-8 flex flex-col flex-1">
+<h3 class="text-lg font-bold tracking-tight mb-6">Sales by Category</h3>
+<div class="flex-1 flex items-center justify-center relative">
+<!-- Visual Donut Placeholder -->
+<div class="w-40 h-40 rounded-full border-[16px] border-primary-fixed relative flex items-center justify-center">
+<div class="absolute inset-0 border-[16px] border-transparent border-t-primary border-l-primary rotate-45 rounded-full"></div>
+<div class="text-center">
+<p class="text-2xl font-black tracking-tighter">4.2M</p>
+<p class="text-[9px] font-bold text-on-surface-variant uppercase">Total Units</p>
+</div>
+</div>
+</div>
+<div class="mt-8 space-y-3" id="category-breakdown-list">
+<p class="text-xs text-on-surface-variant">Loading categories...</p>
+</div>
+</div>
+<!-- Inventory Turnover Small Card -->
+<div class="bg-inverse-surface text-inverse-on-surface rounded-2xl p-6 h-auto">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold tracking-tight">Turnover Heatmap</h3>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<div class="grid grid-cols-6 gap-1 mb-4">
+<!-- Heatmap Squares -->
+<div class="aspect-square bg-slate-700/50 rounded-sm"></div>
+<div class="aspect-square bg-slate-700/50 rounded-sm"></div>
+<div class="aspect-square bg-indigo-500/50 rounded-sm"></div>
+<div class="aspect-square bg-indigo-400 rounded-sm"></div>
+<div class="aspect-square bg-indigo-300 rounded-sm"></div>
+<div class="aspect-square bg-indigo-600 rounded-sm"></div>
+<div class="aspect-square bg-slate-700/50 rounded-sm"></div>
+<div class="aspect-square bg-indigo-400 rounded-sm"></div>
+<div class="aspect-square bg-indigo-900 rounded-sm"></div>
+<div class="aspect-square bg-indigo-200 rounded-sm"></div>
+<div class="aspect-square bg-indigo-500 rounded-sm"></div>
+<div class="aspect-square bg-indigo-800 rounded-sm"></div>
+</div>
+<p class="text-[10px] text-slate-400">High volatility detected in Sector B-12. Recommend re-allocation of picker bots.</p>
+</div>
+</div>
+</div>
+<!-- Detailed Table Section -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/5">
+<div class="p-6 border-b border-outline-variant/5 flex justify-between items-center">
+<h3 class="text-lg font-bold tracking-tight">Top Selling Products</h3>
+<div class="flex gap-4">
+<button class="text-xs font-bold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+<button class="text-xs font-bold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="sort">sort</span>
+                            Sort
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Product Name</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Units Sold</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Total Revenue</th>
+</tr>
+</thead>
+<tbody id="top-products-body" class="divide-y divide-outline-variant/5">
+<tr><td colspan="3" class="px-6 py-8 text-center text-on-surface-variant">Loading products...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Action (Contextual) -->
+<script src="../shared/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!WmsAPI.requireAuth()) return;
+
+    // Load Analytics Data
+    async function loadAnalytics() {
+        try {
+            const data = await WmsAPI.getSalesAnalytics('MOM'); // month over month
+            
+            // 1. KPIs
+            const currRev = data.currentRevenue || 0;
+            const prevRev = data.previousRevenue || 0;
+            
+            document.getElementById('kpi-current-rev').textContent = WmsAPI.formatCurrency(currRev);
+            document.getElementById('kpi-prev-rev').textContent = WmsAPI.formatCurrency(prevRev);
+            
+            let growth = 0;
+            if (prevRev > 0) {
+                growth = ((currRev - prevRev) / prevRev) * 100;
+            } else if (currRev > 0) {
+                growth = 100; // undefined theoretically
+            }
+            
+            const gText = growth > 0 ? `+${growth.toFixed(1)}%` : `${growth.toFixed(1)}%`;
+            document.getElementById('kpi-growth').textContent = gText;
+            
+            const badge = document.getElementById('kpi-growth-badge');
+            if (growth >= 0) {
+                document.getElementById('kpi-growth').classList.add('text-primary');
+                badge.className = "bg-emerald-100 text-emerald-700 text-[10px] px-2 py-0.5 rounded-full font-bold";
+                badge.textContent = "POSITIVE";
+            } else {
+                document.getElementById('kpi-growth').classList.add('text-error');
+                badge.className = "bg-rose-100 text-rose-700 text-[10px] px-2 py-0.5 rounded-full font-bold";
+                badge.textContent = "NEGATIVE";
+            }
+
+            // 2. Category Breakdown
+            const catList = document.getElementById('category-breakdown-list');
+            if (!data.categoryBreakdown || data.categoryBreakdown.length === 0) {
+                catList.innerHTML = `<p class="text-xs text-on-surface-variant">No category data.</p>`;
+            } else {
+                let totalCatSales = data.categoryBreakdown.reduce((sum, item) => sum + (item[1] || 0), 0);
+                if (totalCatSales === 0) totalCatSales = 1;
+
+                const colors = ['bg-primary', 'bg-tertiary', 'bg-secondary', 'bg-primary-fixed', 'bg-surface-variant'];
+                catList.innerHTML = data.categoryBreakdown.map((item, idx) => {
+                    const pct = ((item[1] / totalCatSales) * 100).toFixed(0);
+                    const cClass = colors[idx % colors.length];
+                    return `
+                    <div class="flex items-center justify-between text-xs transition-opacity hover:opacity-80 cursor-default">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2.5 h-2.5 rounded-full ${cClass}"></div>
+                            <span class="font-medium truncate max-w-[120px]">${item[0] || 'Uncategorized'}</span>
+                        </div>
+                        <span class="font-bold">${pct}%</span>
+                    </div>`;
+                }).join('');
+            }
+
+            // 3. Top Products
+            const topBody = document.getElementById('top-products-body');
+            if (!data.topProducts || data.topProducts.length === 0) {
+                topBody.innerHTML = `<tr><td colspan="3" class="px-6 py-8 text-center text-on-surface-variant">No sales data.</td></tr>`;
+            } else {
+                topBody.innerHTML = data.topProducts.map(tp => {
+                    const pName = tp[1];
+                    const pUnits = tp[2] || 0;
+                    const pRev = tp[3] || 0;
+                    
+                    return `
+                    <tr class="hover:bg-surface-container-low transition-colors">
+                        <td class="px-6 py-4 text-sm font-bold">${pName}</td>
+                        <td class="px-6 py-4 text-sm font-medium text-right">${pUnits.toLocaleString()}</td>
+                        <td class="px-6 py-4 text-sm font-bold text-primary text-right">${WmsAPI.formatCurrency(pRev)}</td>
+                    </tr>
+                    `;
+                }).join('');
+            }
+
+        } catch (err) {
+            console.error('Analytics Error:', err);
+            WmsAPI.showToast('Failed to load analytics: ' + err.message, 'error');
+        }
+    }
+
+    loadAnalytics();
+});
+</script>
+</body></html>
