@@ -1,4 +1,0 @@
-ID,SKU,Name,Category,Supplier,Price,Quantity,MinThreshold,MaxThreshold,LastSaleDate,CreatedAt
-1,ELC-102,Wireless Earbuds A2,Electronics,,2499.99,1232,100,5000,2026-04-13,2026-04-13T22:58:00.958644
-2,OFC-229,Ergonomic Mesh Chair,Furniture,,15999.00,7,50,200,,2026-04-13T22:58:28.251303
-33,TST-001,Test Widget,Electronics,,99.99,10,50,500,,2026-04-13T23:03:02.578174
