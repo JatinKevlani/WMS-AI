@@ -351,6 +351,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         document.getElementById('poSupplier').innerHTML = suppliersList.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
         document.getElementById('poProduct').innerHTML = productsList.map(p => `<option value="${p.id}" data-price="${p.unitPrice}">${p.sku} - ${p.name}</option>`).join('');
+        document.getElementById('poQty').value = '1';
         document.getElementById('poNotes').value = '';
         currentPoItems = [];
         window.renderPoItems();
@@ -362,12 +363,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         const qty = Number(document.getElementById('poQty').value);
         if (qty <= 0) return WmsAPI.showToast('Invalid quantity', 'error');
         const prodId = Number(prodSelect.value);
-        const name = prodSelect.options[prodSelect.selectedIndex].text;
-        const price = Number(prodSelect.options[prodSelect.selectedIndex].dataset.price);
+        const product = productsList.find((entry) => entry.id === prodId);
+        if (!product) return WmsAPI.showToast('Select a valid product', 'error');
+
+        const label = `${product.sku} - ${product.name}`;
+        const price = Number(product.unitPrice);
+        if (!Number.isFinite(price) || price <= 0) {
+            return WmsAPI.showToast(`Set a valid unit price for ${product.name} before creating a purchase order`, 'error');
+        }
         
         const existing = currentPoItems.find(i => i.productId === prodId);
         if (existing) existing.quantity += qty;
-        else currentPoItems.push({ productId: prodId, name, quantity: qty, unitPrice: price });
+        else currentPoItems.push({ productId: prodId, label, quantity: qty, unitPrice: price });
         window.renderPoItems();
     });
 
@@ -383,20 +390,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.classList.add('hidden');
         } else {
             container.classList.remove('hidden');
-            list.innerHTML = currentPoItems.map(i => `<tr><td class="p-2 font-medium">${i.name}</td><td class="p-2">${i.quantity}</td><td class="p-2"><button type="button" onclick="removePoItem(${i.productId})" class="text-error hover:text-red-700 font-bold flex"><span class="material-symbols-outlined text-[16px]">delete</span></button></td></tr>`).join('');
+            list.innerHTML = currentPoItems.map(i => `<tr><td class="p-2 font-medium">${i.label}</td><td class="p-2">${i.quantity}</td><td class="p-2"><button type="button" onclick="removePoItem(${i.productId})" class="text-error hover:text-red-700 font-bold flex"><span class="material-symbols-outlined text-[16px]">delete</span></button></td></tr>`).join('');
         }
     };
 
     document.getElementById('poBtnCancel').addEventListener('click', () => document.getElementById('poModal').close());
     document.getElementById('poBtnSave').addEventListener('click', async () => {
         if (currentPoItems.length === 0) return WmsAPI.showToast('Add at least one item', 'error');
+        const supplierId = Number(document.getElementById('poSupplier').value);
+        if (!Number.isInteger(supplierId) || supplierId <= 0) {
+            return WmsAPI.showToast('Select a valid supplier', 'error');
+        }
         const btn = document.getElementById('poBtnSave');
         btn.disabled = true;
         try {
             await WmsAPI.createOrder({
-                supplierId: Number(document.getElementById('poSupplier').value),
+                supplierId,
                 notes: document.getElementById('poNotes').value,
-                items: currentPoItems
+                items: currentPoItems.map(({ productId, quantity, unitPrice }) => ({
+                    productId,
+                    quantity,
+                    unitPrice
+                }))
             });
             WmsAPI.showToast('Order created successfully!');
             document.getElementById('poModal').close();

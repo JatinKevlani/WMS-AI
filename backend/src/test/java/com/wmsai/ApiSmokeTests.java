@@ -2,8 +2,10 @@ package com.wmsai;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wmsai.entity.Category;
 import com.wmsai.entity.Product;
 import com.wmsai.entity.Supplier;
+import com.wmsai.repository.CategoryRepository;
 import com.wmsai.repository.ProductRepository;
 import com.wmsai.repository.SupplierRepository;
 import org.junit.jupiter.api.Test;
@@ -41,6 +43,9 @@ class ApiSmokeTests {
     private ProductRepository productRepository;
 
     @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
     private SupplierRepository supplierRepository;
 
     @Test
@@ -63,6 +68,28 @@ class ApiSmokeTests {
                         ))))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.message").value("Invalid credentials"));
+    }
+
+    @Test
+    @WithMockUser(username = "admin@wms.com", roles = "ADMIN")
+    void adminCanViewAllUsers() throws Exception {
+        mockMvc.perform(get("/api/auth/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].id").isNotEmpty());
+    }
+
+    @Test
+    @WithMockUser(username = "staff@wms.com", roles = "STAFF")
+    void staffCanViewOnlySelfAndAccessAlerts() throws Exception {
+        mockMvc.perform(get("/api/auth/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].email").value("staff@wms.com"));
+
+        mockMvc.perform(get("/api/alerts/count"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.count").exists());
     }
 
     @Test
@@ -127,6 +154,80 @@ class ApiSmokeTests {
 
     @Test
     @WithMockUser(username = "admin@wms.com", roles = "ADMIN")
+    void analyticsEndpointReturnsStructuredLiveData() throws Exception {
+        Category category = categoryRepository.save(Category.builder()
+                .name("Analytics Category")
+                .description("Analytics Category")
+                .build());
+
+        Product product = productRepository.save(Product.builder()
+                .sku("ANLY001")
+                .name("Analytics Product")
+                .category(category)
+                .unitPrice(new BigDecimal("25.00"))
+                .quantity(20)
+                .minThreshold(2)
+                .maxThreshold(40)
+                .build());
+
+        mockMvc.perform(post("/api/sales")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(Map.of(
+                                "productId", product.getId(),
+                                "quantitySold", 3,
+                                "salePrice", new BigDecimal("25.00")
+                        ))))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/analytics/sales").param("period", "MOM"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.period").value("MOM"))
+                .andExpect(jsonPath("$.periodLabel").isNotEmpty())
+                .andExpect(jsonPath("$.timeSeries").isArray())
+                .andExpect(jsonPath("$.topProducts[0].sku").value("ANLY001"))
+                .andExpect(jsonPath("$.categoryBreakdown[0].category").value("Analytics Category"))
+                .andExpect(jsonPath("$.inventoryHealth.total").value(1));
+    }
+
+    @Test
+    @WithMockUser(username = "admin@wms.com", roles = "ADMIN")
+    void productCreationPersistsAssignedCategoryAndSupplier() throws Exception {
+        Category category = categoryRepository.save(Category.builder()
+                .name("Smoke Category")
+                .description("Smoke Category")
+                .build());
+
+        Supplier supplier = supplierRepository.save(Supplier.builder()
+                .name("Smoke Supplier")
+                .contactPerson("Verifier")
+                .email("smoke-supplier@example.com")
+                .phone("8888888888")
+                .address("Smoke Address")
+                .build());
+
+        mockMvc.perform(post("/api/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(Map.of(
+                                "sku", "REL0001",
+                                "name", "Related Product",
+                                "unitPrice", new BigDecimal("19.99"),
+                                "quantity", 5,
+                                "categoryId", category.getId(),
+                                "supplierId", supplier.getId()
+                        ))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.category.id").value(category.getId()))
+                .andExpect(jsonPath("$.supplier.id").value(supplier.getId()));
+
+        Product savedProduct = productRepository.findBySku("REL0001").orElseThrow();
+        org.junit.jupiter.api.Assertions.assertNotNull(savedProduct.getCategory());
+        org.junit.jupiter.api.Assertions.assertNotNull(savedProduct.getSupplier());
+        org.junit.jupiter.api.Assertions.assertEquals(category.getId(), savedProduct.getCategory().getId());
+        org.junit.jupiter.api.Assertions.assertEquals(supplier.getId(), savedProduct.getSupplier().getId());
+    }
+
+    @Test
+    @WithMockUser(username = "admin@wms.com", roles = "ADMIN")
     void orderEndpointsSerializeWithoutRecursiveLoop() throws Exception {
         Supplier supplier = supplierRepository.save(Supplier.builder()
                 .name("Smoke Test Supplier")
@@ -151,6 +252,7 @@ class ApiSmokeTests {
                                 "supplierId", supplier.getId(),
                                 "items", List.of(Map.of(
                                         "productId", product.getId(),
+                                        "name", "ORDER001 - Order Smoke Product",
                                         "quantity", 4,
                                         "unitPrice", new BigDecimal("39.99")
                                 ))

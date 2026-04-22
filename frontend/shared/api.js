@@ -14,6 +14,10 @@ class WmsAPI {
         return user ? JSON.parse(user) : null;
     }
 
+    static isAdmin() {
+        return this.getUser()?.role === 'ADMIN';
+    }
+
     static isLoggedIn() {
         return !!this.getToken();
     }
@@ -39,6 +43,50 @@ class WmsAPI {
         return h;
     }
 
+    static async getErrorMessage(res, fallbackMessage) {
+        try {
+            const data = await res.clone().json();
+            if (data && typeof data.message === 'string' && data.message.trim()) {
+                return data.message;
+            }
+        } catch (_) {
+            // Ignore JSON parse errors and fall back to text/default message.
+        }
+
+        try {
+            const text = await res.text();
+            if (text && text.trim()) return text;
+        } catch (_) {
+            // Ignore text parse errors and fall back to default message.
+        }
+
+        return fallbackMessage;
+    }
+
+    static queueToast(message, type = 'success') {
+        sessionStorage.setItem('wms_toast', JSON.stringify({ message, type }));
+    }
+
+    static flushQueuedToast() {
+        const rawToast = sessionStorage.getItem('wms_toast');
+        if (!rawToast) return;
+
+        sessionStorage.removeItem('wms_toast');
+
+        try {
+            const toast = JSON.parse(rawToast);
+            if (toast?.message) {
+                this.showToast(toast.message, toast.type || 'success');
+            }
+        } catch (_) {
+            // Ignore invalid session storage data.
+        }
+    }
+
+    static applyRoleGuards() {
+        return true;
+    }
+
     // ========== AUTH ==========
     static async login(email, password) {
         const res = await fetch(`${API_BASE}/auth/login`, {
@@ -50,9 +98,11 @@ class WmsAPI {
         const data = await res.json();
         localStorage.setItem('wms_token', data.token);
         localStorage.setItem('wms_user', JSON.stringify({
+            id: data.id,
             email: data.email,
             fullName: data.fullName,
-            role: data.role
+            role: data.role,
+            active: data.active
         }));
         return data;
     }
@@ -64,6 +114,12 @@ class WmsAPI {
             body: JSON.stringify({ email, password, fullName, role })
         });
         if (!res.ok) throw new Error((await res.json()).message || 'Registration failed');
+        return await res.json();
+    }
+
+    static async getUsers() {
+        const res = await fetch(`${API_BASE}/auth/users`, { headers: this.headers() });
+        if (!res.ok) throw new Error(await this.getErrorMessage(res, 'Failed to fetch users'));
         return await res.json();
     }
 
@@ -181,7 +237,7 @@ class WmsAPI {
         const res = await fetch(`${API_BASE}/orders`, {
             method: 'POST', headers: this.headers(), body: JSON.stringify(order)
         });
-        if (!res.ok) throw new Error('Failed to create order');
+        if (!res.ok) throw new Error(await this.getErrorMessage(res, 'Failed to create order'));
         return await res.json();
     }
 
@@ -316,6 +372,10 @@ class WmsAPI {
 // Auto-inject user info into sidebar if present
 document.addEventListener('DOMContentLoaded', () => {
     const user = WmsAPI.getUser();
+    if (user && !WmsAPI.applyRoleGuards()) return;
+
+    WmsAPI.flushQueuedToast();
+
     if (user) {
         document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = user.fullName);
         document.querySelectorAll('[data-user-email]').forEach(el => el.textContent = user.email);

@@ -12,14 +12,17 @@ public interface SalesRepository extends JpaRepository<SalesTransaction, Integer
 
     List<SalesTransaction> findBySaleDateBetween(LocalDateTime from, LocalDateTime to);
 
+    List<SalesTransaction> findBySaleDateBetweenOrderBySaleDateAsc(LocalDateTime from, LocalDateTime to);
+
     List<SalesTransaction> findByProductId(Integer productId);
 
     @Query("SELECT COALESCE(SUM(s.totalAmount), 0) FROM SalesTransaction s WHERE s.saleDate BETWEEN :from AND :to")
     BigDecimal findRevenueByPeriod(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 
-    @Query("SELECT s.product.id, s.product.name, SUM(s.quantitySold) as totalQty, SUM(s.totalAmount) as totalRev " +
+    @Query("SELECT s.product.id, s.product.sku, s.product.name, COALESCE(s.product.category.name, 'Uncategorized'), " +
+           "SUM(s.quantitySold) as totalQty, SUM(s.totalAmount) as totalRev " +
            "FROM SalesTransaction s WHERE s.saleDate BETWEEN :from AND :to " +
-           "GROUP BY s.product.id, s.product.name ORDER BY totalQty DESC")
+           "GROUP BY s.product.id, s.product.sku, s.product.name, s.product.category.name ORDER BY totalQty DESC")
     List<Object[]> findTopSellingProducts(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 
     @Query("SELECT s.product.category.name, SUM(s.totalAmount) " +
@@ -28,8 +31,9 @@ public interface SalesRepository extends JpaRepository<SalesTransaction, Integer
     List<Object[]> findRevenueByCategory(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 
     /** Slow-moving products: lowest total sales quantity [ANA-06]. */
-    @Query("SELECT s.product.id, s.product.name, s.product.sku, SUM(s.quantitySold) as totalQty " +
+    @Query("SELECT s.product.id, s.product.sku, s.product.name, COALESCE(s.product.category.name, 'Uncategorized'), " +
+           "SUM(s.quantitySold) as totalQty, SUM(s.totalAmount) as totalRev " +
            "FROM SalesTransaction s WHERE s.saleDate BETWEEN :from AND :to " +
-           "GROUP BY s.product.id, s.product.name, s.product.sku ORDER BY totalQty ASC")
+           "GROUP BY s.product.id, s.product.sku, s.product.name, s.product.category.name ORDER BY totalQty ASC")
     List<Object[]> findSlowMovingProducts(@Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 }

@@ -58,7 +58,6 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN")
-                .requestMatchers("/api/alerts/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").hasRole("ADMIN")
                 .requestMatchers("/api/export/**").hasRole("ADMIN")
                 .requestMatchers("/api/import/**").hasRole("ADMIN")

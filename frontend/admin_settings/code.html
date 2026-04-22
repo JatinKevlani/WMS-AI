@@ -195,25 +195,26 @@
 <section class="bg-surface-container-lowest rounded-xl p-0 overflow-hidden shadow-sm">
 <div class="p-6 flex items-center justify-between">
 <h3 class="text-lg font-bold tracking-tight">Active Personnel</h3>
-<div class="relative">
+<div class="relative" id="userSearchWrapper">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-40 text-[20px]">search</span>
-<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-xs w-64 focus:ring-2 focus:ring-primary/20" placeholder="Filter by name or role..." type="text"/>
+<input id="userSearchInput" class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-xs w-64 focus:ring-2 focus:ring-primary/20" placeholder="Filter by name or role..." type="text"/>
 </div>
 </div>
 <div class="overflow-x-auto">
 <table class="w-full text-left">
-<thead>
+<thead id="usersTableHead">
 <tr class="bg-surface-container-low border-none">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">User ID</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Full Name</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Email</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Role</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Last Login</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Created</th>
 <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
 </tr>
 </thead>
 <tbody id="usersTableBody">
-<tr><td colspan="6" class="px-6 py-8 text-center text-on-surface-variant">Loading personnel...</td></tr>
+<tr><td colspan="7" class="px-6 py-8 text-center text-on-surface-variant">Loading personnel...</td></tr>
 </tbody>
 </table>
 </div>
@@ -316,48 +317,98 @@
 document.addEventListener('DOMContentLoaded', async () => {
     if (!WmsAPI.requireAuth()) return;
 
-    // Show admin-only buttons
     const user = WmsAPI.getUser();
-    if (user && user.role === 'ADMIN') {
+    const isAdmin = user?.role === 'ADMIN';
+    const usersTableHead = document.getElementById('usersTableHead');
+    const usersTableBody = document.getElementById('usersTableBody');
+    const userSearchInput = document.getElementById('userSearchInput');
+    const userSearchWrapper = document.getElementById('userSearchWrapper');
+    const toggleLabels = Array.from(document.querySelectorAll('[data-setting-toggle]'));
+    const settingsState = {};
+    let visibleUsers = [];
+
+    if (isAdmin) {
         document.getElementById('adminOnlyButtons').style.display = 'flex';
+    } else {
+        if (userSearchWrapper) {
+            userSearchWrapper.classList.add('hidden');
+        }
+        if (usersTableHead) {
+            usersTableHead.innerHTML = `
+                <tr class="bg-surface-container-low border-none">
+                    <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Your User ID</th>
+                </tr>`;
+        }
     }
 
-    function populateActiveUser() {
-        const u = WmsAPI.getUser();
-        const tbody = document.getElementById('usersTableBody');
-        if (!u) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-on-surface-variant">No personnel loaded.</td></tr>';
+    function renderUsers() {
+        const query = (userSearchInput?.value || '').trim().toLowerCase();
+        const filteredUsers = visibleUsers.filter((entry) => {
+            if (!query) return true;
+            return (entry.fullName || '').toLowerCase().includes(query)
+                || (entry.email || '').toLowerCase().includes(query)
+                || (entry.role || '').toLowerCase().includes(query)
+                || (entry.id || '').toLowerCase().includes(query);
+        });
+
+        if (!filteredUsers.length) {
+            usersTableBody.innerHTML = `<tr><td colspan="${isAdmin ? '7' : '1'}" class="px-6 py-8 text-center text-on-surface-variant">No matching personnel found.</td></tr>`;
             return;
         }
-        
-        const init = u.fullName ? u.fullName.substring(0, 2).toUpperCase() : 'U';
-        tbody.innerHTML = `
-            <tr class="hover:bg-surface-container-low transition-colors group">
-                <td class="px-6 py-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-xs font-bold">${init}</div>
-                        <span class="text-sm font-semibold">${u.fullName || 'Admin User'}</span>
-                    </div>
-                </td>
-                <td class="px-6 py-4 text-sm text-on-surface-variant">${u.email || 'None'}</td>
-                <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded uppercase">${u.role || 'ADMIN'}</span>
-                </td>
-                <td class="px-6 py-4">
-                    <span class="flex items-center gap-1.5 text-[11px] font-bold text-green-600">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                        Active
-                    </span>
-                </td>
-                <td class="px-6 py-4 text-xs text-on-surface-variant">Just now</td>
-                <td class="px-6 py-4 text-right">
-                    <button class="p-2 hover:bg-surface-container-highest rounded-lg text-on-surface-variant">
-                        <span class="material-symbols-outlined text-[20px]">more_vert</span>
-                    </button>
-                </td>
-            </tr>`;
+
+        if (!isAdmin) {
+            const currentUser = filteredUsers[0];
+            usersTableBody.innerHTML = `
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                    <td class="px-6 py-4 text-sm font-mono font-semibold text-on-surface">${currentUser?.id || 'N/A'}</td>
+                </tr>`;
+            return;
+        }
+
+        usersTableBody.innerHTML = filteredUsers.map((entry) => {
+            const initials = (entry.fullName || 'User')
+                .split(' ')
+                .map((part) => part[0] || '')
+                .join('')
+                .slice(0, 2)
+                .toUpperCase();
+            const createdText = entry.createdAt ? WmsAPI.formatDate(entry.createdAt) : 'N/A';
+            const actionLabel = isAdmin ? 'Manage' : 'Self';
+            return `
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                    <td class="px-6 py-4 text-xs font-mono text-on-surface-variant">${entry.id || 'N/A'}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-xs font-bold">${initials}</div>
+                            <span class="text-sm font-semibold">${entry.fullName || 'Unknown User'}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-on-surface-variant">${entry.email || 'N/A'}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded uppercase">${entry.role || 'STAFF'}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="flex items-center gap-1.5 text-[11px] font-bold ${entry.active ? 'text-green-600' : 'text-error'}">
+                            <span class="w-1.5 h-1.5 rounded-full ${entry.active ? 'bg-green-500' : 'bg-error'}"></span>
+                            ${entry.active ? 'Active' : 'Inactive'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-xs text-on-surface-variant">${createdText}</td>
+                    <td class="px-6 py-4 text-right">
+                        <span class="inline-flex items-center px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-lg bg-surface-container text-on-surface-variant">${actionLabel}</span>
+                    </td>
+                </tr>`;
+        }).join('');
     }
-    populateActiveUser();
+
+    async function loadUsers() {
+        try {
+            visibleUsers = await WmsAPI.getUsers();
+            renderUsers();
+        } catch (err) {
+            usersTableBody.innerHTML = `<tr><td colspan="${isAdmin ? '7' : '1'}" class="px-6 py-8 text-center text-error">${err.message}</td></tr>`;
+        }
+    }
 
     // Tab switching
     const tabButtons = Array.from(document.querySelectorAll('[data-settings-tab]'));
@@ -376,14 +427,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 mainContent.querySelectorAll('section').forEach(s => s.classList.remove('hidden'));
             } else if (tab === 'roles') {
                 WmsAPI.showToast('Role management is available in the enterprise edition.', 'info');
-            } else if (tab === 'settings') {
-                WmsAPI.showToast('System settings saved via the notification toggles on this page.', 'info');
             }
         });
     });
 
     // Settings toggles
-    const toggleLabels = Array.from(document.querySelectorAll('[data-setting-toggle]'));
     function setToggleState(label, enabled) {
         const track = label.querySelector('[data-toggle-track]');
         const knob = track?.querySelector('div');
@@ -400,14 +448,43 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
+    async function loadSettings() {
+        try {
+            const settings = await WmsAPI.getSettings();
+            settings.forEach((setting) => {
+                settingsState[setting.key] = setting.value;
+            });
+
+            toggleLabels.forEach((label) => {
+                const key = label.dataset.settingKey;
+                const storedValue = settingsState[key];
+                const enabled = storedValue != null
+                    ? String(storedValue).toLowerCase() === 'true'
+                    : label.dataset.enabled === 'true';
+                setToggleState(label, enabled);
+            });
+        } catch (err) {
+            toggleLabels.forEach((label) => setToggleState(label, label.dataset.enabled === 'true'));
+        }
+    }
+
     toggleLabels.forEach(label => {
-        label.addEventListener('click', () => {
+        label.addEventListener('click', async () => {
             const enabled = label.dataset.enabled !== 'true';
-            label.dataset.enabled = String(enabled);
             setToggleState(label, enabled);
-            WmsAPI.showToast(enabled ? 'Setting enabled' : 'Setting disabled', 'success');
+            settingsState[label.dataset.settingKey] = String(enabled);
+            try {
+                await WmsAPI.updateSettings({ [label.dataset.settingKey]: String(enabled) });
+                WmsAPI.showToast(enabled ? 'Setting enabled' : 'Setting disabled', 'success');
+            } catch (err) {
+                setToggleState(label, !enabled);
+                settingsState[label.dataset.settingKey] = String(!enabled);
+                WmsAPI.showToast(err.message || 'Failed to update settings', 'error');
+            }
         });
     });
+
+    userSearchInput?.addEventListener('input', renderUsers);
 
     // Logs link
     document.getElementById('logsLink').addEventListener('click', (event) => {
@@ -424,7 +501,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Create User
-    document.getElementById('btnCreateUser').addEventListener('click', () => {
+    document.getElementById('btnCreateUser')?.addEventListener('click', () => {
         document.getElementById('userCreationModal').classList.remove('hidden');
     });
 
@@ -455,6 +532,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             WmsAPI.showToast(`User ${fullName} created successfully`);
             document.getElementById('userCreationModal').classList.add('hidden');
             e.target.reset();
+            await loadUsers();
         } catch (err) {
             WmsAPI.showToast(err.message, 'error');
         } finally {
@@ -462,6 +540,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             btn.textContent = 'Create User';
         }
     });
+
+    await Promise.all([loadUsers(), loadSettings()]);
 });
 </script>
 

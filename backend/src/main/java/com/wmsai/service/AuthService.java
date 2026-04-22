@@ -34,10 +34,12 @@ public class AuthService {
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
         return AuthResponse.builder()
+                .id(user.getId().toString())
                 .token(token)
                 .email(user.getEmail())
                 .fullName(user.getFullName())
                 .role(user.getRole().name())
+                .active(user.isActive())
                 .build();
     }
 
@@ -63,10 +65,26 @@ public class AuthService {
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
         return AuthResponse.builder()
+                .id(user.getId().toString())
                 .token(token)
                 .email(user.getEmail())
                 .fullName(user.getFullName())
                 .role(user.getRole().name())
+                .active(user.isActive())
                 .build();
+    }
+
+    public java.util.List<UserSummaryDTO> getVisibleUsers(String requesterEmail) {
+        User requester = userRepository.findByEmail(requesterEmail)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + requesterEmail));
+
+        if (requester.getRole() == Role.ADMIN) {
+            return userRepository.findAll().stream()
+                    .sorted(java.util.Comparator.comparing(User::getFullName, String.CASE_INSENSITIVE_ORDER))
+                    .map(UserSummaryDTO::from)
+                    .toList();
+        }
+
+        return java.util.List.of(UserSummaryDTO.from(requester));
     }
 }

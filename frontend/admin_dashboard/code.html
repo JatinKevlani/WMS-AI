@@ -297,21 +297,20 @@
                     <div class="flex justify-between items-center mb-8">
                         <div>
                             <h4 class="text-lg font-bold">Sales Overview</h4>
-                            <p class="text-on-surface-variant text-xs">Performance trajectory over the current quarter
+                            <p class="text-on-surface-variant text-xs" id="sales-overview-subtitle">Performance trajectory over the current period
                             </p>
                         </div>
-                        <div class="flex bg-surface-container-low p-1 rounded-lg">
-                            <button class="px-3 py-1 text-xs font-bold bg-white shadow-sm rounded-md">MoM</button>
-                            <button class="px-3 py-1 text-xs font-bold text-on-surface-variant">QoQ</button>
-                            <button class="px-3 py-1 text-xs font-bold text-on-surface-variant">YoY</button>
+                        <div class="flex bg-surface-container-low p-1 rounded-lg" id="sales-overview-periods">
+                            <button class="px-3 py-1 text-xs font-bold bg-white shadow-sm rounded-md" data-sales-period="MOM">MoM</button>
+                            <button class="px-3 py-1 text-xs font-bold text-on-surface-variant" data-sales-period="QOQ">QoQ</button>
+                            <button class="px-3 py-1 text-xs font-bold text-on-surface-variant" data-sales-period="YOY">YoY</button>
                         </div>
                     </div>
-                    <div class="h-64 flex items-end gap-2 px-2">
-                        <!-- Empty State Chart -->
+                    <div class="h-64" id="sales-overview-chart">
                         <div class="w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/20 rounded-xl">
                             <span class="material-symbols-outlined text-outline-variant text-[32px] mb-2 opacity-50">bar_chart</span>
-                            <p class="text-[11px] font-bold text-on-surface-variant">No sales data available</p>
-                            <p class="text-[9px] text-on-surface-variant opacity-70">Sales trajectories will populate here automatically</p>
+                            <p class="text-[11px] font-bold text-on-surface-variant">Loading sales data...</p>
+                            <p class="text-[9px] text-on-surface-variant opacity-70">Recent revenue and units will appear here.</p>
                         </div>
                     </div>
 
@@ -321,10 +320,10 @@
                     <h4 class="text-lg font-bold mb-6">Inventory Health</h4>
                     <div class="flex justify-center mb-8">
                         <!-- Custom Donut Chart -->
-                        <div class="relative w-48 h-48 rounded-full flex items-center justify-center"
+                        <div id="inventory-health-donut" class="relative w-48 h-48 rounded-full flex items-center justify-center"
                             style="background: conic-gradient(#4f46e5 0% 87%, #ba1a1a 87% 95%, #7e3000 95% 100%);">
                             <div class="w-36 h-36 bg-white rounded-full flex flex-col items-center justify-center">
-                                <span class="text-3xl font-black">87%</span>
+                                <span class="text-3xl font-black" id="inventory-health-total">87%</span>
                                 <span class="text-[10px] uppercase font-bold text-on-surface-variant">Healthy</span>
                             </div>
                         </div>
@@ -335,21 +334,21 @@
                                 <div class="w-3 h-3 rounded-full bg-primary"></div>
                                 <span class="text-xs font-medium">Normal Stock</span>
                             </div>
-                            <span class="text-xs font-bold">87%</span>
+                            <span class="text-xs font-bold" id="inventory-health-normal">87%</span>
                         </li>
                         <li class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
                                 <div class="w-3 h-3 rounded-full bg-error"></div>
                                 <span class="text-xs font-medium">Low Stock</span>
                             </div>
-                            <span class="text-xs font-bold">8%</span>
+                            <span class="text-xs font-bold" id="inventory-health-low">8%</span>
                         </li>
                         <li class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
                                 <div class="w-3 h-3 rounded-full bg-tertiary"></div>
                                 <span class="text-xs font-medium">Overstock</span>
                             </div>
-                            <span class="text-xs font-bold">5%</span>
+                            <span class="text-xs font-bold" id="inventory-health-over">5%</span>
                         </li>
                     </ul>
                 </div>
@@ -399,7 +398,7 @@
                             <span
                                 class="text-[10px] font-bold px-2 py-0.5 bg-error-container text-error rounded-full">LIVE</span>
                         </div>
-                        <div class="space-y-6">
+                        <div class="space-y-6" id="dashboard-alerts-list">
                             <div class="flex gap-4">
                                 <div class="w-2 h-2 mt-1.5 rounded-full bg-error shrink-0"></div>
                                 <div>
@@ -431,7 +430,7 @@
                                 <h4 class="text-xs font-bold uppercase tracking-widest text-indigo-200">AI
                                     Recommendation</h4>
                             </div>
-                            <p class="text-sm font-medium leading-relaxed mb-6">Based on current sales velocity and
+                            <p class="text-sm font-medium leading-relaxed mb-6" id="dashboard-ai-recommendation">Based on current sales velocity and
                                 supply lead times, we suggest restocking <span
                                     class="font-bold text-indigo-200 underline decoration-indigo-400">Electronics</span>
                                 by Friday.</p>
@@ -456,6 +455,20 @@
         document.addEventListener('DOMContentLoaded', async () => {
             if (!WmsAPI.requireAuth()) return;
 
+            const user = WmsAPI.getUser();
+            const salesOverviewChart = document.getElementById('sales-overview-chart');
+            const salesOverviewSubtitle = document.getElementById('sales-overview-subtitle');
+            const topSkusBody = document.getElementById('topSkusBody');
+            const alertsList = document.getElementById('dashboard-alerts-list');
+            const aiRecommendation = document.getElementById('dashboard-ai-recommendation');
+            const salesPeriodButtons = Array.from(document.querySelectorAll('[data-sales-period]'));
+            const inventoryHealthDonut = document.getElementById('inventory-health-donut');
+            const inventoryHealthTotal = document.getElementById('inventory-health-total');
+            const inventoryHealthNormal = document.getElementById('inventory-health-normal');
+            const inventoryHealthLow = document.getElementById('inventory-health-low');
+            const inventoryHealthOver = document.getElementById('inventory-health-over');
+            let currentSalesPeriod = 'MOM';
+
             document.getElementById('btnDashboardProducts')?.addEventListener('click', () => {
                 window.location.href = '../product_list/code.html';
             });
@@ -466,7 +479,6 @@
                 window.location.href = '../sales_transactions/code.html';
             });
 
-            const user = WmsAPI.getUser();
             const greeting = document.querySelector('h1');
             if (greeting && user) {
                 const hour = new Date().getHours();
@@ -474,110 +486,180 @@
                 greeting.textContent = `${timeGreeting}, ${user.fullName.split(' ')[0]}.`;
             }
 
-            try {
-                const stats = await WmsAPI.getDashboardStats();
-                document.getElementById('kpi-products').textContent = stats.totalProducts.toLocaleString();
-                document.getElementById('kpi-revenue').textContent = WmsAPI.formatCurrency(stats.monthlyRevenue);
-                document.getElementById('kpi-alerts').textContent = stats.activeAlerts;
+            function setActiveSalesPeriod(period) {
+                salesPeriodButtons.forEach((button) => {
+                    const isActive = button.dataset.salesPeriod === period;
+                    button.className = isActive
+                        ? 'px-3 py-1 text-xs font-bold bg-white shadow-sm rounded-md'
+                        : 'px-3 py-1 text-xs font-bold text-on-surface-variant';
+                });
+            }
 
-                const salesData = await WmsAPI.getSalesAnalytics('MOM');
-                document.getElementById('kpi-sales').textContent = WmsAPI.formatCurrency(salesData.currentRevenue);
+            function renderSalesOverview(analytics) {
+                const series = analytics.timeSeries || [];
+                salesOverviewSubtitle.textContent = `${analytics.periodLabel || 'Current Period'} revenue and units sold`;
 
-                // Dynamic best sellers table
-                if (salesData.topProducts && salesData.topProducts.length > 0) {
-                    const bestSellersBody = document.querySelector('table tbody');
-                    if (bestSellersBody) {
-                        bestSellersBody.innerHTML = salesData.topProducts.slice(0, 5).map(p => `
+                if (!series.length || series.every((point) => Number(point.revenue || 0) === 0)) {
+                    salesOverviewChart.innerHTML = `
+                        <div class="w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/20 rounded-xl">
+                            <span class="material-symbols-outlined text-outline-variant text-[32px] mb-2 opacity-50">bar_chart</span>
+                            <p class="text-[11px] font-bold text-on-surface-variant">No sales data available</p>
+                            <p class="text-[9px] text-on-surface-variant opacity-70">Record a sale to populate the overview.</p>
+                        </div>`;
+                    return;
+                }
+
+                const maxRevenue = Math.max(...series.map((point) => Number(point.revenue || 0)), 1);
+                salesOverviewChart.innerHTML = `
+                    <div class="h-full flex items-end gap-3 rounded-xl bg-surface-container-low/40 px-4 py-4">
+                        ${series.map((point) => {
+                            const revenue = Number(point.revenue || 0);
+                            const units = Number(point.units || 0);
+                            const height = Math.max(10, Math.round((revenue / maxRevenue) * 100));
+                            return `
+                                <div class="flex-1 h-full flex flex-col justify-end">
+                                    <div class="text-[9px] text-center text-on-surface-variant mb-2">${units}u</div>
+                                    <div class="rounded-t-xl bg-gradient-to-t from-primary to-primary-container shadow-sm" style="height:${height}%"></div>
+                                    <div class="mt-2 text-[10px] font-bold text-center text-on-surface-variant">${point.label}</div>
+                                </div>`;
+                        }).join('')}
+                    </div>`;
+            }
+
+            function renderBestSellers(topProducts) {
+                if (!topProducts || topProducts.length === 0) {
+                    topSkusBody.innerHTML = `
+                        <tr id="empty-sku-state">
+                            <td colspan="4" class="px-8 py-12 text-center text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[32px] mb-2 opacity-50 block">inventory_2</span>
+                                <p class="text-xs font-bold">No products found.</p>
+                                <p class="text-[10px]">Start tracking inventory to see data here.</p>
+                            </td>
+                        </tr>`;
+                    return;
+                }
+
+                topSkusBody.innerHTML = topProducts.map((product) => `
                     <tr class="hover:bg-surface-container-low transition-colors">
-                        <td class="px-8 py-4 text-sm font-semibold">${p[1] || 'N/A'}</td>
-                        <td class="px-8 py-4 text-sm text-on-surface-variant">${p[1] || '-'}</td>
-                        <td class="px-8 py-4 text-sm">${Number(p[2]).toLocaleString()}</td>
-                        <td class="px-8 py-4 text-sm font-bold text-right">${WmsAPI.formatCurrency(p[3])}</td>
+                        <td class="px-8 py-4 text-sm font-semibold">${product.sku || 'N/A'}</td>
+                        <td class="px-8 py-4 text-sm text-on-surface-variant">${product.category || 'Uncategorized'}</td>
+                        <td class="px-8 py-4 text-sm">${Number(product.unitsSold || 0).toLocaleString()}</td>
+                        <td class="px-8 py-4 text-sm font-bold text-right">${WmsAPI.formatCurrency(product.revenue)}</td>
                     </tr>
                 `).join('');
-                    }
-                }
-
-                // Dynamic inventory health donut
-                const products = await WmsAPI.getProducts(0, 1000);
-                const allProds = products.content || [];
-                const total = allProds.length || 1;
-                const lowCount = allProds.filter(p => p.quantity <= p.minThreshold).length;
-                const overCount = allProds.filter(p => p.quantity >= p.maxThreshold).length;
-                const normalCount = total - lowCount - overCount;
-                const normalPct = Math.round((normalCount / total) * 100);
-                const lowPct = Math.round((lowCount / total) * 100);
-                const overPct = 100 - normalPct - lowPct;
-
-                const donut = document.querySelector('[style*="conic-gradient"]');
-                if (donut) {
-                    donut.style.background = `conic-gradient(#4f46e5 0% ${normalPct}%, #ba1a1a ${normalPct}% ${normalPct + lowPct}%, #7e3000 ${normalPct + lowPct}% 100%)`;
-                    const centerSpan = donut.querySelector('.text-3xl');
-                    if (centerSpan) centerSpan.textContent = normalPct + '%';
-                }
-                const healthLabels = document.querySelectorAll('ul.space-y-4 li .text-xs.font-bold');
-                if (healthLabels.length >= 3) {
-                    healthLabels[0].textContent = normalPct + '%';
-                    healthLabels[1].textContent = lowPct + '%';
-                    healthLabels[2].textContent = overPct + '%';
-                }
-
-                // Load recent alerts (Admin only)
-                if (user && user.role === 'ADMIN') {
-                    try {
-                        const alerts = await WmsAPI.getAlerts();
-                        const alertContainer = document.querySelector('.border-l-4.border-error .space-y-6');
-                        if (alertContainer && alerts.length > 0) {
-                            alertContainer.innerHTML = alerts.slice(0, 3).map(a => `
-                        <div class="flex gap-4">
-                            <div class="w-2 h-2 mt-1.5 rounded-full ${a.type === 'LOW_STOCK' ? 'bg-error' : 'bg-tertiary'} shrink-0"></div>
-                            <div>
-                                <p class="text-sm font-bold">${a.type.replace('_', ' ')}</p>
-                                <p class="text-xs text-on-surface-variant">${a.message}</p>
-                            </div>
-                        </div>
-                    `).join('');
-                        } else if (alertContainer) {
-                            alertContainer.innerHTML = '<p class="text-sm text-on-surface-variant">No active alerts. All systems healthy.</p>';
-                        }
-                    } catch (e) {
-                        console.warn('Could not load alerts for dashboard:', e.message);
-                        const alertSection = document.querySelector('.border-l-4.border-error');
-                        if (alertSection) alertSection.style.display = 'none';
-                    }
-                } else {
-                    // Hide alert section for Staff
-                    const alertSection = document.querySelector('.border-l-4.border-error');
-                    if (alertSection) alertSection.style.display = 'none';
-                    
-                    // Also hide the Alerts link in the sidebar
-                    const alertsLink = document.querySelector('a[href*="alerts/code.html"]');
-                    if (alertsLink) alertsLink.style.display = 'none';
-
-                    const analyticsLink = document.querySelector('a[href*="analytics_dashboard/code.html"]');
-                    if (analyticsLink) analyticsLink.style.display = 'none';
-                    
-                    const settingsLink = document.querySelector('a[href*="admin_settings/code.html"]');
-                    if (settingsLink) settingsLink.style.display = 'none';
-                }
-
-                // Wire "Generate Purchase Order" button
-                document.querySelector('.bg-gradient-to-br.from-indigo-900 button')?.addEventListener('click', () => {
-                    window.location.href = '../purchase_orders/code.html';
-                });
-
-                // Wire FAB button
-                document.querySelector('.fixed.bottom-8.right-8')?.addEventListener('click', () => {
-                    window.location.href = '../product_list/code.html';
-                });
-
-                // Wire notification bell
-                document.querySelector('[class*="notifications"]')?.closest('button')?.addEventListener('click', () => {
-                    window.location.href = '../alerts/code.html';
-                });
-            } catch (err) {
-                console.error('Dashboard load error:', err);
             }
+
+            function renderInventoryHealth(inventoryHealth) {
+                const total = Number(inventoryHealth?.total || 0);
+                const normalPct = total > 0 ? Math.round(((Number(inventoryHealth?.normal || 0)) / total) * 100) : 0;
+                const lowPct = total > 0 ? Math.round(((Number(inventoryHealth?.lowStock || 0)) / total) * 100) : 0;
+                const overPct = total > 0 ? Math.round(((Number(inventoryHealth?.overstock || 0)) / total) * 100) : 0;
+
+                if (inventoryHealthDonut) {
+                    if (total > 0) {
+                        inventoryHealthDonut.style.background = `conic-gradient(#4f46e5 0% ${normalPct}%, #ba1a1a ${normalPct}% ${normalPct + lowPct}%, #7e3000 ${normalPct + lowPct}% 100%)`;
+                    } else {
+                        inventoryHealthDonut.style.background = 'conic-gradient(#c7c4d8 0% 100%)';
+                    }
+                }
+
+                if (inventoryHealthTotal) inventoryHealthTotal.textContent = `${normalPct}%`;
+                if (inventoryHealthNormal) inventoryHealthNormal.textContent = `${normalPct}%`;
+                if (inventoryHealthLow) inventoryHealthLow.textContent = `${lowPct}%`;
+                if (inventoryHealthOver) inventoryHealthOver.textContent = `${overPct}%`;
+            }
+
+            function renderAlerts(alerts) {
+                if (!alerts || alerts.length === 0) {
+                    alertsList.innerHTML = '<p class="text-sm text-on-surface-variant">No active alerts. All systems healthy.</p>';
+                    return;
+                }
+
+                alertsList.innerHTML = alerts.slice(0, 3).map((alert) => `
+                    <div class="flex gap-4">
+                        <div class="w-2 h-2 mt-1.5 rounded-full ${alert.type === 'LOW_STOCK' ? 'bg-error' : 'bg-tertiary'} shrink-0"></div>
+                        <div>
+                            <p class="text-sm font-bold">${alert.type.replace('_', ' ')}</p>
+                            <p class="text-xs text-on-surface-variant">${alert.message}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function renderRecommendation(products, analytics) {
+                const lowStockProduct = (products || []).find((product) => product.quantity <= product.minThreshold);
+                const topProduct = (analytics.topProducts || [])[0];
+
+                if (lowStockProduct) {
+                    aiRecommendation.innerHTML = `Low stock detected for <span class="font-bold text-indigo-200 underline decoration-indigo-400">${lowStockProduct.name}</span>. Create a replenishment order soon to avoid an interruption in outbound sales.`;
+                } else if (topProduct) {
+                    aiRecommendation.innerHTML = `<span class="font-bold text-indigo-200 underline decoration-indigo-400">${topProduct.name}</span> is the current top seller. Review supplier lead times now so the next restock lands before demand peaks again.`;
+                } else {
+                    aiRecommendation.textContent = 'Sales and stock signals will surface here automatically as new transactions are recorded.';
+                }
+            }
+
+            async function loadDashboardSales(period = 'MOM') {
+                currentSalesPeriod = period;
+                setActiveSalesPeriod(period);
+
+                const analytics = await WmsAPI.getSalesAnalytics(period);
+                document.getElementById('kpi-sales').textContent = WmsAPI.formatCurrency(analytics.currentRevenue);
+                renderSalesOverview(analytics);
+                renderBestSellers(analytics.topProducts || []);
+                renderInventoryHealth(analytics.inventoryHealth);
+
+                const products = await WmsAPI.getProducts(0, 1000);
+                renderRecommendation(products.content || [], analytics);
+            }
+
+            async function loadDashboard() {
+                try {
+                    const [stats, alerts] = await Promise.all([
+                        WmsAPI.getDashboardStats(),
+                        WmsAPI.getAlerts().catch(() => [])
+                    ]);
+
+                    document.getElementById('kpi-products').textContent = Number(stats.totalProducts || 0).toLocaleString();
+                    document.getElementById('kpi-revenue').textContent = WmsAPI.formatCurrency(stats.monthlyRevenue);
+                    document.getElementById('kpi-alerts').textContent = Number(stats.activeAlerts || 0).toLocaleString();
+
+                    renderAlerts(alerts);
+                    await loadDashboardSales(currentSalesPeriod);
+                } catch (err) {
+                    console.error('Dashboard load error:', err);
+                    WmsAPI.showToast(err.message || 'Failed to load dashboard', 'error');
+                }
+            }
+
+            salesPeriodButtons.forEach((button) => {
+                button.addEventListener('click', async () => {
+                    try {
+                        await loadDashboardSales(button.dataset.salesPeriod);
+                    } catch (err) {
+                        WmsAPI.showToast(err.message || 'Failed to load sales overview', 'error');
+                    }
+                });
+            });
+
+            document.querySelector('.bg-gradient-to-br.from-indigo-900 button')?.addEventListener('click', () => {
+                window.location.href = '../purchase_orders/code.html';
+            });
+
+            document.querySelector('.fixed.bottom-8.right-8')?.addEventListener('click', () => {
+                window.location.href = '../product_list/code.html';
+            });
+
+            document.querySelectorAll('button').forEach((button) => {
+                const icon = button.querySelector('.material-symbols-outlined');
+                if (icon && icon.textContent.trim() === 'notifications') {
+                    button.addEventListener('click', () => {
+                        window.location.href = '../alerts/code.html';
+                    });
+                }
+            });
+
+            loadDashboard();
         });
     </script>
 </body>

@@ -436,6 +436,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     let categoriesList = [];
     let suppliersList = [];
 
+    function populateProductRelationOptions() {
+        const catSelect = document.getElementById('modalProductCategory');
+        if (catSelect) {
+            catSelect.innerHTML = '<option value="">No Category</option>' + categoriesList.map((category) => `<option value="${category.id}">${category.name}</option>`).join('');
+        }
+
+        const supSelect = document.getElementById('modalProductSupplier');
+        if (supSelect) {
+            supSelect.innerHTML = '<option value="">No Supplier</option>' + suppliersList.map((supplier) => `<option value="${supplier.id}">${supplier.name}</option>`).join('');
+        }
+    }
+
+    async function refreshProductRelations() {
+        const [categories, suppliers] = await Promise.all([
+            WmsAPI.getCategories(),
+            WmsAPI.getSuppliers()
+        ]);
+
+        categoriesList = categories || [];
+        suppliersList = suppliers || [];
+        populateProductRelationOptions();
+    }
+
     function selectedProductIds() {
         return Array.from(document.querySelectorAll('[data-product-select]:checked')).map((input) => Number(input.value));
     }
@@ -549,13 +572,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             allProducts = productsData.content || [];
             categoriesList = categories || [];
             suppliersList = suppliers || [];
-
-            // Populate Modal Dropdowns
-            const catSelect = document.getElementById('modalProductCategory');
-            if (catSelect) catSelect.innerHTML = '<option value="">No Category</option>' + categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-            
-            const supSelect = document.getElementById('modalProductSupplier');
-            if (supSelect) supSelect.innerHTML = '<option value="">No Supplier</option>' + suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+            populateProductRelationOptions();
 
             filterCategory.innerHTML = '<option value="">All Categories</option>' + categories.map((category) => `<option value="${category.name}">${category.name}</option>`).join('');
             filterSupplier.innerHTML = '<option value="">All Suppliers</option>' + suppliers.map((supplier) => `<option value="${supplier.name}">${supplier.name}</option>`).join('');
@@ -598,22 +615,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const user = WmsAPI.getUser();
     if (user && user.role === 'ADMIN') {
-        document.getElementById('btnAddProduct').addEventListener('click', () => {
-            addModal.showModal();
+        document.getElementById('btnAddProduct').addEventListener('click', async () => {
+            try {
+                await refreshProductRelations();
+                addModal.showModal();
+            } catch (error) {
+                WmsAPI.showToast(error.message || 'Failed to load categories and suppliers', 'error');
+            }
         });
     } else {
         const addBtn = document.getElementById('btnAddProduct');
         if (addBtn) addBtn.style.display = 'none';
-        
-        // Hide admin sidebar links
-        const alertsLink = document.querySelector('a[href*="alerts/code.html"]');
-        if (alertsLink) alertsLink.style.display = 'none';
-
-        const analyticsLink = document.querySelector('a[href*="analytics_dashboard/code.html"]');
-        if (analyticsLink) analyticsLink.style.display = 'none';
-        
-        const settingsLink = document.querySelector('a[href*="admin_settings/code.html"]');
-        if (settingsLink) settingsLink.style.display = 'none';
     }
 
     document.getElementById('modalBtnCancel').addEventListener('click', () => {
@@ -630,6 +642,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!name || !sku) {
             WmsAPI.showToast('Name and SKU are required', 'error');
+            return;
+        }
+        if (categoryId !== null && !categoriesList.some((category) => category.id === categoryId)) {
+            WmsAPI.showToast('Select a valid category', 'error');
+            return;
+        }
+        if (supplierId !== null && !suppliersList.some((supplier) => supplier.id === supplierId)) {
+            WmsAPI.showToast('Select a valid supplier', 'error');
             return;
         }
 
@@ -650,6 +670,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Clear form
             document.getElementById('modalProductName').value = '';
             document.getElementById('modalProductSku').value = '';
+            document.getElementById('modalProductPrice').value = '0.00';
+            document.getElementById('modalProductQty').value = '0';
+            document.getElementById('modalProductCategory').value = '';
+            document.getElementById('modalProductSupplier').value = '';
             
             await loadProducts();
         } catch (error) {

@@ -61,12 +61,8 @@ public class ProductService {
                 .overstockDays(dto.getOverstockDays() != null ? dto.getOverstockDays() : 30)
                 .build();
 
-        if (dto.getCategoryId() != null) {
-            product.setCategory(categoryRepository.findById(dto.getCategoryId()).orElse(null));
-        }
-        if (dto.getSupplierId() != null) {
-            product.setSupplier(supplierRepository.findById(dto.getSupplierId()).orElse(null));
-        }
+        product.setCategory(resolveCategory(dto.getCategoryId()));
+        product.setSupplier(resolveSupplier(dto.getSupplierId()));
 
         Product saved = productRepository.save(product);
         
@@ -103,13 +99,25 @@ public class ProductService {
         if (dto.getMaxThreshold() != null) product.setMaxThreshold(dto.getMaxThreshold());
         if (dto.getOverstockDays() != null) product.setOverstockDays(dto.getOverstockDays());
         if (dto.getCategoryId() != null) {
-            product.setCategory(categoryRepository.findById(dto.getCategoryId()).orElse(null));
+            product.setCategory(resolveCategory(dto.getCategoryId()));
         }
         if (dto.getSupplierId() != null) {
-            product.setSupplier(supplierRepository.findById(dto.getSupplierId()).orElse(null));
+            product.setSupplier(resolveSupplier(dto.getSupplierId()));
         }
 
         return productRepository.save(product);
+    }
+
+    private Category resolveCategory(Integer categoryId) {
+        if (categoryId == null) return null;
+        return categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found: " + categoryId));
+    }
+
+    private Supplier resolveSupplier(Integer supplierId) {
+        if (supplierId == null) return null;
+        return supplierRepository.findById(supplierId)
+                .orElseThrow(() -> new IllegalArgumentException("Supplier not found: " + supplierId));
     }
 
     @Transactional
