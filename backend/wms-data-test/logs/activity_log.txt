@@ -1,0 +1,2 @@
+[2026-04-23 19:26:37] User: admin@wms.com | Action: SALE_RECORDED | Details: Product: Sales Smoke Product (SKU: SALE0001), Qty: 2, Price: ₹49.99, Total: ₹99.98
+[2026-04-23 19:26:38] User: admin@wms.com | Action: SALE_RECORDED | Details: Product: Analytics Product (SKU: ANLY001), Qty: 3, Price: ₹25.00, Total: ₹75.00
